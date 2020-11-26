@@ -11,6 +11,7 @@ use \App\Http\Controllers\FaqController as FaqCtrl;
 use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\ContactController as ContactCtrl;
 use \App\Http\Controllers\SponsorController as SponsorCtrl;
+use \App\Http\Controllers\SpeakerController as SpeakerCtrl;
 use \App\Http\Controllers\EventTypeController as EventTypeCtrl;
 
 class AdminController extends Controller
@@ -105,6 +106,15 @@ class AdminController extends Controller
 		$events = EventCtrl::get();
 		return view('admin.event')->with([
 			'eventTypes' => $eventTypes,
+			'events' => $events
+		]);
+	}
+	public function speaker() {
+		$speakers = SpeakerCtrl::get();
+		$events = EventCtrl::get();
+
+		return view('admin.speaker')->with([
+			'speakers' => $speakers,
 			'events' => $events
 		]);
 	}

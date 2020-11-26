@@ -49,3 +49,9 @@ Route::group(['prefix' => 'event'], function() {
 	Route::post('update', 'EventController@update')->name('event.update');
 	Route::delete('delete', 'EventController@delete')->name('event.delete');
 });
+
+Route::group(['prefix' => 'speaker'], function() {
+	Route::post('store', 'SpeakerController@store')->name('speaker.store');
+	Route::post('update', 'SpeakerController@update')->name('speaker.update');
+	Route::delete('delete', 'SpeakerController@delete')->name('speaker.delete');
+});

@@ -45,7 +45,8 @@
                         <li><i class="fas fa-phone-alt"></i> <a href="{{ route('admin.contact') }}">Contact</a></li>
                         <li><i class="fas fa-ad"></i> <a href="{{ route('admin.sponsor') }}">Sponsor</a></li>
                         <li><i class="fas fa-calendar"></i> <a href="{{ route('admin.eventType') }}">Jenis Event</a></li>
-                        <li><i class="fas fa-calendar"></i> <a href="{{ route('admin.eventType') }}">Event</a></li>
+                        <li><i class="fas fa-calendar"></i> <a href="{{ route('admin.event') }}">Event</a></li>
+                        <li><i class="fas fa-users"></i> <a href="{{ route('admin.speaker') }}">Speaker</a></li>
                     </ul>
                 </li>
             </ul>
