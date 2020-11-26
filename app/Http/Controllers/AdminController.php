@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use \App\Http\Controllers\FaqController as FaqCtrl;
 use \App\Http\Controllers\EventController as EventCtrl;
+use \App\Http\Controllers\JudgeController as JudgeCtrl;
 use \App\Http\Controllers\ContactController as ContactCtrl;
 use \App\Http\Controllers\SponsorController as SponsorCtrl;
 use \App\Http\Controllers\SpeakerController as SpeakerCtrl;
@@ -115,6 +116,15 @@ class AdminController extends Controller
 
 		return view('admin.speaker')->with([
 			'speakers' => $speakers,
+			'events' => $events
+		]);
+	}
+	public function judge() {
+		$events = EventCtrl::get();
+		$judges = JudgeCtrl::get();
+
+		return view('admin.judge')->with([
+			'judges' => $judges,
 			'events' => $events
 		]);
 	}

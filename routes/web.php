@@ -18,6 +18,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('event-type', 'AdminController@eventType')->name('admin.eventType');
 	Route::get('event', 'AdminController@event')->name('admin.event');
 	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker');
+	Route::get('judge', 'AdminController@judge')->name('admin.judge');
 });
 
 Route::group(['prefix' => 'faq'], function() {
@@ -54,4 +55,10 @@ Route::group(['prefix' => 'speaker'], function() {
 	Route::post('store', 'SpeakerController@store')->name('speaker.store');
 	Route::post('update', 'SpeakerController@update')->name('speaker.update');
 	Route::delete('delete', 'SpeakerController@delete')->name('speaker.delete');
+});
+
+Route::group(['prefix' => 'judge'], function() {
+	Route::post('store', 'JudgeController@store')->name('judge.store');
+	Route::post('update', 'JudgeController@update')->name('judge.update');
+	Route::delete('delete', 'JudgeController@delete')->name('judge.delete');
 });

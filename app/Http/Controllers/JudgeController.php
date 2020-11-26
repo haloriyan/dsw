@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use Storage;
-use App\Speaker;
+use App\Judge;
 use Illuminate\Http\Request;
 
-class SpeakerController extends Controller
+class JudgeController extends Controller
 {
     public static function get($eventID = NULL) {
         if ($eventID == NULL) {
-            return Speaker::with('event')->get();
+            return Judge::with('event')->get();
         }
-        return Speaker::where('event_id', $eventID)->get();
+        return Judge::where('event_id', $eventID)->get();
     }
     public function store(Request $req) {
         $photo = $req->file('photo');
         $photoFileName = $photo->getClientOriginalName();
 
-        $saveData = Speaker::create([
+        $saveData = Judge::create([
             'event_id' => $req->event_id,
             'name' => $req->name,
             'phone' => $req->phone,
@@ -27,15 +27,15 @@ class SpeakerController extends Controller
             'photo' => $photoFileName,
         ]);
 
-        $photo->storeAs('public/speaker_photo', $photoFileName);
+        $photo->storeAs('public/judge_photo', $photoFileName);
 
-        return redirect()->route('admin.speaker')->with([
-            'message' => "Data speaker berhasil ditambahkan"
+        return redirect()->route('admin.judge')->with([
+            'message' => "Data juri berhasil ditambahkan"
         ]);
     }
     public function update(Request $req) {
         $id = $req->data_id;
-        $speaker = Speaker::where('id', $id);
+        $judge = Judge::where('id', $id);
         
         $toUpdate = [
             'event_id' => $req->event_id,
@@ -48,25 +48,25 @@ class SpeakerController extends Controller
         $photo = $req->file('photo');
         if ($photo) {
             $photoFileName = $photo->getClientOriginalName();
-            $deleteOldPhoto = Storage::delete('public/speaker_photo/'.$speaker->first()->photo);
-            $uploadNewPhoto = $photo->storeAs('public/speaker_photo', $photoFileName);
+            $deleteOldPhoto = Storage::delete('public/judge_photo/'.$judge->first()->photo);
+            $uploadNewPhoto = $photo->storeAs('public/judge_photo', $photoFileName);
             $toUpdate['photo'] = $photoFileName;
         }
 
-        $speaker->update($toUpdate);
+        $judge->update($toUpdate);
         
-        return redirect()->route('admin.speaker')->with([
-            'message' => "Data speaker berhasil diubah"
+        return redirect()->route('admin.judge')->with([
+            'message' => "Data juri berhasil diubah"
         ]);
     }
     public function delete(Request $req) {
         $id = $req->data_id;
-        $speaker = Speaker::where('id', $id);
-        $deletePhoto = Storage::delete('public/speaker_photo/'.$speaker->first()->photo);
-        $deleteData = $speaker->delete();
+        $judge = Judge::where('id', $id);
+        $deletePhoto = Storage::delete('public/judge_photo/'.$judge->first()->photo);
+        $deleteData = $judge->delete();
         
-        return redirect()->route('admin.speaker')->with([
-            'message' => "Data speaker berhasil dihapus"
+        return redirect()->route('admin.judge')->with([
+            'message' => "Data juri berhasil dihapus"
         ]);
     }
 }
