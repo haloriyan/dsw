@@ -2,30 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::group(['prefix' => 'admin'], function() {
 	Route::get('login', 'AdminController@loginPage')->name('admin.loginPage');
-	Route::post('login', 'AdminController@login')->name('admin.login.action');
+	Route::post('login', 'AdminController@login')->name('admin.login');
 	Route::get('logout', 'AdminController@logout')->name('admin.logout');
 	Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
 	Route::get('faq', 'AdminController@faq')->name('admin.faq');
 	Route::get('contact', 'AdminController@contact')->name('admin.contact');
 	Route::get('sponsor', 'AdminController@sponsor')->name('admin.sponsor');
+	Route::get('event-type', 'AdminController@eventType')->name('admin.eventType');
+	Route::get('event', 'AdminController@event')->name('admin.event');
+	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker');
 });
 
 Route::group(['prefix' => 'faq'], function() {
@@ -44,4 +36,16 @@ Route::group(['prefix' => 'sponsor'], function() {
 	Route::post('store', 'SponsorController@store')->name('sponsor.store');
 	Route::post('update', 'SponsorController@update')->name('sponsor.update');
 	Route::delete('delete', 'SponsorController@delete')->name('sponsor.delete');
+});
+
+Route::group(['prefix' => 'eventType'], function() {
+	Route::post('store', 'EventTypeController@store')->name('eventType.store');
+	Route::post('update', 'EventTypeController@update')->name('eventType.update');
+	Route::delete('delete', 'EventTypeController@delete')->name('eventType.delete');
+});
+
+Route::group(['prefix' => 'event'], function() {
+	Route::post('store', 'EventController@store')->name('event.store');
+	Route::post('update', 'EventController@update')->name('event.update');
+	Route::delete('delete', 'EventController@delete')->name('event.delete');
 });

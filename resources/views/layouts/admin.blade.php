@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('template-admin/assets/css/style.css') }}">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+        body { background: #ecf0f1; }
+    </style>
 
     @yield('head')
 </head>
@@ -41,6 +44,8 @@
                         <li><i class="fas fa-question"></i> <a href="{{ route('admin.faq') }}">FAQ</a></li>
                         <li><i class="fas fa-phone-alt"></i> <a href="{{ route('admin.contact') }}">Contact</a></li>
                         <li><i class="fas fa-ad"></i> <a href="{{ route('admin.sponsor') }}">Sponsor</a></li>
+                        <li><i class="fas fa-calendar"></i> <a href="{{ route('admin.eventType') }}">Jenis Event</a></li>
+                        <li><i class="fas fa-calendar"></i> <a href="{{ route('admin.eventType') }}">Event</a></li>
                     </ul>
                 </li>
             </ul>
@@ -155,33 +160,32 @@
     </header><!-- /header -->
     <!-- Header-->
 
-    <div class="breadcrumbs">
-        <div class="breadcrumbs-inner">
-            <div class="row m-0">
-                <div class="col-sm-4">
-                    <div class="page-header float-left">
-                        <div class="page-title">
-                            <h1>@yield('title')</h1>
+    <div class="content">
+        <div class="animated fadeIn">
+
+         <div class="row shadow bg-white rounded">
+            <div class="breadcrumbs rounded">
+                <div class="breadcrumbs-inner">
+                    <div class="row m-0">
+                        <div class="col-sm-4">
+                            <div class="page-header float-left">
+                                <div class="page-title">
+                                    <h1>@yield('title')</h1>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="page-header float-right">
-                        <div class="page-title">
-                            <ol class="breadcrumb text-right">
-                                @yield('breadcrumb')
-                            </ol>
+                        <div class="col-sm-8">
+                            <div class="page-header float-right">
+                                <div class="page-title">
+                                    <ol class="breadcrumb text-right">
+                                        @yield('breadcrumb')
+                                    </ol>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="content">
-        <div class="animated fadeIn">
-
-         <div class="row">
             <div class="col-lg-12">
                 @yield('content')
             </div>
