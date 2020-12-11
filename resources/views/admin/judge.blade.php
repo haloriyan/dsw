@@ -8,36 +8,38 @@
 
 @section('content')
 <div class="col-md-12">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Event</th>
-                <th>Nama</th>
-                <th>Telepon</th>
-                <th>Email</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($judges as $judge)
+    <div class="table-responsive">
+        <table class="table table-bordered w-100">
+            <thead>
                 <tr>
-                    <td>{{ $judge->event->title }}</td>
-                    <td>{{ $judge->name }}</td>
-                    <td>{{ $judge->phone }}</td>
-                    <td>{{ $judge->email }}</td>
-                    <td>
-                        <a href="#" class="text-primary" id="editBtn" data-toggle="modal" data-target="#editJudge" data-value="{{ $judge }}">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        &nbsp;
-                        <a href="#" class="text-danger" id="deleteBtn" data-toggle="modal" data-target="#deleteJudge" data-id="{{ $judge->id }}">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
+                    <th>Event</th>
+                    <th>Nama</th>
+                    <th>Telepon</th>
+                    <th>Email</th>
+                    <th></th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($judges as $judge)
+                    <tr>
+                        <td>{{ $judge->event->title }}</td>
+                        <td>{{ $judge->name }}</td>
+                        <td>{{ $judge->phone }}</td>
+                        <td>{{ $judge->email }}</td>
+                        <td>
+                            <a href="#" class="text-primary" id="editBtn" data-toggle="modal" data-target="#editJudge" data-value="{{ $judge }}">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            &nbsp;
+                            <a href="#" class="text-danger" id="deleteBtn" data-toggle="modal" data-target="#deleteJudge" data-id="{{ $judge->id }}">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div class="modal fade" id="deleteJudge" tabindex="-1" role="dialog">

@@ -12,6 +12,7 @@ use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\JudgeController as JudgeCtrl;
 use \App\Http\Controllers\ContactController as ContactCtrl;
 use \App\Http\Controllers\SponsorController as SponsorCtrl;
+use App\Http\Controllers\SponsorTypeController as SponsorTypeCtrl;
 use \App\Http\Controllers\SpeakerController as SpeakerCtrl;
 use \App\Http\Controllers\EventTypeController as EventTypeCtrl;
 
@@ -87,15 +88,29 @@ class AdminController extends Controller
 	public function faq() {
 		$faqs = FaqCtrl::get();
 		return view('admin.faq')->with(['faqs' => $faqs]);
-	}
+    }
+
 	public function contact() {
 		$contacts = ContactCtrl::get();
 		return view('admin.contact')->with(['contacts' => $contacts]);
+    }
+
+    public function sponsorType() {
+		$sponsorType = SponsorTypeCtrl::get();
+		return view('admin.sponsorType')->with([
+			'sponsorType' => $sponsorType,
+		]);
 	}
+
 	public function sponsor() {
-		$sponsors = SponsorController::get();
-		return view('admin.sponsor')->with(['sponsors' => $sponsors]);
-	}
+		$sponsorType = SponsorTypeCtrl::get();
+		$sponsors = SponsorCtrl::get();
+		return view('admin.sponsor')->with([
+			'sponsorType' => $sponsorType,
+			'sponsors' => $sponsors
+		]);
+    }
+
 	public function eventType() {
 		$eventTypes = EventTypeCtrl::get();
 		return view('admin.eventType')->with([

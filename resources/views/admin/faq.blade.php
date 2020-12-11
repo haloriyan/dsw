@@ -10,41 +10,39 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12">
-        @if ($faqs->count() == 0)
-            <h4>Tidak ada data</h4>
-        @else
-            <table class="table table-bordered w-100">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Question</th>
-                        <th>Answer</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php $i = 1; @endphp
-                    @foreach ($faqs as $faq)
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered w-100">
+                    <thead>
                         <tr>
-                            <td>{{ $i++ }}</td>
-                            <td>{{ $faq->question }}</td>
-                            <td>{{ $faq->answer }}</td>
-                            <td class="text-center">
-                                <a href="#" class="text-danger" data-faq="{{ json_encode($faq) }}" data-toggle="modal" data-target="#deleteModal" id="deleteBtn">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                                &nbsp; &nbsp;
-                                <a href="#" data-faq="{{ json_encode($faq) }}" class="text-primary" data-toggle="modal" data-target="#editModal" id="editBtn">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
+                            <th>No</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th></th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
-    </div>
+                    </thead>
+                    <tbody>
+                        @php $i = 1; @endphp
+                        @foreach ($faqs as $faq)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $faq->question }}</td>
+                                <td>{{ $faq->answer }}</td>
+                                <td class="text-center">
+                                    <a href="#" class="text-danger" data-faq="{{ json_encode($faq) }}" data-toggle="modal" data-target="#deleteModal" id="deleteBtn">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    &nbsp; &nbsp;
+                                    <a href="#" data-faq="{{ json_encode($faq) }}" class="text-primary" data-toggle="modal" data-target="#editModal" id="editBtn">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-md" role="document">
@@ -138,7 +136,8 @@
             $("#answerEdit").val(data.answer)
         })
         $(document).on("click", "#deleteBtn", function() {
-            let data = $(this).data('faq')
+
+ let data = $(this).data('faq')
             $("#faq_id_delete").val(data.id)
         })
     })(jQuery)

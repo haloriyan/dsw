@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Jenis Event')
+@section('title', 'Jenis Sponsor')
 
 @section('breadcrumb')
 <button class="btn btn-primary" data-toggle="modal" data-target="#addType"><i class="fa fa-plus"></i> &nbsp; Data</button>
@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($eventTypes as $type)
+                @foreach ($sponsorType as $type)
                     <tr>
                         <td>{{ $type->name }}</td>
                         <td>
@@ -38,7 +38,7 @@
 
 <div class="modal fade" id="addType" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md" role="document">
-        <form action="{{ route('eventType.store') }}" class="modal-content" method="POST">
+        <form action="{{ route('sponsorType.store') }}" class="modal-content" method="POST">
             {{ csrf_field() }}
             <div class="modal-header">
                 <h5 class="modal-title float-left" id="scrollmodalLabel">Tambah Data</h5>
@@ -61,7 +61,7 @@
 </div>
 <div class="modal fade" id="deleteType" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md" role="document">
-        <form action="{{ route('eventType.delete') }}" class="modal-content" method="POST">
+        <form action="{{ route('sponsorType.delete') }}" class="modal-content" method="POST">
             {{ csrf_field() }}
             <input type="hidden" name="data_id" id="data_id">
             <input type="hidden" name="_method" value="DELETE">
@@ -76,14 +76,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button class="btn btn-success">Simpan</button>
+                <button class="btn btn-danger">Hapus</button>
             </div>
         </form>
     </div>
 </div>
 <div class="modal fade" id="editType" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md" role="document">
-        <form action="{{ route('eventType.update') }}" class="modal-content" method="POST" id="formEdit">
+        <form action="{{ route('sponsorType.update') }}" class="modal-content" method="POST" id="formEdit">
             {{ csrf_field() }}
             <input type="hidden" name="data_id" id="data_id_edit">
             <div class="modal-header">
@@ -100,7 +100,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button class="btn btn-danger">Hapus</button>
+                <button class="btn btn-success">Simpan</button>
             </div>
         </form>
     </div>

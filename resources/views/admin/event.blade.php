@@ -8,44 +8,46 @@
 
 @section('content')
 <div class="col-md-12">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>Deskripsi</th>
-                <th>Requirements</th>
-                <th>Hadiah</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($events as $event)
+    <div class="table-responsive">
+        <table class="table table-bordered w-100">
+            <thead>
                 <tr>
-                    <td>{{ $event->title }}</td>
-                    <td>{{ $event->description }}</td>
-                    <td>
-                        @foreach (json_decode($event->requirements) as $key => $req)
-                            <li>{{ $req }}</li>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach (json_decode($event->prize) as $key => $prize)
-                            <li>{{ $prize }}</li>
-                        @endforeach
-                    </td>
-                    <td>
-                        <a href="#" class="text-primary" id="editBtn" data-value="{{ $event }}" data-toggle="modal" data-target="#editEvent">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        &nbsp;
-                        <a href="#" class="text-danger" id="deleteBtn" data-id="{{ $event->id }}" data-toggle="modal" data-target="#deleteEvent">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
+                    <th>Nama</th>
+                    <th>Deskripsi</th>
+                    <th>Requirements</th>
+                    <th>Hadiah</th>
+                    <th></th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($events as $event)
+                    <tr>
+                        <td>{{ $event->title }}</td>
+                        <td>{{ $event->description }}</td>
+                        <td>
+                            @foreach (json_decode($event->requirements) as $key => $req)
+                                <li>{{ $req }}</li>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach (json_decode($event->prize) as $key => $prize)
+                                <li>{{ $prize }}</li>
+                            @endforeach
+                        </td>
+                        <td>
+                            <a href="#" class="text-primary" id="editBtn" data-value="{{ $event }}" data-toggle="modal" data-target="#editEvent">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            &nbsp;
+                            <a href="#" class="text-danger" id="deleteBtn" data-id="{{ $event->id }}" data-toggle="modal" data-target="#deleteEvent">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div class="modal fade" id="deleteEvent" tabindex="-1" role="dialog">
@@ -178,6 +180,10 @@
 @endsection
 
 @section('javascript')
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/datatables.min.js') }}"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
 <script>
     let state = {
@@ -190,7 +196,7 @@
             requirements: []
         }
     }
-    
+
     const addReqStore = dom => {
         let index = dom.getAttribute('id').split('_')[1]
         let value = dom.value

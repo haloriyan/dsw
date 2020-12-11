@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EventType extends Model
+class SponsorType extends Model
 {
-    protected $table = 'event_types';
+    protected $table = 'sponsor_type';
     protected $fillable = ['name'];
 }
