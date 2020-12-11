@@ -29,7 +29,7 @@
     @yield('head')
 </head>
 <body>
-    
+
 <aside id="left-panel" class="left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
 
@@ -43,6 +43,7 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fas fa-question"></i> <a href="{{ route('admin.faq') }}">FAQ</a></li>
                         <li><i class="fas fa-phone-alt"></i> <a href="{{ route('admin.contact') }}">Contact</a></li>
+                        <li><i class="fas fa-ad"></i> <a href="{{ route('admin.sponsorType') }}">Jenis Sponsor</a></li>
                         <li><i class="fas fa-ad"></i> <a href="{{ route('admin.sponsor') }}">Sponsor</a></li>
                         <li><i class="fas fa-calendar"></i> <a href="{{ route('admin.eventType') }}">Jenis Event</a></li>
                         <li><i class="fas fa-calendar"></i> <a href="{{ route('admin.event') }}">Event</a></li>
@@ -197,6 +198,11 @@
 
     </div><!-- .animated -->
 </div><!-- .content -->
+
+<script src="{{ asset('sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/datatables.min.js') }}"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

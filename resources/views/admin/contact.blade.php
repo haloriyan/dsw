@@ -35,10 +35,8 @@
 
 @section('content')
 <div class="col-md-12">
-    @if ($contacts->count() == 0)
-        <h4>Tidak ada data</h4>
-    @else
-        <table class="table table-bordered">
+    <div class="table-responsive">
+        <table id="data" class="table table-bordered w-100">
             <thead>
                 <tr>
                     <th>No</th>
@@ -65,7 +63,7 @@
                 @endforeach
             </tbody>
         </table>
-    @endif
+    </div>
 </div>
 
 <div class="modal fade" id="deleteContact" tabindex="-1" role="dialog">
@@ -141,6 +139,10 @@
 @endsection
 
 @section('javascript')
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/datatables.min.js') }}"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('template-admin/assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
 <script>
     let fontAwesomeIcon = []
     let fontAwesomeKey = []
@@ -153,9 +155,9 @@
             fontAwesomeKey.push(obj)
         }
     })
-    
+
     const select = dom => document.querySelector(dom)
-    function createElement(props) {  
+    function createElement(props) {
         let el = document.createElement(props.el)
         if (props.attributes !== undefined) {
             props.attributes.forEach(res => {
@@ -165,7 +167,7 @@
         if(props.html !== undefined) {
             el.innerHTML = props.html
         }
-        select(props.createTo).appendChild(el)  
+        select(props.createTo).appendChild(el)
     }
 
     const searchIcon = q => {

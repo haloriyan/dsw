@@ -7,40 +7,43 @@
 @endsection
 
 @section('content')
-
-@if ($sponsors->count() == 0)
-    <h4>Tidak ada data</h4>
-@else
-    <table id="data" class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Telepon</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @php $i = 1; @endphp
-            @foreach ($sponsors as $sponsor)
+<div class="col-md-12">
+    <div class="table-responsive">
+        <table id="data" class="table table-bordered w-100">
+            <thead>
                 <tr>
-                    <td>{{ $i++ }}</td>
-                    <td>{{ $sponsor->name }}</td>
-                    <td>{{ $sponsor->phone }}</td>
-                    <td>
-                        <a href="#" data-target="#detailSponsor" id="detailBtn" data-toggle="modal" class="text-primary" data-sponsor="{{ json_encode($sponsor) }}">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        &nbsp; &nbsp;
-                        <a href="#" data-target="#deleteSponsor" id="deleteBtn" data-toggle="modal" class="text-danger" data-id="{{ $sponsor->id }}">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Telepon</th>
+                    <th></th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endif
+            </thead>
+            <tbody>
+                @php $i = 1; @endphp
+                @foreach ($sponsors as $sponsor)
+                    <tr>
+                        <td>{{ $i++ }}</td>
+                        <td>{{ $sponsor->name }}</td>
+                        <td>{{ $sponsor->phone }}</td>
+                        <td>
+                            <a href="#" data-target="#detailSponsor" id="detailBtn" data-toggle="modal" class="text-primary" data-sponsor="{{ json_encode($sponsor) }}">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            &nbsp; &nbsp;
+                            <a href="#" class="text-primary" data-toggle="modal" data-target="#editSponsor" data-value="{{ $sponsor }}" id="editBtn">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            &nbsp; &nbsp;
+                            <a href="#" data-target="#deleteSponsor" id="deleteBtn" data-toggle="modal" class="text-danger" data-id="{{ $sponsor->id }}">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div class="modal fade" id="deleteSponsor" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md" role="document">
@@ -81,7 +84,7 @@
                 <div class="text-center">
                     <img id="logoSponsor">
                     <h4 class="mt-4"></h4>
-                    <div id="field" class="mt-2 text-muted"></div>
+                    <div id="bidang_kerja" class="mt-2 text-muted"></div>
                     <p class="mt-4"></p>
 
                     <div class="row">
@@ -89,7 +92,7 @@
                             <div id="phone"></div>
                         </div>
                         <div class="col-md-6 text-center mt-4 mb-4">
-                            <div id="website"></div>
+                            <div id="link"></div>
                         </div>
                     </div>
                 </div>
@@ -110,6 +113,15 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    <label for="title">Jenis sponsor :</label>
+                    <select name="type_id" class="form-control">
+                        <option value="">-- Pilih Jenis Sponsor --</option>
+                        @foreach ($sponsorType as $type)
+                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="name">Nama :</label>
                     <input type="text" class="form-control" name="name" id="name" required>
                 </div>
@@ -118,8 +130,8 @@
                     <textarea type="text" class="form-control" name="address" id="address" rows="5" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="field">Bidang Pekerjaan :</label>
-                    <input type="text" class="form-control" name="field" id="field" required>
+                    <label for="bidang_kerja">Bidang Pekerjaan :</label>
+                    <input type="text" class="form-control" name="bidang_kerja" id="bidang_kerja" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">No. Telepon :</label>
@@ -131,7 +143,62 @@
                 </div>
                 <div class="form-group">
                     <label for="logo">Logo :</label>
-                    <input type="file" class="form-control" name="logo" id="logo" required>
+                    <input type="file" class="form-control" name="logo" id="logo" accept="image/*" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button class="btn btn-success">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="editSponsor" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+        <form action="{{ route('sponsor.update') }}" class="modal-content" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <input type="hidden" id="data_id_edit" name="data_id">
+            <div class="modal-header">
+                <h5 class="modal-title float-left" id="scrollmodalLabel">Ubah Data Sponsor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="title">Jenis sponsor :</label>
+                    <select name="type_id" class="form-control" id="type_id_edit">
+                        <option value="">-- Pilih Jenis Sponsor --</option>
+                        @foreach ($sponsorType as $type)
+                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nama :</label>
+                    <input type="text" class="form-control" name="name" id="name_edit">
+                </div>
+                <div class="form-group">
+                    <label for="address">Alamat :</label>
+                    <textarea type="text" class="form-control" name="address" id="address_edit" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="bidang_kerja">Bidang Pekerjaan :</label>
+                    <input type="text" class="form-control" name="bidang_kerja" id="bidang_kerja_edit">
+                </div>
+                <div class="form-group">
+                    <label for="phone">No. Telepon :</label>
+                    <input type="text" class="form-control" name="phone" id="phone_edit">
+                </div>
+                <div class="form-group">
+                    <label for="link">Link Website / Social Media :</label>
+                    <input type="text" class="form-control" name="link" id="link_edit">
+                </div>
+                <div class="form-group">
+                    <label for="logo">Logo :</label>
+                    <input type="file" class="form-control" name="logo" accept="image/*">
+                    <p class="text-muted mt-3">Biarkan kosong jika tidak ingin mengganti foto</p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -153,13 +220,24 @@
         $("#data").DataTable()
         $(document).on("click", "#detailBtn", function() {
             let data = $(this).data('sponsor')
-            
-            $("#logoSponsor").attr('src', `{{ asset('storage/logo/${data.logo}') }}`)
+
+            $("#logoSponsor").attr('src', `{{ asset('storage/sponsor/logo/${data.logo}') }}`)
             $("#detailSponsor h4").html(data.name)
             $("#detailSponsor p").html(data.address)
-            $("#detailSponsor #field").html(data.field)
+            $("#detailSponsor #bidang_kerja").html(data.bidang_kerja)
             $("#detailSponsor #phone").html("<i class='fas fa-phone-alt'></i> &nbsp; " + data.phone)
-            $("#detailSponsor #website").html(data.link)
+            $("#detailSponsor #link").html(data.link)
+        })
+
+        $(document).on("click", "#editBtn", function() {
+            let data = $(this).data('value')
+            $(`#editSponsor #type_id_edit option[value=${data.type_id}]`).attr('selected', 'selected')
+            $("#editSponsor #data_id_edit").val(data.id)
+            $("#editSponsor #name_edit").val(data.name)
+            $("#editSponsor #address_edit").val(data.address)
+            $("#editSponsor #bidang_kerja_edit").val(data.bidang_kerja)
+            $("#editSponsor #phone_edit").val(data.phone)
+            $("#editSponsor #link_edit").val(data.link)
         })
 
         $(document).on("click", "#deleteBtn", function() {

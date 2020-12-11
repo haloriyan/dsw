@@ -13,7 +13,8 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
 	Route::get('faq', 'AdminController@faq')->name('admin.faq');
-	Route::get('contact', 'AdminController@contact')->name('admin.contact');
+    Route::get('contact', 'AdminController@contact')->name('admin.contact');
+    Route::get('sponsor-type', 'AdminController@sponsorType')->name('admin.sponsorType');
 	Route::get('sponsor', 'AdminController@sponsor')->name('admin.sponsor');
 	Route::get('event-type', 'AdminController@eventType')->name('admin.eventType');
 	Route::get('event', 'AdminController@event')->name('admin.event');
@@ -31,6 +32,12 @@ Route::group(['prefix' => 'contact'], function() {
 	Route::post('store', 'ContactController@store')->name('contact.store');
 	Route::post('update', 'ContactController@update')->name('contact.update');
 	Route::delete('delete', 'ContactController@delete')->name('contact.delete');
+});
+
+Route::group(['prefix' => 'sponsorType'], function() {
+	Route::post('store', 'SponsorTypeController@store')->name('sponsorType.store');
+	Route::post('update', 'SponsorTypeController@update')->name('sponsorType.update');
+	Route::delete('delete', 'SponsorTypeController@delete')->name('sponsorType.delete');
 });
 
 Route::group(['prefix' => 'sponsor'], function() {

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Storage;
 use App\Speaker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SpeakerController extends Controller
 {
@@ -36,7 +36,7 @@ class SpeakerController extends Controller
     public function update(Request $req) {
         $id = $req->data_id;
         $speaker = Speaker::where('id', $id);
-        
+
         $toUpdate = [
             'event_id' => $req->event_id,
             'name' => $req->name,
@@ -54,7 +54,7 @@ class SpeakerController extends Controller
         }
 
         $speaker->update($toUpdate);
-        
+
         return redirect()->route('admin.speaker')->with([
             'message' => "Data speaker berhasil diubah"
         ]);
@@ -64,7 +64,7 @@ class SpeakerController extends Controller
         $speaker = Speaker::where('id', $id);
         $deletePhoto = Storage::delete('public/speaker_photo/'.$speaker->first()->photo);
         $deleteData = $speaker->delete();
-        
+
         return redirect()->route('admin.speaker')->with([
             'message' => "Data speaker berhasil dihapus"
         ]);
