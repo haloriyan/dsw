@@ -42,9 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="title">Jenis sponsor :</label>
-                                {{-- {{ $sponsor->type->name }} --}}
                                 <select name="type_id" class="form-control">
-                                    {{-- <option value="{{ $sponsor->type_id }}">{{ $sponsor->type->name }}</option> --}}
                                     @foreach ($sponsorType as $type)
                                         @php
                                             $selected = "";

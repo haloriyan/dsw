@@ -10,6 +10,12 @@ class EventTypeController extends Controller
     public static function get() {
         return EventType::all();
     }
+
+    public function create()
+    {
+        return view('admin.eventType.create');
+    }
+
     public function store(Request $req) {
         $saveData = EventType::create([
             'name' => $req->name,
@@ -19,14 +25,15 @@ class EventTypeController extends Controller
             'message' => "Data berhasil ditambahkan"
         ]);
     }
-    public function delete(Request $req) {
-        $id = $req->data_id;
-        $deleteData = EventType::where('id', $id)->delete();
 
-        return redirect()->route('admin.eventType')->with([
-            'message' => "Data berhasil dihapus"
-        ]);
+    public function edit($id) {
+		$EventType = EventType::find($id);
+
+		return view('admin.eventType.edit')->with([
+			'eventType' => $EventType
+		]);
     }
+
     public function update(Request $req) {
         $id = $req->data_id;
         $updateData = EventType::find($id)->update([
@@ -36,5 +43,10 @@ class EventTypeController extends Controller
         return redirect()->route('admin.eventType')->with([
             'message' => "Data berhasil diubah"
         ]);
+    }
+
+    public function delete($id) {
+        EventType::where('id', $id)->delete();
+        return redirect()->route('admin.eventType')->with(['message' => "Data berhasil dihapus"]);
     }
 }

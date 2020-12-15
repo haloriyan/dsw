@@ -63,15 +63,22 @@ Route::group(['prefix' => 'sponsor'], function() {
 });
 
 Route::group(['prefix' => 'eventType'], function() {
+    Route::get('create', 'EventTypeController@create')->name('eventType.create');
+    Route::get('{id}/edit', 'EventTypeController@edit')->name('eventType.edit');
+
 	Route::post('store', 'EventTypeController@store')->name('eventType.store');
 	Route::post('update', 'EventTypeController@update')->name('eventType.update');
-	Route::delete('delete', 'EventTypeController@delete')->name('eventType.delete');
+	Route::delete('{id}/delete', 'EventTypeController@delete')->name('eventType.delete');
 });
 
 Route::group(['prefix' => 'event'], function() {
+    Route::get('create', 'EventController@create')->name('event.create');
+    Route::get('{id}/view', 'EventController@view')->name('event.view');
+    Route::get('{id}/edit', 'EventController@edit')->name('event.edit');
+
 	Route::post('store', 'EventController@store')->name('event.store');
 	Route::post('update', 'EventController@update')->name('event.update');
-	Route::delete('delete', 'EventController@delete')->name('event.delete');
+	Route::delete('{id}/delete', 'EventController@delete')->name('event.delete');
 });
 
 Route::group(['prefix' => 'speaker'], function() {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\EventType;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -10,6 +11,15 @@ class EventController extends Controller
     public static function get() {
         return Event::all();
     }
+
+    public function create()
+    {
+        $eventTypes = EventType::all();
+        return view('admin.event.create')->with([
+			'eventTypes' => $eventTypes
+		]);
+    }
+
     public function store(Request $req) {
         $saveData = Event::create([
             'type_id' => $req->type_id,
@@ -21,6 +31,24 @@ class EventController extends Controller
 
         return redirect()->route('admin.event');
     }
+
+    public function view($id)
+    {
+        $event = Event::where('id' , $id)->with('type')->first();
+        return view('admin.event.view',['event' => $event]);
+    }
+
+
+	public function edit($id) {
+        $event = Event::where('id', $id)->with('type')->first();
+        $eventType = EventType::all();
+        
+		return view('admin.event.edit')->with([
+            'event' => $event ,
+            'eventType' => $eventType
+        ]);
+    }
+
     public function update(Request $req) {
         $id = $req->data_id;
 
@@ -34,10 +62,9 @@ class EventController extends Controller
         
         return redirect()->route('admin.event');
     }
-    public function delete(Request $req) {
-        $id = $req->data_id;
-        $deleteData = Event::find($id)->delete();
 
-        return redirect()->route('admin.event');
+    public function delete($id) {
+       Event::where('id', $id)->delete();
+       return redirect()->route('admin.event')->with(['message' => "Data berhasil dihapus"]);
     }
 }

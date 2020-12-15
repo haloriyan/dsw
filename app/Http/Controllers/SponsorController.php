@@ -47,10 +47,8 @@ class SponsorController extends Controller
     public function view($id)
     {
         $sponsor = Sponsor::where('id', $id)->with('type')->first();
-        $sponsorType = SponsorType::all();
         return view('admin.sponsor.view')->with([
             'sponsor' => $sponsor ,
-            'sponsorType' => $sponsorType
         ]);
     }
 
