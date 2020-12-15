@@ -10,6 +10,12 @@ class SponsorTypeController extends Controller
     public static function get() {
         return SponsorType::all();
     }
+
+    public function create()
+    {
+        return view('admin.sponsorType.create');
+    }
+
     public function store(Request $req) {
         $saveData = SponsorType::create([
             'name' => $req->name,
@@ -19,14 +25,15 @@ class SponsorTypeController extends Controller
             'message' => "Data berhasil ditambahkan"
         ]);
     }
-    public function delete(Request $req) {
-        $id = $req->data_id;
-        $deleteData = SponsorType::where('id', $id)->delete();
 
-        return redirect()->route('admin.sponsorType')->with([
-            'message' => "Data berhasil dihapus"
-        ]);
+	public function edit($id) {
+		$SponsorType = SponsorType::find($id);
+
+		return view('admin.SponsorType.edit')->with([
+			'sponsorType' => $SponsorType
+		]);
     }
+
     public function update(Request $req) {
         $id = $req->data_id;
         $updateData = SponsorType::find($id)->update([
@@ -37,4 +44,9 @@ class SponsorTypeController extends Controller
             'message' => "Data berhasil diubah"
         ]);
     }
+
+    public function delete($id) {
+        SponsorType::where('id', $id)->delete();
+        return redirect()->route('admin.sponsorType')->with(['message' => "Data berhasil dihapus"]);
+	}
 }

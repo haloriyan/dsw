@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sponsor;
+use App\SponsorType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,6 +15,16 @@ class SponsorController extends Controller
         }
         return Sponsor::where($filter)->get();
     }
+
+    public function create()
+    {
+        $sponsorType = SponsorType::all();
+        return view('admin.sponsor.create')->with([
+			'sponsorType' => $sponsorType
+		]);
+    }
+
+
     public function store(Request $req) {
         $logo = $req->file('logo');
         $logoFileName = $logo->getClientOriginalName();
@@ -28,9 +39,29 @@ class SponsorController extends Controller
             'logo' => $logoFileName
         ]);
 
-        $logo->storeAs('storage/sponsor/logo', $logoFileName);
+        $logo->storeAs('public/sponsor/logo', $logoFileName);
 
         return redirect()->route('admin.sponsor')->with(['message' => "Sponsor baru berhasil ditambahkan"]);
+    }
+
+    public function view($id)
+    {
+        $sponsor = Sponsor::where('id', $id)->with('type')->first();
+        $sponsorType = SponsorType::all();
+        return view('admin.sponsor.view')->with([
+            'sponsor' => $sponsor ,
+            'sponsorType' => $sponsorType
+        ]);
+    }
+
+
+	public function edit($id) {
+        $sponsor = Sponsor::where('id', $id)->with('type')->first();
+        $sponsorType = SponsorType::all();
+		return view('admin.sponsor.edit')->with([
+            'sponsor' => $sponsor ,
+            'sponsorType' => $sponsorType
+        ]);
     }
 
     public function update(Request $req) {
@@ -49,8 +80,8 @@ class SponsorController extends Controller
         $logo = $req->file('logo');
         if ($logo) {
             $photoFileName = $logo->getClientOriginalName();
-            $deleteOldPhoto = Storage::delete('storage/sponsor/logo/'.$sponsor->first()->photo);
-            $uploadNewPhoto = $logo->storeAs('storage/sponsor/logo', $photoFileName);
+            $deleteOldPhoto = Storage::delete('public/sponsor/logo/'.$sponsor->first()->photo);
+            $uploadNewPhoto = $logo->storeAs('public/sponsor/logo', $photoFileName);
             $updateData['logo'] = $photoFileName;
         }
 
@@ -63,9 +94,8 @@ class SponsorController extends Controller
         return redirect()->route('admin.event');
     }
 
-    public function delete(Request $req) {
-        $id = $req->sponsor_id;
-        $deleteData = Sponsor::where('id', $id)->delete();
+    public function delete($id) {
+        Sponsor::where('id', $id)->delete();
         return redirect()->route('admin.sponsor')->with(['message' => "Sponsor berhasil dihapus"]);
     }
 }
