@@ -87,40 +87,38 @@ class AdminController extends Controller
 	}
 	public function faq() {
 		$faqs = FaqCtrl::get();
-		return view('admin.faq')->with(['faqs' => $faqs]);
+		return view('admin.faq.index')->with(['faqs' => $faqs]);
     }
 
 	public function contact() {
 		$contacts = ContactCtrl::get();
-		return view('admin.contact')->with(['contacts' => $contacts]);
+		return view('admin.contact.index')->with(['contacts' => $contacts]);
     }
 
     public function sponsorType() {
-		$sponsorType = SponsorTypeCtrl::get();
-		return view('admin.sponsorType')->with([
-			'sponsorType' => $sponsorType,
+		$sponsorTypes = SponsorTypeCtrl::get();
+		return view('admin.sponsorType.index')->with([
+			'sponsorTypes' => $sponsorTypes,
 		]);
 	}
 
 	public function sponsor() {
-		$sponsorType = SponsorTypeCtrl::get();
 		$sponsors = SponsorCtrl::get();
-		return view('admin.sponsor')->with([
-			'sponsorType' => $sponsorType,
+		return view('admin.sponsor.index')->with([
 			'sponsors' => $sponsors
 		]);
     }
 
 	public function eventType() {
 		$eventTypes = EventTypeCtrl::get();
-		return view('admin.eventType')->with([
+		return view('admin.eventType.index')->with([
 			'eventTypes' => $eventTypes
 		]);
 	}
 	public function event() {
 		$eventTypes = EventTypeCtrl::get();
 		$events = EventCtrl::get();
-		return view('admin.event')->with([
+		return view('admin.event.index')->with([
 			'eventTypes' => $eventTypes,
 			'events' => $events
 		]);
@@ -129,7 +127,7 @@ class AdminController extends Controller
 		$speakers = SpeakerCtrl::get();
 		$events = EventCtrl::get();
 
-		return view('admin.speaker')->with([
+		return view('admin.speaker.index')->with([
 			'speakers' => $speakers,
 			'events' => $events
 		]);
@@ -138,7 +136,7 @@ class AdminController extends Controller
 		$events = EventCtrl::get();
 		$judges = JudgeCtrl::get();
 
-		return view('admin.judge')->with([
+		return view('admin.judge.index')->with([
 			'judges' => $judges,
 			'events' => $events
 		]);
