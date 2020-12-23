@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Hash;
 use Session;
 use App\Admin;
 use Illuminate\Http\Request;
@@ -50,6 +51,33 @@ class AdminController extends Controller
 	}
 	public function dashboard() {
 		return view('admin.dashboard');
+	}
+	public function profile() {
+		$myData = self::me();
+		$message = Session::get('message');
+
+		return view('admin.profile', [
+			'myData' => $myData,
+			'message' => $message
+		]);
+	}
+	public function updateProfile(Request $req) {
+		$myData = self::me();
+		$old_password = $req->old_password;
+		$new_password = $req->new_password;
+
+		$checkingPassword = Hash::check($old_password, $myData->password);
+		if (!$checkingPassword) {
+			return redirect()->route('admin.profile')->withErrors(['Old password is not match']);
+		}
+
+		$updateData = Admin::where('id', $myData)->update([
+			'password' => bcrypt($new_password)
+		]);
+
+		return redirect()->route('admin.profile')->with([
+			'message' => "Password has been changed"
+		]);
 	}
 	public function add() {
 		return view('admin.admin.add');

@@ -6,12 +6,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('pwd', function () {
+    return bcrypt("inikatasandi");
+});
+
 Route::group(['prefix' => 'admin'], function() {
 	Route::get('login', 'AdminController@loginPage')->name('admin.loginPage');
 	Route::post('login', 'AdminController@login')->name('admin.login');
 	Route::get('logout', 'AdminController@logout')->name('admin.logout');
 	Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard')->middleware('Admin');
 
+	Route::get('profile', 'AdminController@profile')->name('admin.profile')->middleware('Admin');
+	Route::post('profile/update', 'AdminController@updateProfile')->name('admin.profile.update')->middleware('Admin');
 	Route::get('faq', 'AdminController@faq')->name('admin.faq')->middleware('Admin');
     Route::get('contact', 'AdminController@contact')->name('admin.contact')->middleware('Admin');
     Route::get('sponsor-type', 'AdminController@sponsorType')->name('admin.sponsorType')->middleware('Admin');
