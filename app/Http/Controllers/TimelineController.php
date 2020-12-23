@@ -45,6 +45,20 @@ class TimelineController extends Controller
             'events' => $events
         ]);
     }
+    public function update($id, Request $req) {
+        $updateData = Timeline::where('id', $id)->update([
+            'event_id' => $req->event_id,
+            'type' => $req->type,
+            'open_date' => $req->open_date,
+            'close_date' => $req->close_date,
+            'judgement_date' => $req->judgement_date,
+            'main_date' => $req->main_date,
+        ]);
+
+        return redirect()->route('admin.timeline')->with([
+            'message' => "Data timeline berhasil diubah"
+        ]);
+    }
     public function delete($id) {
         $deleteData = Timeline::where('id', $id)->delete();
 
