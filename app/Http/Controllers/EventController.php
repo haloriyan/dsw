@@ -41,6 +41,7 @@ class EventController extends Controller
 
 	public function edit($id) {
         $event = Event::where('id', $id)->with('type')->first();
+        // $event = json_decode(json_encode($event), FALSE);
         $eventType = EventType::all();
         
 		return view('admin.event.edit')->with([
@@ -49,15 +50,29 @@ class EventController extends Controller
         ]);
     }
 
-    public function update(Request $req) {
-        $id = $req->data_id;
+    public function update($id, Request $req) {
+        $requirements = [];
+        foreach ($req->requirements as $requirement) {
+            if ($requirement != null) {
+                $requirements[] = $requirement;
+            }
+        }
+        $requirements = json_encode($requirements);
+
+        $prizes = [];
+        foreach ($req->prizes as $prize) {
+            if ($prize != null) {
+                $prizes[] = $prize;
+            }
+        }
+        $prizes = json_encode($prizes);
 
         $updateData = Event::where('id', $id)->update([
             'type_id' => $req->type_id,
             'title' => $req->title,
             'description' => $req->description,
-            'requirements' => $req->requirements,
-            'prize' => $req->prize
+            'requirements' => $requirements,
+            'prize' => $prizes
         ]);
         
         return redirect()->route('admin.event');

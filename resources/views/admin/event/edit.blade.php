@@ -4,8 +4,6 @@
 
 @section('content')
 
-@section('content')
-
 <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Event Edit</h1>
@@ -31,7 +29,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('event.update',$event->id) }}" method="POST">
+                <form action="{{ route('event.update', [$event->id]) }}" method="POST">
                     @csrf
                     @method('POST')
 
@@ -65,19 +63,41 @@
                             </div>
                             <div class="form-group" id="requirementsEditArea">
                                 <label for="title">Requirements :</label>
-                                <input type="hidden" name="requirements" id="requirements_edit">
-                                <div class="area"></div>
+                                <input type="text" name="requirements_old" id="requirements_edit" value="{{ $event->requirements }}">
+                                <div class="area">
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @foreach (json_decode($event->requirements) as $req)
+                                        @php
+                                            $iPP = $i++;
+                                        @endphp
+                                        <input type="text" class="form-control" id="edit_req{{ $iPP }}" name="requirements[]" oninput="addReqEdit(this)" value="{{ $req }}">
+                                        <span class="btn btn-danger ml-1 text-white transparent" id="removeBtn{{ $iPP }}" aria-hidden="true" onclick="removeReqEdit('{{ $iPP }}', '{{ $req }}')"><i class="fas fa-times"></i></span>
+                                    @endforeach
+                                </div>
                                 <button type="button" onclick="moreReqEdit()" id="moreReqEditBtn" class="btn btn-secondary mt-2"><i class="fas fa-plus"></i> More</button>
                             </div>
                             <div class="form-group" id="prizeEditArea">
                                 <label for="title">Prize :</label>
-                                <input type="hidden" name="prize" id="prize_edit">
-                                <div class="area"></div>
+                                <input type="hidden" name="old_prize" id="prize_edit">
+                                <div class="area">
+                                    @php
+                                        $a = 0;
+                                    @endphp
+                                    @foreach (json_decode($event->prize) as $prize)
+                                        @php
+                                            $aPP = $a++;
+                                        @endphp
+                                        <input type="text" class="form-control" id="edit_prize{{ $iPP }}" name="prizes[]" oninput="addPrizeEdit(this)" value="{{ $prize }}">
+                                        <span class="btn btn-danger ml-1 text-white transparent" id="removeBtnPrize{{ $iPP }}" aria-hidden="true" onclick="removePrizeEdit('{{ $iPP }}', '{{ $req }}')"><i class="fas fa-times"></i></span>
+                                    @endforeach
+                                </div>
                                 <button type="button" onclick="morePrizeEdit()" id="morePrizeEditBtn" class="btn btn-secondary mt-2"><i class="fas fa-plus"></i> More</button>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-right">
-                        <button type="submit" class="btn btn-success">Update</button>
+                            <button type="submit" class="btn btn-success">Update</button>
                         </div>
                     </div>
                 </form>
@@ -92,52 +112,13 @@
     let state = {
         edit: {
             prize: [],
-            requirements: []
+            requirements: {!! $event->requirements !!}
         },
         store: {
             prize: [],
             requirements: []
         }
     }
-
-    (function($) {
-        $(document).on("click", "#editBtn", function() {
-           
-            let index = 0
-            JSON.parse(data.requirements).forEach(req => {
-                state['edit']['requirements'].push(req)
-                createElement({
-                    el: 'div',
-                    attributes: [
-                        ['class', 'input-group mt-3'],
-                        ['id', `edit_req${index}`]
-                    ],
-                    html: `<input type="text" class="form-control" id="requirements_${index}" oninput="addReqEdit(this)" value="${req}">
-<span class="input-group-addon bg-danger text-white transparent" aria-hidden="true" onclick="removeReqEdit(${index})"><i class="fas fa-times"></i></span>`,
-                    createTo: '#requirementsEditArea .area'
-                })
-                index++
-            })
-            select("#requirements_edit").value = JSON.stringify(state['edit']['requirements'])
-
-            let indexPrize = 0
-            JSON.parse(data.prize).forEach(prize => {
-                state['edit']['prize'].push(prize)
-                createElement({
-                    el: 'div',
-                    attributes: [
-                        ['class', 'input-group mt-3'],
-                        ['id', `edit_prize${indexPrize}`]
-                    ],
-                    html: `<input type="text" class="form-control" id="requirements_${indexPrize}" oninput="addPrizeEdit(this)" value="${prize}">
-<span class="input-group-addon bg-danger text-white transparent" aria-hidden="true" onclick="removePrizeEdit(${indexPrize})"><i class="fas fa-times"></i></span>`,
-                    createTo: '#prizeEditArea .area'
-                })
-                indexPrize++
-            })
-            select("#prize_edit").value = JSON.stringify(state['edit']['prize'])
-        })
-    })(jQuery)
 
     const addReqEdit = dom => {
         let index = dom.getAttribute('id').split('_')[1]
@@ -152,20 +133,34 @@
     }
     const moreReqEdit = () => {
         let index = state['edit']['requirements'].length
+        console.log(state['edit'])
         createElement({
             el: 'div',
             attributes: [
                 ['class', 'input-group mt-3'],
                 ['id', `edit_req${index}`]
             ],
-            html: `<input type="text" class="form-control" id="requirements_${index}" oninput="addReqEdit(this)">
-<span class="btn btn-danger ml-1 text-white transparent" aria-hidden="true" onclick="removeReqEdit(${index})"><i class="fas fa-times"></i></span>`,
+            html: `<input type="text" class="form-control" id="requirements_${index}" name="requirements[]" oninput="addReqEdit(this)">
+<span class="btn btn-danger ml-1 text-white transparent" aria-hidden="true" onclick="removeReqEdit('${index}')"><i class="fas fa-times"></i></span>`,
             createTo: '#requirementsEditArea .area'
         })
     }
-    const removeReqEdit = i => {
-        select(`#edit_req${i}`).remove()
-        state['edit']['requirements'].splice(i, 1)
+    const removeReqEdit = (index, requirement = null) => {
+        if (requirement == null) {
+            select(`#edit_req${index}`).remove()
+            select(`#removeBtn${index}`).remove()
+            state['edit']['requirements'].splice(index, 1)
+        }else {
+            let i = 0
+            state.edit.requirements.forEach(req => {
+                let iPP = i++
+                if (requirement == req) {
+                    state['edit']['requirements'].splice(iPP, 1)
+                    select(`#edit_req${iPP}`).remove()
+                    select(`#removeBtn${iPP}`).remove()
+                }
+            })
+        }
         select("#requirements_edit").value = JSON.stringify(state['edit']['requirements'])
     }
 
@@ -183,10 +178,15 @@
                 ['class', 'input-group mt-3'],
                 ['id', `store_prize${index}`]
             ],
-            html: `<input type="text" class="form-control" id="prize_${index}" oninput="addPrizeEdit(this)">
-<span class="btn btn-danger ml-1 text-white transparent" aria-hidden="true" onclick="removePrizeStore(${index})"><i class="fas fa-times"></i></span>`,
+            html: `<input type="text" class="form-control" name="prizes[]" id="prize_${index}" oninput="addPrizeEdit(this)">
+<span class="btn btn-danger ml-1 text-white transparent" aria-hidden="true" onclick="removePrizeEdit(${index})"><i class="fas fa-times"></i></span>`,
             createTo: '#prizeEditArea .area'
         })
+    }
+    const removePrizeEdit = i => {
+        select(`#edit_prize${i}`).remove()
+        select(`#removeBtnPrize${i}`).remove()
+        state['edit']['prize'].splice(i, 1)
     }
 </script>
 @endsection

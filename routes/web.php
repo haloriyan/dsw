@@ -77,7 +77,7 @@ Route::group(['prefix' => 'event'], function() {
     Route::get('{id}/edit', 'EventController@edit')->name('event.edit');
 
 	Route::post('store', 'EventController@store')->name('event.store');
-	Route::post('update', 'EventController@update')->name('event.update');
+	Route::post('{id}/update', 'EventController@update')->name('event.update');
 	Route::delete('{id}/delete', 'EventController@delete')->name('event.delete');
 });
 
