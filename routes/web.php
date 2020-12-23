@@ -10,16 +10,16 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('login', 'AdminController@loginPage')->name('admin.loginPage');
 	Route::post('login', 'AdminController@login')->name('admin.login');
 	Route::get('logout', 'AdminController@logout')->name('admin.logout');
-	Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+	Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard')->middleware('Admin');
 
-	Route::get('faq', 'AdminController@faq')->name('admin.faq');
-    Route::get('contact', 'AdminController@contact')->name('admin.contact');
-    Route::get('sponsor-type', 'AdminController@sponsorType')->name('admin.sponsorType');
-	Route::get('sponsor', 'AdminController@sponsor')->name('admin.sponsor');
-	Route::get('event-type', 'AdminController@eventType')->name('admin.eventType');
-	Route::get('event', 'AdminController@event')->name('admin.event');
-	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker');
-	Route::get('judge', 'AdminController@judge')->name('admin.judge');
+	Route::get('faq', 'AdminController@faq')->name('admin.faq')->middleware('Admin');
+    Route::get('contact', 'AdminController@contact')->name('admin.contact')->middleware('Admin');
+    Route::get('sponsor-type', 'AdminController@sponsorType')->name('admin.sponsorType')->middleware('Admin');
+	Route::get('sponsor', 'AdminController@sponsor')->name('admin.sponsor')->middleware('Admin');
+	Route::get('event-type', 'AdminController@eventType')->name('admin.eventType')->middleware('Admin');
+	Route::get('event', 'AdminController@event')->name('admin.event')->middleware('Admin');
+	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker')->middleware('Admin');
+	Route::get('judge', 'AdminController@judge')->name('admin.judge')->middleware('Admin');
 });
 
 Route::group(['prefix' => 'faq'], function() {
