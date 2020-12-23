@@ -77,7 +77,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="event">Event :</label>
-                    <select name="event_id" class="form-control" required id="event_id_edit">
+                    <select name="event[]" class="form-control" required id="event">
                         <option value="">Pilih event...</option>
                         @foreach ($events as $event)
                             <option value="{{ $event->id }}">{{ $event->title }}</option>
@@ -163,22 +163,16 @@
 </div>
 @endsection
 
-@section('javascript')
+@section('pagejs')
 <script>
-    (function($) {
-        $(document).on("click", "#editBtn", function() {
-            let data = $(this).data('value')
-            $(`#editSpeaker #event_id_edit option[value=${data.event.id}]`).attr('selected', 'selected')
-            $("#editSpeaker #data_id_edit").val(data.id)
-            $("#editSpeaker #name_edit").val(data.name)
-            $("#editSpeaker #phone_edit").val(data.phone)
-            $("#editSpeaker #email_edit").val(data.email)
-            $("#editSpeaker #linkedin_edit").val(data.linkedin_profile)
-        })
-        $(document).on("click", "#deleteBtn", function() {
-            let data = $(this).data('id')
-            $("#data_id_delete").val(data)
-        })
-    })(jQuery)
+    $(document).ready(function ()
+    {
+            $('#event').select2();
+
+            $('#event').on('change', function() {
+                var event = $(this).val();
+                console.log(event);
+            })
+    });
 </script>
 @endsection
