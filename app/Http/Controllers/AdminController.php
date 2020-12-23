@@ -13,9 +13,10 @@ use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\JudgeController as JudgeCtrl;
 use \App\Http\Controllers\ContactController as ContactCtrl;
 use \App\Http\Controllers\SponsorController as SponsorCtrl;
-use App\Http\Controllers\SponsorTypeController as SponsorTypeCtrl;
 use \App\Http\Controllers\SpeakerController as SpeakerCtrl;
+use \App\Http\Controllers\TimelineController as TimelineCtrl;
 use \App\Http\Controllers\EventTypeController as EventTypeCtrl;
+use App\Http\Controllers\SponsorTypeController as SponsorTypeCtrl;
 
 class AdminController extends Controller
 {
@@ -167,6 +168,13 @@ class AdminController extends Controller
 		return view('admin.judge.index')->with([
 			'judges' => $judges,
 			'events' => $events
+		]);
+	}
+	public function timeline() {
+		$timelines = TimelineCtrl::get();
+		
+		return view('admin.timeline.index', [
+			'timelines' => $timelines
 		]);
 	}
 }

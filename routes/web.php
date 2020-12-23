@@ -26,6 +26,15 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('event', 'AdminController@event')->name('admin.event')->middleware('Admin');
 	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker')->middleware('Admin');
 	Route::get('judge', 'AdminController@judge')->name('admin.judge')->middleware('Admin');
+	Route::get('timeline', 'AdminController@timeline')->name('admin.timeline')->middleware('Admin');
+});
+
+Route::group(['prefix' => 'timeline'], function() {
+	Route::get('create', 'TimelineController@create')->name('timeline.create');
+	Route::post('store', 'TimelineController@store')->name('timeline.store');
+	Route::get('{id}/edit', 'TimelineController@edit')->name('timeline.edit');
+	Route::post('{id}/update', 'TimelineController@update')->name('timeline.update');
+	Route::delete('{id}/delete', 'TimelineController@delete')->name('timeline.delete');
 });
 
 Route::group(['prefix' => 'faq'], function() {
