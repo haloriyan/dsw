@@ -82,6 +82,10 @@ Route::group(['prefix' => 'event'], function() {
 });
 
 Route::group(['prefix' => 'speaker'], function() {
+    Route::get('create', 'SpeakerController@create')->name('speaker.create');
+    Route::get('{id}/view', 'SpeakerController@view')->name('speaker.view');
+    Route::get('{id}/edit', 'SpeakerController@edit')->name('speaker.edit');
+
 	Route::post('store', 'SpeakerController@store')->name('speaker.store');
 	Route::post('update', 'SpeakerController@update')->name('speaker.update');
 	Route::delete('delete', 'SpeakerController@delete')->name('speaker.delete');

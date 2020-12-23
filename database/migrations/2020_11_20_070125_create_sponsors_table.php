@@ -15,8 +15,7 @@ class CreateSponsorsTable extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('type_id')->unsigned()->index();
-            $table->foreign('type_id')->references('id')->on('sponsor_type');
+            $table->foreignId('type_id')->constrained('sponsor_type')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('address');
             $table->string('bidang_kerja');

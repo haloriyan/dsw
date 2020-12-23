@@ -29,7 +29,6 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Deskripsi</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -39,20 +38,17 @@
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $event->title }}</td>
-                                                <td>{{ $event->description }}</td>
                                                 <td>
                                                     <form action="{{ route('event.delete',$event->id) }}" method="POST">
                                                     <a href="{{ route('event.view',$event->id) }}" class="btn btn-info btn-icon-split">
                                                         <span class="icon text-white-50">
                                                             <i class="fas fa-eye"></i>
                                                         </span>
-                                                        <span class="text">Detail</span>
                                                     </a>
                                                     <a href="{{ route('event.edit',$event->id) }}" class="btn btn-success btn-icon-split" id="editBtn">
                                                         <span class="icon text-white-50">
                                                             <i class="far fa-edit"></i>
                                                         </span>
-                                                        <span class="text">Edit</span>
                                                     </a>
 
                                                     @csrf
@@ -62,7 +58,6 @@
                                                         <span class="icon text-white-50">
                                                             <i class="fas fa-trash"></i>
                                                         </span>
-                                                        <span class="text">Delete</span>
                                                     </button>
                                                     </form>
                                                 </td>

@@ -58,21 +58,21 @@
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.eventType') }}">
-                    <i class="fas fa-fw fa-calender"></i>
+                    <i class="fa fa-calendar"></i>
                     <span>Jenis Event</span></a>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.event') }}">
-                    <i class="fas fa-fw fa-calender"></i>
+                    <i class="fa fa-calendar"></i>
                     <span>Event</span></a>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.speaker') }}">
-                    <i class="far fa-fw fa-users"></i>
+                    <i class="fa fa-users"></i>
                     <span>Speaker</span></a>
             </li>
 

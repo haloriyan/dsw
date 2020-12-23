@@ -15,8 +15,6 @@ class CreateSpeakersTable extends Migration
     {
         Schema::create('speakers', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('event_id')->unsigned()->index();
-            $table->foreign('event_id')->references('id')->on('events');
             $table->string('name');
             $table->string('phone', 15);
             $table->string('email');
