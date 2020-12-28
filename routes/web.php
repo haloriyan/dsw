@@ -27,6 +27,25 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker')->middleware('Admin');
 	Route::get('judge', 'AdminController@judge')->name('admin.judge')->middleware('Admin');
 	Route::get('timeline', 'AdminController@timeline')->name('admin.timeline')->middleware('Admin');
+	Route::get('rundown', 'AdminController@rundown')->name('admin.rundown')->middleware('Admin');
+	Route::get('ticket-type', 'AdminController@ticketType')->name('admin.ticketType')->middleware('Admin');
+	Route::get('ticket/{typeID?}', 'AdminController@ticket')->name('admin.ticket')->middleware('Admin');
+});
+
+Route::group(['prefix' => 'ticket'], function() {
+	Route::get('create', 'TicketController@create')->name('ticket.create')->middleware('Admin');
+	Route::post('store', 'TicketController@store')->name('ticket.store')->middleware('Admin');
+	Route::get('{id}/edit', 'TicketController@edit')->name('ticket.edit')->middleware('Admin');
+	Route::post('{id}/update', 'TicketController@update')->name('ticket.update')->middleware('Admin');
+	Route::delete('{id}/delete', 'TicketController@delete')->name('ticket.delete')->middleware('Admin');
+});
+
+Route::group(['prefix' => 'ticket-type'], function() {
+	Route::get('create', 'TicketTypeController@create')->name('ticketType.create')->middleware('Admin');
+	Route::post('store', 'TicketTypeController@store')->name('ticketType.store')->middleware('Admin');
+	Route::get('{id}/edit', 'TicketTypeController@edit')->name('ticketType.edit')->middleware('Admin');
+	Route::post('{id}/update', 'TicketTypeController@update')->name('ticketType.update')->middleware('Admin');
+	Route::delete('{id}/delete', 'TicketTypeController@delete')->name('ticketType.delete')->middleware('Admin');
 });
 
 Route::group(['prefix' => 'timeline'], function() {
@@ -35,6 +54,15 @@ Route::group(['prefix' => 'timeline'], function() {
 	Route::get('{id}/edit', 'TimelineController@edit')->name('timeline.edit');
 	Route::post('{id}/update', 'TimelineController@update')->name('timeline.update');
 	Route::delete('{id}/delete', 'TimelineController@delete')->name('timeline.delete');
+});
+
+Route::group(['prefix' => 'rundown'], function() {
+	Route::get('create', 'RundownController@create')->name('rundown.create');
+	Route::post('store', 'RundownController@store')->name('rundown.store');
+	Route::get('{id}/view', 'RundownController@view')->name('rundown.view');
+	Route::get('{id}/edit', 'RundownController@edit')->name('rundown.edit');
+	Route::post('{id}/update', 'RundownController@update')->name('rundown.update');
+	Route::delete('{id}/delete', 'RundownController@delete')->name('rundown.delete');
 });
 
 Route::group(['prefix' => 'faq'], function() {

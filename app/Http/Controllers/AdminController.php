@@ -11,11 +11,14 @@ use Illuminate\Http\Request;
 use \App\Http\Controllers\FaqController as FaqCtrl;
 use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\JudgeController as JudgeCtrl;
+use \App\Http\Controllers\TicketController as TicketCtrl;
 use \App\Http\Controllers\ContactController as ContactCtrl;
 use \App\Http\Controllers\SponsorController as SponsorCtrl;
 use \App\Http\Controllers\SpeakerController as SpeakerCtrl;
+use \App\Http\Controllers\RundownController as RundownCtrl;
 use \App\Http\Controllers\TimelineController as TimelineCtrl;
 use \App\Http\Controllers\EventTypeController as EventTypeCtrl;
+use \App\Http\Controllers\TicketTypeController as TicketTypeCtrl;
 use App\Http\Controllers\SponsorTypeController as SponsorTypeCtrl;
 
 class AdminController extends Controller
@@ -172,9 +175,46 @@ class AdminController extends Controller
 	}
 	public function timeline() {
 		$timelines = TimelineCtrl::get();
-		
+
 		return view('admin.timeline.index', [
 			'timelines' => $timelines
+		]);
+	}
+	public function rundown() {
+		$rundowns = RundownCtrl::get();
+		
+		return view('admin.rundown.index', [
+			'rundowns' => $rundowns
+		]);
+	}
+	public function ticketType() {
+		$types = TicketTypeCtrl::get();
+
+		return view('admin.ticketType.index', [
+			'types' => $types
+		]);
+	}
+	public function ticket($typeID = NULL) {
+		$type = new \stdClass();
+		$type->name = "";
+		if ($typeID == NULL) {
+			$tickets = TicketCtrl::get()->with('type')->get();
+		}else {
+			$tickets = TicketCtrl::get([
+				['type_id', '=', $typeID]
+			])
+			->with('type')
+			->get();
+			
+			$type = TicketTypeCtrl::get([
+				['id', '=', $typeID]
+			])
+			->first();
+		}
+		
+		return view('admin.ticket.index', [
+			'tickets' => $tickets,
+			'type' => $type
 		]);
 	}
 }

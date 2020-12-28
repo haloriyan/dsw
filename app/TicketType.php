@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rundown extends Model
+class TicketType extends Model
 {
     protected $fillable = [
-        'title','date','start_time','end_time','notes'
+        'name','description'
     ];
 }
