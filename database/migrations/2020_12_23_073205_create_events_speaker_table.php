@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJudgesTable extends Migration
+class CreateEventsSpeakerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateJudgesTable extends Migration
      */
     public function up()
     {
-        Schema::create('judges', function (Blueprint $table) {
+        Schema::create('events_speaker', function (Blueprint $table) {
             $table->id();
             $table->foreignId('events_id')->constrained('events')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('name');
-            $table->string('phone', 15);
-            $table->string('email');
-            $table->string('linkedin_profile');
-            $table->string('photo');
+            $table->foreignId('speaker_id')->constrained('speakers')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateJudgesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('judges');
+        Schema::dropIfExists('events_speaker');
     }
 }

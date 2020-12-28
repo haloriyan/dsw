@@ -59,9 +59,9 @@
                                             <div class="area">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" id="requirements_0" oninput="addReqStore(this)">
+                                                    <button type="button" onclick="moreReqStore()" id="moreReqStoreBtn" class="btn btn-secondary ml-2"><i class="fas fa-plus"></i></button>
                                                 </div>
                                             </div>
-                                            <button type="button" onclick="moreReqStore()" id="moreReqStoreBtn" class="btn btn-secondary mt-2" style="display: none;"><i class="fas fa-plus"></i> More</button>
                                         </div>
                                         <div class="form-group" id="prizeAddArea">
                                             <label for="prize">Hadiah :</label>
@@ -69,9 +69,9 @@
                                             <div class="area">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" id="prize_0" oninput="addPrizeStore(this)">
+                                                    <button type="button" id="morePrizeStoreBtn" class="btn btn-secondary ml-2" onclick="morePrizeStore()"><i class="fas fa-plus"></i></button>
                                                 </div>
                                             </div>
-                                            <button type="button" id="morePrizeStoreBtn" class="btn btn-secondary mt-2" style="display: none;" onclick="morePrizeStore()"><i class="fas fa-plus"></i> More</button>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-12 text-right">
