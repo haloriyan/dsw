@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Day 1 &#8211; Data Science Weekend</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>Data Science Fair</description>
+	<lastBuildDate>Sun, 11 Oct 2020 22:54:29 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2020/10/cropped-DSW-logo-black-2-32x32.png</url>
+	<title>Day 1 &#8211; Data Science Weekend</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Talks B and Talks Social Impact B</title>
+		<link>./../../../event/talks-b-and-talks-social-impact-b/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Sat, 10 Oct 2020 14:09:59 +0000</pubDate>
+				<guid isPermaLink="false">./../../../index.html?post_type=event&#038;p=3015</guid>
+
+					<description><![CDATA[DSW Talks are one of the Data Science Weekend sessions [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p><span style="font-weight: 400;">DSW Talks are one of the Data Science Weekend sessions that will bring several focus from data science and technology to data issues and paradigms in society presented to the entire conference audience. DSW Talks will also be held as one of the DSW Roadshows series sessions and will present some sessions for social fundraising to aim more impact and encourage a better future.</span></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Talks A and Talks Social Impact A</title>
+		<link>./../../../event/talks-a-and-talks-social-impact-a/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Sat, 10 Oct 2020 14:08:53 +0000</pubDate>
+				<guid isPermaLink="false">./../../../index.html?post_type=event&#038;p=3014</guid>
+
+					<description><![CDATA[DSW Talks are one of the Data Science Weekend sessions [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p><span style="font-weight: 400;">DSW Talks are one of the Data Science Weekend sessions that will bring several focus from data science and technology to data issues and paradigms in society presented to the entire conference audience. DSW Talks will also be held as one of the DSW Roadshows series sessions and will present some sessions for social fundraising to aim more impact and encourage a better future.</span></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Exhibition Sesi 2</title>
+		<link>./../../../event/exhibition-sesi-2/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Sat, 10 Oct 2020 14:06:26 +0000</pubDate>
+				<guid isPermaLink="false">./../../../index.html?post_type=event&#038;p=3013</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Exhibition Sesi 1</title>
+		<link>./../../../event/exhibition-sesi-1/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2020 18:17:47 +0000</pubDate>
+				<guid isPermaLink="false">http://54.179.228.148/?post_type=event&#038;p=2894</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Panel Talks B</title>
+		<link>./../../../event/panel-talks-b/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2020 18:15:58 +0000</pubDate>
+				<guid isPermaLink="false">http://54.179.228.148/?post_type=event&#038;p=2893</guid>
+
+					<description><![CDATA[DSW Talks are one of the Data Science Weekend sessions [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p>DSW Talks are one of the Data Science Weekend sessions that will bring several focus from data science and technology to data issues and paradigms in society presented to the entire conference audience. DSW Talks will also be held as one of the DSW Roadshows series sessions and will present some sessions for social fundraising to aim more impact and encourage a better future</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Concert B</title>
+		<link>./../../../event/concert-b/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2020 18:13:58 +0000</pubDate>
+				<guid isPermaLink="false">http://54.179.228.148/?post_type=event&#038;p=2891</guid>
+
+					<description><![CDATA[These are the biggest sessions of the Data Science Weekend [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p>These are the biggest sessions of the Data Science Weekend series where the rockstars or keynote from several backgrounds share the happening of data science and technology can make a powerful impact for the sustainable future. DSW concerts are raised from issues and paradigms in society, so it will bring up a couple of topics such as data awareness, digitization technology and many more. The DSW concert will open a few sides of perspective from the government, several industry sectors and individual outstanding.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Concert A</title>
+		<link>./../../../event/concert-a/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2020 18:12:58 +0000</pubDate>
+				<guid isPermaLink="false">http://54.179.228.148/?post_type=event&#038;p=2890</guid>
+
+					<description><![CDATA[These are the biggest sessions of the Data Science Weekend [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p>These are the biggest sessions of the Data Science Weekend series where the rockstars or keynote from several backgrounds share the happening of data science and technology can make a powerful impact for the sustainable future. DSW concerts are raised from issues and paradigms in society, so it will bring up a couple of topics such as data awareness, digitization technology and many more. The DSW concert will open a few sides of perspective from the government, several industry sectors and individual outstanding.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Panel Talks A</title>
+		<link>./../../../event/panel-talks-a/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2020 18:11:27 +0000</pubDate>
+				<guid isPermaLink="false">http://54.179.228.148/?post_type=event&#038;p=2892</guid>
+
+					<description><![CDATA[DSW Talks are one of the Data Science Weekend sessions [&#8230;]]]></description>
+										<content:encoded><![CDATA[<p>DSW Talks are one of the Data Science Weekend sessions that will bring several focus from data science and technology to data issues and paradigms in society presented to the entire conference audience. DSW Talks will also be held as one of the DSW Roadshows series sessions and will present some sessions for social fundraising to aim more impact and encourage a better future</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Opening Welcome</title>
+		<link>./../../../event/opening-welcome/index.html</link>
+		
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2020 11:13:07 +0000</pubDate>
+				<guid isPermaLink="false">http://54.179.228.148/?post_type=event&#038;p=2889</guid>
+
+					<description><![CDATA[Preparation and Registration]]></description>
+										<content:encoded><![CDATA[<p>Preparation and Registration</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

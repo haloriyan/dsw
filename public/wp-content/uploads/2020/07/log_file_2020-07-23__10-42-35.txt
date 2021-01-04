@@ -1,0 +1,34 @@
+
+---Downloaded files---
+The import files for: Solustrid were successfully downloaded!
+Initial max execution time = 30
+Files info:
+Site URL = https://virtualweddingexpo.id
+Data file = /home/virtualw/public_html/wp-content/plugins/miexpo-demo-installer/demo-data/demo1/content.xml
+Widget file = /home/virtualw/public_html/wp-content/plugins/miexpo-demo-installer/demo-data/demo1/widgets.wie
+Customizer file = /home/virtualw/public_html/wp-content/plugins/miexpo-demo-installer/demo-data/demo1/customize.dat
+Redux files:
+not defined!
+
+---Importing widgets---
+Sidebar : 
+
+Search - No Title - Widget already exists
+Categories - No Title - Widget already exists
+Top-speaker - TOP SPEAKER - Imported
+Tag Cloud - No Title - Imported
+Top-event - TOP SPEAKER - Imported
+
+Footer Widget : 
+
+Text - No Title - Imported
+Text - No Title - Imported
+Text - No Title - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---pt-ocdi/after_import---
+
