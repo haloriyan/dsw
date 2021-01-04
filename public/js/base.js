@@ -98,6 +98,10 @@ function inArray(needle, haystack) {
     }
     return false;
 }
+function removeArray(toRemove, arr) {
+	let index = arr.indexOf(toRemove)
+	arr.splice(index, 1)
+}
 
 const redirect = url => {
     let a = document.createElement('a')

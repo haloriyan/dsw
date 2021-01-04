@@ -9,6 +9,7 @@ use App\Admin;
 use Illuminate\Http\Request;
 
 use \App\Http\Controllers\FaqController as FaqCtrl;
+use \App\Http\Controllers\RoleController as RoleCtrl;
 use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\JudgeController as JudgeCtrl;
 use \App\Http\Controllers\TicketController as TicketCtrl;
@@ -23,7 +24,7 @@ use App\Http\Controllers\SponsorTypeController as SponsorTypeCtrl;
 
 class AdminController extends Controller
 {
-	public function me() {
+	public static function me() {
 		return Auth::guard('admin')->user();
 	}
 	public function loginPage() {
@@ -101,16 +102,45 @@ class AdminController extends Controller
 		$saveData = Admin::create([
 			'name' => $name,
 			'email' => $email,
-			'password' => $password,
-			'role' => $role
+			'password' => bcrypt($password),
+			'role' => $role,
+			'is_super' => 0,
+			'username' => $req->username,
+			'phone' => $req->phone,
+		]);
+
+		return redirect()->route('admin.admin')->with([
+			'message' => "Admin baru berhasil ditambahkan"
 		]);
 	}
 	public function edit($id) {
 		$admin = Admin::find($id);
 
-		return view('admin.admin.edit')->with([
+		return view('admin.admin.edit', [
 			'admin' => $admin
 		]);
+	}
+	public function update($id, Request $req) {
+		$toUpdate = [
+			'name' => $req->name,
+			'email' => $req->email,
+			'role' => $req->role,
+			'username' => $req->username,
+			'phone' => $req->phone,
+		];
+		
+		if ($req->password != "") {
+			$toUpdate['password'] = bcrypt($req->password);
+		}
+
+		$updateData = Admin::where('id', $id)->update($toUpdate);
+		
+		return redirect()->route('admin.admin')->with([
+			'message' => "Data admin berhasil diperbarui"
+		]);
+	}
+	public function create() {
+		return view('admin.admin.create');
 	}
 	public function delete($id) {
 		$deleteData = Admin::where('id', $id)->delete();
@@ -217,5 +247,19 @@ class AdminController extends Controller
 			'type' => $type
 		]);
 	}
-}
+	public function role() {
+		$roles = RoleCtrl::get()->get();
+		
+		return view('admin.role.index', [
+			'roles' => $roles
+		]);
+	}
+	public function admin() {
+		$admins = Admin::all();
 
+		return view('admin.admin.index', [
+			'admins' => $admins
+		]);
+	}
+
+}

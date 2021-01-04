@@ -6,8 +6,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('pwd', function () {
-    return bcrypt("inikatasandi");
+Route::group(['prefix' => "role"], function() {
+	Route::get('create', "RoleController@create")->name('role.create');
+	Route::post('store', "RoleController@store")->name('role.store');
+	Route::get('{id}/edit', "RoleController@edit")->name('role.edit');
+	Route::post('{id}/update', "RoleController@update")->name('role.update');
+	Route::delete('{id}/delete', "RoleController@delete")->name('role.delete');
 });
 
 Route::group(['prefix' => 'admin'], function() {
@@ -18,6 +22,14 @@ Route::group(['prefix' => 'admin'], function() {
 
 	Route::get('profile', 'AdminController@profile')->name('admin.profile')->middleware('Admin');
 	Route::post('profile/update', 'AdminController@updateProfile')->name('admin.profile.update')->middleware('Admin');
+	
+	Route::get('admin', 'AdminController@admin')->name('admin.admin')->middleware('Admin');
+	Route::get('create', 'AdminController@create')->name('admin.create')->middleware('Admin');
+	Route::post('store', 'AdminController@store')->name('admin.store')->middleware('Admin');
+	Route::get('{id}/edit', 'AdminController@edit')->name('admin.edit')->middleware('Admin');
+	Route::post('{id}/update', 'AdminController@update')->name('admin.update')->middleware('Admin');
+	Route::delete('{id}/delete', 'AdminController@delete')->name('admin.delete')->middleware('Admin');
+	
 	Route::get('faq', 'AdminController@faq')->name('admin.faq')->middleware('Admin');
     Route::get('contact', 'AdminController@contact')->name('admin.contact')->middleware('Admin');
     Route::get('sponsor-type', 'AdminController@sponsorType')->name('admin.sponsorType')->middleware('Admin');
@@ -30,6 +42,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('rundown', 'AdminController@rundown')->name('admin.rundown')->middleware('Admin');
 	Route::get('ticket-type', 'AdminController@ticketType')->name('admin.ticketType')->middleware('Admin');
 	Route::get('ticket/{typeID?}', 'AdminController@ticket')->name('admin.ticket')->middleware('Admin');
+	Route::get('role', 'AdminController@role')->name('admin.role')->middleware('Admin');
 });
 
 Route::group(['prefix' => 'ticket'], function() {
@@ -49,11 +62,11 @@ Route::group(['prefix' => 'ticket-type'], function() {
 });
 
 Route::group(['prefix' => 'timeline'], function() {
-	Route::get('create', 'TimelineController@create')->name('timeline.create');
-	Route::post('store', 'TimelineController@store')->name('timeline.store');
-	Route::get('{id}/edit', 'TimelineController@edit')->name('timeline.edit');
-	Route::post('{id}/update', 'TimelineController@update')->name('timeline.update');
-	Route::delete('{id}/delete', 'TimelineController@delete')->name('timeline.delete');
+	Route::get('create', 'TimelineController@create')->name('timeline.create')->middleware('Admin');
+	Route::post('store', 'TimelineController@store')->name('timeline.store')->middleware('Admin');
+	Route::get('{id}/edit', 'TimelineController@edit')->name('timeline.edit')->middleware('Admin');
+	Route::post('{id}/update', 'TimelineController@update')->name('timeline.update')->middleware('Admin');
+	Route::delete('{id}/delete', 'TimelineController@delete')->name('timeline.delete')->middleware('Admin');
 });
 
 Route::group(['prefix' => 'rundown'], function() {
