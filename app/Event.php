@@ -14,4 +14,7 @@ class Event extends Model
     public function type() {
         return $this->belongsTo('App\EventType', 'type_id');
     }
+    public function timeline() {
+        return $this->hasOne('App\Timeline', 'event_id');
+    }
 }

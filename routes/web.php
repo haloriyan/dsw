@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('pages.index');
+Route::get('/', "UserController@index")->name('user.index');
+Route::get('contact', "UserController@contact")->name('user.contact');
+Route::get('test', function() {
+	return view('pages.danthon.index');
 });
+Route::get('event/{id}', "UserController@event")->name('user.event');
 
 Route::group(['prefix' => "role"], function() {
 	Route::get('create', "RoleController@create")->name('role.create');

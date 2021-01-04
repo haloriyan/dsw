@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public static function get() {
-        return Event::all();
+    public static function get($filter = NULL) {
+        if ($filter == NULL) {
+            return new Event;
+        }
+        return Event::where($filter);
     }
 
     public function create()

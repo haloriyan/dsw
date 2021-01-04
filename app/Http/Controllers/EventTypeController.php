@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class EventTypeController extends Controller
 {
     public static function get() {
-        return EventType::all();
+        return new EventType;
     }
 
     public function create()
