@@ -1,192 +1,155 @@
 @extends('layouts.admin')
 
-@section('title', 'Event')
+@section('title', 'Edit Event')
 
 @section('content')
 
 <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Event Edit</h1>
-                <a href="{{ route('admin.event') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                        class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Tambah Event</h1>
+    <a href="{{ route('admin.event') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
+</div>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Data Event</h6>
+    </div>
+    <div class="card-body">
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
+        @endif
 
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Data Edit</h6>
-                </div>
-                <div class="card-body">
+        <form action="{{ route('event.update', $event->id) }}" method="POST">
+            @php
+                $requirements = explode(",", $event->requirements);
+                $prize = explode(",", $event->prize);
+                $i = 0;
+                $iPrize = 0;
+            @endphp
+            @csrf
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <label for="title">Jenis event :</label>
+                        <select name="type_id" class="form-control">
+                            <option value="">-- Pilih Jenis Event --</option>
+                            @foreach ($eventTypes as $type)
+                                @php
+                                    $isSelected = $event->type_id == $type->id ? "selected='selected'" : "";
+                                @endphp
+                                <option {{ $isSelected }} value="{{ $type->id }}">{{ $type->name }}</option>
                             @endforeach
-                        </ul>
+                        </select>
                     </div>
-                @endif
-
-                <form action="{{ route('event.update', [$event->id]) }}" method="POST">
-                    @csrf
-                    @method('POST')
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <input type="hidden" name="data_id" value="{{ $event->id }}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Jenis event :</label>
-                                <select name="type_id" class="form-control">
-                                    @foreach ($eventType as $type)
-                                        @php
-                                            $selected = "";
-                                            if ($type->id == $event->type->id) {
-                                                $selected = "selected='selected'";
-                                            }
-                                        @endphp
-                                        <option {{ $selected }} value="{{ $type->id }}">{{ $type->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Nama event :</label>
-                                <input type="text"  value="{{ $event->title }}" class="form-control" name="title">
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Deskripsi :</label>
-                                <textarea name="description" rows="5" class="form-control">{{ $event->description }}
-                                </textarea>
-                            </div>
-                            <div class="form-group" id="requirementsEditArea">
-                                <label for="title">Requirements :</label>
-                                <input type="text" name="requirements_old" id="requirements_edit" value="{{ $event->requirements }}">
-                                <div class="area">
-                                    @php
-                                        $i = 0;
-                                    @endphp
-                                    @foreach (json_decode($event->requirements) as $req)
-                                        @php
-                                            $iPP = $i++;
-                                        @endphp
-                                        <input type="text" class="form-control" id="edit_req{{ $iPP }}" name="requirements[]" oninput="addReqEdit(this)" value="{{ $req }}">
-                                        <span class="btn btn-danger ml-1 text-white transparent" id="removeBtn{{ $iPP }}" aria-hidden="true" onclick="removeReqEdit('{{ $iPP }}', '{{ $req }}')"><i class="fas fa-times"></i></span>
-                                    @endforeach
-                                </div>
-                                <button type="button" onclick="moreReqEdit()" id="moreReqEditBtn" class="btn btn-secondary mt-2"><i class="fas fa-plus"></i> More</button>
-                            </div>
-                            <div class="form-group" id="prizeEditArea">
-                                <label for="title">Prize :</label>
-                                <input type="hidden" name="old_prize" id="prize_edit">
-                                <div class="area">
-                                    @php
-                                        $a = 0;
-                                    @endphp
-                                    @foreach (json_decode($event->prize) as $prize)
-                                        @php
-                                            $aPP = $a++;
-                                        @endphp
-                                        <input type="text" class="form-control" id="edit_prize{{ $iPP }}" name="prizes[]" oninput="addPrizeEdit(this)" value="{{ $prize }}">
-                                        <span class="btn btn-danger ml-1 text-white transparent" id="removeBtnPrize{{ $iPP }}" aria-hidden="true" onclick="removePrizeEdit('{{ $iPP }}', '{{ $req }}')"><i class="fas fa-times"></i></span>
-                                    @endforeach
-                                </div>
-                                <button type="button" onclick="morePrizeEdit()" id="morePrizeEditBtn" class="btn btn-secondary mt-2"><i class="fas fa-plus"></i> More</button>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-right">
-                            <button type="submit" class="btn btn-success">Update</button>
-                        </div>
+                    <div class="form-group">
+                        <label for="title">Nama event :</label>
+                        <input type="text" class="form-control" name="title" value="{{ $event->title }}">
                     </div>
-                </form>
+                    <div class="form-group">
+                        <label for="title">Deskripsi :</label>
+                        <textarea name="description" rows="5" class="form-control">{{ $event->description }}</textarea>
+                    </div>
+                    <div class="form-group" >
+                        <label for="requirements">Requirements :</label>
+                        <div id="requirementsArea">
+                            @foreach ($requirements as $requirement)
+                                @php
+                                    $iPP = $i++;
+                                @endphp
+                                <div class="row requirements" key="{{ $iPP }}">
+                                    <div class="col-md-11">
+                                        <input type="text" class="form-control mb-3" name="requirements[]" value="{{ $requirement }}">
+                                    </div>
+                                    @if ($iPP > 0)
+                                        <div class="col-md-1">
+                                            <button type="button" class="btn btn-danger" onclick="removeReq({{ $iPP }})"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
+                            <input type="hidden" id="iPP" value="{{ $iPP }}">
+                        </div>
+                        <button class="btn btn-primary mt-1" type="button" onclick="moreReq()"><i class="fas fa-plus"></i> lainnya</button>
+                    </div>
+                    <div class="form-group" >
+                        <label for="prize">Prize :</label>
+                        <div id="prizeArea">
+                            {{-- <input type="text" class="form-control" name="prize[]" /> --}}
+                            @foreach ($prize as $prize)
+                                @php
+                                    $iPPPrize = $iPrize++;
+                                @endphp
+                                <div class="row prize">
+                                    <div class="col-md-11">
+                                        <input type="text" class="form-control mb-3" name="prize[]" value="{{ $prize }}" />
+                                    </div>
+                                    @if ($iPPPrize > 0)
+                                        <div class="col-md-1">
+                                            <button type="button" onclick="removePrize({{ $iPPPrize }})" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
+                            <input type="hidden" id="iPPPrize" value="{{ $iPPPrize }}">
+                        </div>
+                        <button class="btn btn-primary mt-1" type="button" onclick="morePrize()"><i class="fas fa-plus"></i> lainnya</button>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>
+        </form>
+    </div>
+</div>
 @endsection
 
 @section('pagejs')
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="{{ asset('js/base.js') }}"></script>
 <script>
-    let state = {
-        edit: {
-            prize: [],
-            requirements: {!! $event->requirements !!}
-        },
-        store: {
-            prize: [],
-            requirements: []
-        }
-    }
-
-    const addReqEdit = dom => {
-        let index = dom.getAttribute('id').split('_')[1]
-        let value = dom.value
-        state['edit']['requirements'][index] = value
-        select("#requirements_edit").value = JSON.stringify(state['edit']['requirements'])
-
-        if (index == 0) {
-            let buttonVisibility = value != "" ? "block" : "none"
-            select("button#moreReqEditBtn").style.display = buttonVisibility
-        }
-    }
-    const moreReqEdit = () => {
-        let index = state['edit']['requirements'].length
-        console.log(state['edit'])
+    let iPP = select("#iPP").value;
+    let iPPPrize = select("#iPPPrize").value;
+    
+    const moreReq = () => {
+        iPP += 1;
         createElement({
             el: 'div',
             attributes: [
-                ['class', 'input-group mt-3'],
-                ['id', `edit_req${index}`]
+                ['class', 'row mb-3 requirements'],
+                ['key', iPP]
             ],
-            html: `<input type="text" class="form-control" id="requirements_${index}" name="requirements[]" oninput="addReqEdit(this)">
-<span class="btn btn-danger ml-1 text-white transparent" aria-hidden="true" onclick="removeReqEdit('${index}')"><i class="fas fa-times"></i></span>`,
-            createTo: '#requirementsEditArea .area'
-        })
+            html: `<div class="col-md-11"><input type="text" name="requirements[]" class="form-control" key="${iPP}" /></div>
+<div class="col-md-1"><button type="button" onclick="removeReq(${iPP})" class="btn btn-danger"><i class="fas fa-trash"></i></button></div>`,
+            createTo: "#requirementsArea"
+        });
     }
-    const removeReqEdit = (index, requirement = null) => {
-        if (requirement == null) {
-            select(`#edit_req${index}`).remove()
-            select(`#removeBtn${index}`).remove()
-            state['edit']['requirements'].splice(index, 1)
-        }else {
-            let i = 0
-            state.edit.requirements.forEach(req => {
-                let iPP = i++
-                if (requirement == req) {
-                    state['edit']['requirements'].splice(iPP, 1)
-                    select(`#edit_req${iPP}`).remove()
-                    select(`#removeBtn${iPP}`).remove()
-                }
-            })
-        }
-        select("#requirements_edit").value = JSON.stringify(state['edit']['requirements'])
-    }
-
-    const addPrizeEdit = dom => {
-        let index = dom.getAttribute('id').split('_')[1]
-        let value = dom.value
-        state['edit']['prize'][index] = value
-        select("#prize_edit").value = JSON.stringify(state['edit']['prize'])
-    }
-    const morePrizeEdit = () => {
-        let index = state['edit']['prize'].length
+    const morePrize = () => {
+        iPPPrize += 1;
         createElement({
             el: 'div',
             attributes: [
-                ['class', 'input-group mt-3'],
-                ['id', `store_prize${index}`]
+                ['class', 'row mb-3 prize'],
+                ['key', iPPPrize]
             ],
-            html: `<input type="text" class="form-control" name="prizes[]" id="prize_${index}" oninput="addPrizeEdit(this)">
-<span class="btn btn-danger ml-1 text-white transparent" aria-hidden="true" onclick="removePrizeEdit(${index})"><i class="fas fa-times"></i></span>`,
-            createTo: '#prizeEditArea .area'
-        })
+            html: `<div class="col-md-11"><input type="text" name="prize[]" class="form-control" key="${iPPPrize}" /></div>
+<div class="col-md-1"><button type="button" onclick="removePrize(${iPPPrize})" class="btn btn-danger"><i class="fas fa-trash"></i></button></div>`,
+            createTo: "#prizeArea"
+        });
     }
-    const removePrizeEdit = i => {
-        select(`#edit_prize${i}`).remove()
-        select(`#removeBtnPrize${i}`).remove()
-        state['edit']['prize'].splice(i, 1)
+    const removeReq = key => {
+        select(`.requirements[key='${key}']`).remove();
     }
 </script>
 @endsection

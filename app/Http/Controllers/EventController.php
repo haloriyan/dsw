@@ -21,12 +21,15 @@ class EventController extends Controller
     }
 
     public function store(Request $req) {
+        $requirements = implode(",", $req->requirements);
+        $prize = implode(",", $req->prize);
+
         $saveData = Event::create([
             'type_id' => $req->type_id,
             'title' => $req->title,
             'description' => $req->description,
-            'requirements' => $req->requirements,
-            'prize' => $req->prize
+            'requirements' => $requirements,
+            'prize' => $prize
         ]);
 
         return redirect()->route('admin.event');
@@ -46,26 +49,13 @@ class EventController extends Controller
         
 		return view('admin.event.edit')->with([
             'event' => $event ,
-            'eventType' => $eventType
+            'eventTypes' => $eventType
         ]);
     }
 
     public function update($id, Request $req) {
-        $requirements = [];
-        foreach ($req->requirements as $requirement) {
-            if ($requirement != null) {
-                $requirements[] = $requirement;
-            }
-        }
-        $requirements = json_encode($requirements);
-
-        $prizes = [];
-        foreach ($req->prizes as $prize) {
-            if ($prize != null) {
-                $prizes[] = $prize;
-            }
-        }
-        $prizes = json_encode($prizes);
+        $requirements = implode(",", $req->requirements);
+        $prizes = implode(",", $req->prize);
 
         $updateData = Event::where('id', $id)->update([
             'type_id' => $req->type_id,
