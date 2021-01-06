@@ -10,7 +10,7 @@
         <!-- Responsive -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <title>Danthon &#8211; Data Science Weekend</title>
+        <title>{{ $event->title }} &#8211; Data Science Weekend</title>
 <link rel='dns-prefetch' href='//maps.googleapis.com' />
 <link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
@@ -289,7 +289,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 							<div class="elementor-widget-wrap">
 						<div class="elementor-element elementor-element-b86404e elementor-widget elementor-widget-heading" data-id="b86404e" data-element_type="widget" data-widget_type="heading.default">
 				<div class="elementor-widget-container">
-			<h2 class="elementor-heading-title elementor-size-default">Timeline Competition</h2>		</div>
+			<h2 class="elementor-heading-title elementor-size-default">Timeline Event</h2>		</div>
 				</div>
 				<div class="elementor-element elementor-element-f0caaad elementor-widget elementor-widget-timeline-widget-addon" data-id="f0caaad" data-element_type="widget" data-widget_type="timeline-widget-addon.default">
 				<div class="elementor-widget-container">
@@ -359,7 +359,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 							<div class="elementor-widget-wrap">
 						<div class="elementor-element elementor-element-7dc2dcd elementor-widget elementor-widget-heading" data-id="7dc2dcd" data-element_type="widget" data-widget_type="heading.default">
 				<div class="elementor-widget-container">
-			<h2 class="elementor-heading-title elementor-size-default">Competition Detail</h2>		</div>
+			<h2 class="elementor-heading-title elementor-size-default">Event Detail</h2>		</div>
 				</div>
 				<div class="elementor-element elementor-element-9c811ac elementor-view-default elementor-position-top elementor-vertical-align-top elementor-widget elementor-widget-icon-box" data-id="9c811ac" data-element_type="widget" data-widget_type="icon-box.default">
 				<div class="elementor-widget-container">
@@ -618,6 +618,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
           </a>
   </div>
 </div>
+	<script src="{{ asset('js/base.js') }}"></script>
 	<script type="text/javascript">
 		var c = document.body.className;
 		c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
@@ -710,6 +711,43 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 	prices.forEach(price => {
 		price.setAttribute('class', 'price-block-two col-md-4');
 	})
+</script>
+<script>
+	function CountDownTimer(dt, id)
+    {
+        var end = new Date(dt);
+
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            if (distance < 0) {
+				console.log("expierd");
+                clearInterval(timer);
+
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+			let timerArea = selectAll(".time-countdown .counter-column .count");
+			timerArea[0].innerText = days;
+			timerArea[1].innerText = hours;
+			timerArea[2].innerText = minutes;
+			timerArea[3].innerText = seconds;
+        }
+
+        timer = setInterval(showRemaining, 1000);
+    }
+
+	CountDownTimer("{{ Carbon::parse($event->timeline->open_date)->format('m/d/Y') }} 00:01 AM", "test");
 </script>
 </div></body>
 </html>

@@ -40,7 +40,7 @@ class EventController extends Controller
 
     public function view($id)
     {
-        $event = Event::where('id' , $id)->with('type')->first();
+        $event = Event::where('id' , $id)->with(['type','timeline'])->first();
         return view('admin.event.view',['event' => $event]);
     }
 

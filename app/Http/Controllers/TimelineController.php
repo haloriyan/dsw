@@ -16,7 +16,7 @@ class TimelineController extends Controller
         return Timeline::where($filter)->get();
     }
     public function create() {
-        $events = EventCtrl::get();
+        $events = EventCtrl::get()->get();
         
         return view('admin.timeline.create', [
             'events' => $events
@@ -38,7 +38,7 @@ class TimelineController extends Controller
     }
     public function edit($id) {
         $timeline = Timeline::find($id);
-        $events = EventCtrl::get();
+        $events = EventCtrl::get()->get();
         
         return view('admin.timeline.edit', [
             'timeline' => $timeline,

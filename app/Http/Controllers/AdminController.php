@@ -179,7 +179,8 @@ class AdminController extends Controller
 	}
 	public function event() {
 		$eventTypes = EventTypeCtrl::get();
-		$events = EventCtrl::get();
+		$events = EventCtrl::get()->get();
+
 		return view('admin.event.index')->with([
 			'eventTypes' => $eventTypes,
 			'events' => $events
@@ -187,7 +188,7 @@ class AdminController extends Controller
 	}
 	public function speaker() {
 		$speakers = SpeakerCtrl::get();
-		$events = EventCtrl::get();
+		$events = EventCtrl::get()->get();
 
 		return view('admin.speaker.index')->with([
 			'speakers' => $speakers,
@@ -195,7 +196,7 @@ class AdminController extends Controller
 		]);
 	}
 	public function judge() {
-		$events = EventCtrl::get();
+		$events = EventCtrl::get()->get();
 		$judges = JudgeCtrl::get();
 
 		return view('admin.judge.index')->with([
