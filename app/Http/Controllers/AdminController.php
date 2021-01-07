@@ -177,13 +177,24 @@ class AdminController extends Controller
 			'eventTypes' => $eventTypes
 		]);
 	}
-	public function event() {
+	public function event($rundownID = NULL) {
+		$rundown = "";
 		$eventTypes = EventTypeCtrl::get();
-		$events = EventCtrl::get()->get();
+		if ($rundownID == NULL) {
+			$events = EventCtrl::get()->get();
+		}else {
+			$events = EventCtrl::get([
+				['rundown_id', '=', $rundownID]
+			])->get();
+			$rundown = RundownCtrl::get([
+				['id', '=', $rundownID]
+			])->first();
+		}
 
 		return view('admin.event.index')->with([
 			'eventTypes' => $eventTypes,
-			'events' => $events
+			'events' => $events,
+			'rundown' => $rundown
 		]);
 	}
 	public function speaker() {
@@ -204,15 +215,27 @@ class AdminController extends Controller
 			'events' => $events
 		]);
 	}
-	public function timeline() {
-		$timelines = TimelineCtrl::get();
+	public function timeline($eventID = NULL) {
+		$event = "";
+		if ($eventID == NULL) {
+			$timelines = TimelineCtrl::get();
+		}else {
+			$event = EventCtrl::get([
+				['id', '=', $eventID]
+			])->first();
+
+			$timelines = TimelineCtrl::get([
+				['event_id', '=', $eventID]
+			]);
+		}
 
 		return view('admin.timeline.index', [
-			'timelines' => $timelines
+			'timelines' => $timelines,
+			'event' => $event
 		]);
 	}
 	public function rundown() {
-		$rundowns = RundownCtrl::get();
+		$rundowns = RundownCtrl::get()->get();
 		
 		return view('admin.rundown.index', [
 			'rundowns' => $rundowns
@@ -229,7 +252,7 @@ class AdminController extends Controller
 		$type = new \stdClass();
 		$type->name = "";
 		if ($typeID == NULL) {
-			$tickets = TicketCtrl::get()->with('type')->get();
+			$tickets = TicketCtrl::get()->with('event')->get();
 		}else {
 			$tickets = TicketCtrl::get([
 				['type_id', '=', $typeID]

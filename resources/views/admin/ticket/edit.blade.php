@@ -26,14 +26,14 @@
             <form action="{{ route('ticket.update', $ticket->id) }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="type">Type :</label>
-                    <select name="type_id" class="form-control" required>
+                    <label for="event">Type :</label>
+                    <select name="event_id" class="form-control" required>
                         <option value="">-- PILIH JENIS TIKET --</option>
-                        @foreach ($types as $type)
+                        @foreach ($events as $event)
                             @php
-                                $selected = $ticket->type->id == $type->id ? "selected='selected'" : "";
+                                $selected = $ticket->event->id == $event->id ? "selected='selected'" : "";
                             @endphp
-                            <option {{ $selected }} value="{{ $type->id }}">{{ $type->name }}</option>
+                            <option {{ $selected }} value="{{ $event->id }}">{{ $event->title }}</option>
                         @endforeach
                     </select>
                 </div>

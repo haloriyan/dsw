@@ -25,7 +25,12 @@
                 <p>{{ $message }}</p>
             </div>
             @endif
-            <div class="table-responsive">
+            @if ($event != "")
+                <h6 class="m-0 font-weight-bold text-primary">Timeline untuk {{ $event->title }}
+                    &nbsp; <a href="{{ route('admin.timeline') }}"><i class="fas fa-times"></i></a>
+                </h6>
+            @endif
+            <div class="table-responsive mt-4">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>

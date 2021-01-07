@@ -26,11 +26,11 @@
             <form action="{{ route('ticket.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="type">Type :</label>
-                    <select name="type_id" class="form-control" required>
-                        <option value="">-- PILIH JENIS TIKET --</option>
-                        @foreach ($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    <label for="event">Event :</label>
+                    <select name="event_id" class="form-control" required>
+                        <option value="">-- PILIH EVENT --</option>
+                        @foreach ($events as $event)
+                            <option value="{{ $event->id }}">{{ $event->title }}</option>
                         @endforeach
                     </select>
                 </div>

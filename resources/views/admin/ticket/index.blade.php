@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Type</th>
+                            <th>Event</th>
                             <th>Nama</th>
                             <th>Deskripsi</th>
                             <th>Harga</th>
@@ -42,7 +42,7 @@
                         @foreach ($tickets as $ticket)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $ticket->type->name }}</td>
+                                <td>{{ $ticket->event->title }}</td>
                                 <td>{{ $ticket->name }}</td>
                                 <td>{{ $ticket->description }}</td>
                                 <td>{{ $ticket->price }}</td>

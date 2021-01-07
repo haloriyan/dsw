@@ -9,7 +9,7 @@ class TicketTypeController extends Controller
 {
     public static function get($filter = NULL) {
         if ($filter == NULL) {
-            return TicketType::all();
+            return new TicketType;
         }
         return TicketType::where($filter);
     }

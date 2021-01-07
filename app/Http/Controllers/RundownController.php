@@ -9,7 +9,7 @@ class RundownController extends Controller
 {
     public static function get($filter = NULL) {
         if ($filter == NULL) {
-            return Rundown::all();
+            return new Rundown;
         }
         return Rundown::where($filter);
     }

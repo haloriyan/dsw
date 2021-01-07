@@ -3,11 +3,25 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', "UserController@index")->name('user.index');
+Route::get('rundown', "UserController@rundown")->name('user.rundown');
 Route::get('contact', "UserController@contact")->name('user.contact');
+Route::get('ticket', "UserController@ticket")->name('user.ticket');
+Route::get('my-ticket', "UserController@myTicket")->name('user.myTicket');
+Route::get('invoice', "UserController@invoice")->name('user.invoice');
 Route::get('test', function() {
 	return view('pages.danthon.index');
 });
-Route::get('event/{id}', "UserController@event")->name('user.event');
+
+Route::group(['prefix' => "user"], function() {
+	Route::get('login', 'UserController@loginPage')->name('user.loginPage');
+	Route::get('register', 'UserController@registerPage')->name('user.registerPage');
+	Route::post('login', 'UserController@login')->name('user.login');
+	Route::post('register', 'UserController@register')->name('user.register');
+	Route::get('logout', 'UserController@logout')->name('user.logout');
+
+	Route::get('profile', 'UserController@profile')->name('user.profile');
+	Route::post('profile/update', 'UserController@updateProfile')->name('user.updateProfile');
+});
 
 Route::group(['prefix' => "role"], function() {
 	Route::get('create', "RoleController@create")->name('role.create');
@@ -38,10 +52,10 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('sponsor-type', 'AdminController@sponsorType')->name('admin.sponsorType')->middleware('Admin');
 	Route::get('sponsor', 'AdminController@sponsor')->name('admin.sponsor')->middleware('Admin');
 	Route::get('event-type', 'AdminController@eventType')->name('admin.eventType')->middleware('Admin');
-	Route::get('event', 'AdminController@event')->name('admin.event')->middleware('Admin');
+	Route::get('event/{rundownID?}', 'AdminController@event')->name('admin.event')->middleware('Admin');
 	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker')->middleware('Admin');
 	Route::get('judge', 'AdminController@judge')->name('admin.judge')->middleware('Admin');
-	Route::get('timeline', 'AdminController@timeline')->name('admin.timeline')->middleware('Admin');
+	Route::get('timeline/{eventID?}', 'AdminController@timeline')->name('admin.timeline')->middleware('Admin');
 	Route::get('rundown', 'AdminController@rundown')->name('admin.rundown')->middleware('Admin');
 	Route::get('ticket-type', 'AdminController@ticketType')->name('admin.ticketType')->middleware('Admin');
 	Route::get('ticket/{typeID?}', 'AdminController@ticket')->name('admin.ticket')->middleware('Admin');
@@ -54,6 +68,11 @@ Route::group(['prefix' => 'ticket'], function() {
 	Route::get('{id}/edit', 'TicketController@edit')->name('ticket.edit')->middleware('Admin');
 	Route::post('{id}/update', 'TicketController@update')->name('ticket.update')->middleware('Admin');
 	Route::delete('{id}/delete', 'TicketController@delete')->name('ticket.delete')->middleware('Admin');
+
+	Route::get('{id}/buy', 'UserController@buyTicket')->name('ticket.buy')->middleware('User');
+	Route::post('buy', 'TicketOrderController@buy')->name('ticket.buy.order');
+	Route::get('checkout', 'UserController@checkoutTicket')->name('ticket.checkout')->middleware('User');
+	Route::post('complete', 'TicketOrderController@completeOrder')->name('ticket.completeOrder');
 });
 
 Route::group(['prefix' => 'ticket-type'], function() {
@@ -138,6 +157,7 @@ Route::group(['prefix' => 'event'], function() {
 	Route::post('store', 'EventController@store')->name('event.store');
 	Route::post('{id}/update', 'EventController@update')->name('event.update');
 	Route::delete('{id}/delete', 'EventController@delete')->name('event.delete');
+	Route::get('{id}', "UserController@event")->name('user.event');
 });
 
 Route::group(['prefix' => 'speaker'], function() {

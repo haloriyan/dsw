@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
-        'type_id','name','description','price'
+        'event_id','name','description','price'
     ];
 
-    public function type() {
-        return $this->belongsTo('App\TicketType', 'type_id');
+    public function event() {
+        return $this->belongsTo('App\Event', 'event_id');
     }
 }

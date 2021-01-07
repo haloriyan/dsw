@@ -6,6 +6,9 @@ use App\Event;
 use App\EventType;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\RundownController as RundownCtrl;
+use App\Http\Controllers\EventTypeController as EventTypeCtrl;
+
 class EventController extends Controller
 {
     public static function get($filter = NULL) {
@@ -17,9 +20,12 @@ class EventController extends Controller
 
     public function create()
     {
-        $eventTypes = EventType::all();
+        $eventTypes = EventTypeCtrl::get()->get();
+        $rundowns = RundownCtrl::get()->get();
+
         return view('admin.event.create')->with([
-			'eventTypes' => $eventTypes
+            'eventTypes' => $eventTypes,
+            'rundowns' => $rundowns
 		]);
     }
 
@@ -28,6 +34,7 @@ class EventController extends Controller
         $prize = implode(",", $req->prize);
 
         $saveData = Event::create([
+            'rundown_id' => $req->rundown_id,
             'type_id' => $req->type_id,
             'title' => $req->title,
             'description' => $req->description,
@@ -40,7 +47,7 @@ class EventController extends Controller
 
     public function view($id)
     {
-        $event = Event::where('id' , $id)->with(['type','timeline'])->first();
+        $event = Event::where('id' , $id)->with(['type','timeline','rundown'])->first();
         return view('admin.event.view',['event' => $event]);
     }
 
@@ -61,6 +68,7 @@ class EventController extends Controller
         $prizes = implode(",", $req->prize);
 
         $updateData = Event::where('id', $id)->update([
+            'rundown_id' => $req->rundown_id,
             'type_id' => $req->type_id,
             'title' => $req->title,
             'description' => $req->description,

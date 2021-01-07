@@ -11,7 +11,7 @@
     src: url(../fonts/ProLight.otf);
 }
 body {
-    background-color: #ecf0f1;
+    background-color: #fff !important;
     color: #444;
     font-family: ProReg;
 }
@@ -20,7 +20,7 @@ body {
 h1,h2,h3,h4,h5,h6 {
     font-family: ProBold;
 }
-a { text-decoration: none;color: #f15b2d; }
+a { text-decoration: underline;color: #171e45; }
 p { font-family: ProReg;font-size: 18px;  }
 b { font-family: ProBold; }
 .fontLight { font-family: ProLight !important; }
@@ -168,10 +168,10 @@ button.merah:focus {
     box-shadow: 1px 1px 5px 5px #c0392b80;
 }
 button.primer {
-    background-color: #095e6a;
+    background-color: #171e45;
     color: #fff;
 }
-button.primer:hover { background-color: #085661; }
+button.primer:hover { background-color: #101535; }
 button.primer:focus {
     outline: none;
     box-shadow: 1px 1px 5px 5px #095e6a80;

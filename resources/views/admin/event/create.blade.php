@@ -36,10 +36,19 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <label for="title">Jenis event :</label>
-                        <select name="type_id" class="form-control">
+                        <select name="type_id" class="form-control" required>
                             <option value="">-- Pilih Jenis Event --</option>
                             @foreach ($eventTypes as $type)
                                 <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Rundown :</label>
+                        <select name="rundown_id" class="form-control" required>
+                            <option value="">-- Pilih Rundown --</option>
+                            @foreach ($rundowns as $rundown)
+                                <option value="{{ $rundown->id }}">{{ $rundown->title }}</option>
                             @endforeach
                         </select>
                     </div>

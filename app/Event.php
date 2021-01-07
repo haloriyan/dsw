@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     protected $table = 'events';
+    
     protected $fillable = [
-        'type_id','title','description','requirements','prize'
+        'rundown_id','type_id','title','description','requirements','prize'
     ];
 
     public function type() {
@@ -16,5 +17,8 @@ class Event extends Model
     }
     public function timeline() {
         return $this->hasOne('App\Timeline', 'event_id');
+    }
+    public function rundown() {
+        return $this->belongsTo('App\Rundown', 'rundown_id');
     }
 }

@@ -10,15 +10,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'tbl_users';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id','username','name','email','password','no_telp','role_id','is_active'
+        'name','email','password','employment_status','reason','gender','address',
+        'social_linkedin','social_medium','social_instagram','social_facebook',
+        'interested_with_dsi','has_joined_dsi','is_active'
     ];
 
     /**

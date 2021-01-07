@@ -23,12 +23,18 @@
                                 <p>{{ $message }}</p>
                             </div>
                             @endif
+                            @if ($rundown != "")
+                                <h6 class="mt-2 mb-3 font-weight-bold text-primary">Event dengan rundown {{ $rundown->title }}
+                                    &nbsp; <a href="{{ route('admin.event') }}"><i class="fas fa-times"></i></a>
+                                </h6>
+                            @endif
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>Judul</th>
+                                            <th>Rundown</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -38,15 +44,21 @@
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $event->title }}</td>
+                                                <td>{{ $event->rundown->title }}</td>
                                                 <td>
                                                     <form action="{{ route('event.delete',$event->id) }}" method="POST">
+                                                        <a href="{{ route('admin.timeline', $event->id) }}" class="btn btn-info btn-icon-split">
+                                                            <span class="icon text-white">
+                                                                Timeline
+                                                            </span>
+                                                        </a>
                                                     <a href="{{ route('event.view',$event->id) }}" class="btn btn-info btn-icon-split">
-                                                        <span class="icon text-white-50">
-                                                            <i class="fas fa-eye"></i>
+                                                        <span class="icon text-white">
+                                                            <i class="fas fa-eye"></i> 
                                                         </span>
                                                     </a>
                                                     <a href="{{ route('event.edit',$event->id) }}" class="btn btn-success btn-icon-split" id="editBtn">
-                                                        <span class="icon text-white-50">
+                                                        <span class="icon text-white">
                                                             <i class="far fa-edit"></i>
                                                         </span>
                                                     </a>
@@ -55,7 +67,7 @@
                                                     @method('DELETE')
 
                                                     <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                        <span class="icon text-white-50">
+                                                        <span class="icon text-white">
                                                             <i class="fas fa-trash"></i>
                                                         </span>
                                                     </button>

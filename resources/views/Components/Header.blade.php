@@ -21,7 +21,7 @@
                             <ul id="menu-header" class="navigation clearfix"><li id="menu-item-2943" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home page_item page-item-2085 current_page_item menu-item-2943"><a href="./index.html" aria-current="page">Home</a></li>
                                 <li id="menu-item-2620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2620"><a href="#">DSW 2020</a>
                                     <ul class="sub-menu">
-                                        {{-- <li id="menu-item-3082" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3082"><a href="./rundown-data-science-weekend/index.html">Rundown</a></li> --}}
+                                        <li id="menu-item-3082" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3082"><a href="{{ route('user.rundown') }}">Rundown</a></li>
                                         @foreach ($eventTypes as $type)
                                             <li class="menu-item menu-item-type-post_type menu-item-object-custom menu-item-has-children menu-item-3082">
                                                 <a href="#">
@@ -47,7 +47,22 @@
                     <div class="outer-box">
                         <div class="search-box-btn"><span class="icon flaticon-search"></span></div>
                         <div class="btn-box">
-                            <a href="./events/data-science-weekend-2020/index.html" class="theme-btn btn-style-one">Register Now</a>
+                            @if (!Auth::guard('user')->check())
+                                <a href="{{ route('user.registerPage') }}" class="theme-btn btn-style-one">Register Now</a>
+                            @else
+                                <ul id="menu-header" class="navigation clearfix">
+                                    <li id="menu-item-2620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2620"><a href="#">{{ $myData->name }}</a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-custom menu-item-has-children menu-item-3082">
+                                                <a href="#">Profile</a>
+                                            </li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-custom menu-item-has-children menu-item-3082">
+                                                <a href="#">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            @endif
                         </div>
                     </div>
                 </div>

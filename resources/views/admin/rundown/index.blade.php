@@ -41,6 +41,12 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $rundown->title }}</td>
                                 <td>
+                                    <a href="{{ route('admin.event', $rundown->id) }}" class="btn btn-info btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                        <span class="text">Event</span>
+                                    </a>
                                     <a href="{{ route('rundown.view', $rundown->id) }}" class="btn btn-info btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-eye"></i>

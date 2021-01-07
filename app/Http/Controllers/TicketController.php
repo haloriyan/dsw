@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Ticket;
 use App\TicketType;
+use App\TicketOrder;
 use Illuminate\Http\Request;
 
+use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\TicketTypeController as TicketTypeCtrl;
 
 class TicketController extends Controller
@@ -17,15 +19,16 @@ class TicketController extends Controller
         return Ticket::where($filter);
     }
     public function create() {
-        $types = TicketTypeCtrl::get();
+        // $types = TicketTypeCtrl::get()->get();
+        $events = EventCtrl::get()->get();
         
         return view('admin.ticket.create', [
-            'types' => $types
+            'events' => $events
         ]);
     }
     public function store(Request $req) {
         $saveData = Ticket::create([
-            'type_id' => $req->type_id,
+            'event_id' => $req->event_id,
             'name' => $req->name,
             'description' => $req->description,
             'price' => $req->price,
@@ -37,16 +40,16 @@ class TicketController extends Controller
     }
     public function edit($id) {
         $ticket = Ticket::find($id);
-        $types = TicketTypeCtrl::get();
+        $events = EventCtrl::get()->get();
 
         return view('admin.ticket.edit', [
             'ticket' => $ticket,
-            'types' => $types
+            'events' => $events
         ]);
     }
     public function update($id, Request $req) {
         $updateData = Ticket::where('id', $id)->update([
-            'type_id' => $req->type_id,
+            'event_id' => $req->event_id,
             'name' => $req->name,
             'description' => $req->description,
             'price' => $req->price,

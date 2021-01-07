@@ -1,0 +1,20 @@
+body {
+    background-color: #fff;
+}
+.container {
+    position: absolute;
+    top: 70px;left: 25%;right: 25%;
+    margin-bottom: 55px;
+}
+.container .logo {
+    display: inline-block;
+    width: 40%;
+    margin: 0px auto;
+}
+.container .logo img {
+    width: 100%;
+    text-align: center;
+}
+.container form {
+    margin-top: 55px;
+}

@@ -21,6 +21,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="container mt-2">
+                        <p>({{ $event->rundown->title }})</p>
                         <h3>{{ $event->title }}</h3>
                         <p>{{ $event->description }}</p>
                         <div class="row">
