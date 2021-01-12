@@ -40,6 +40,9 @@
                                         @endforeach
                                     </ul>
                                 </li>
+                                @if (Auth::guard('user')->check())
+                                    <li id="menu-item-2276" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2276"><a href="{{ route('user.myTeam') }}">My Team</a></li>
+                                @endif
                                 <li id="menu-item-2276" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2276"><a href="{{ route('user.contact') }}">Contact Us</a></li>
                             </ul>
                         </div>

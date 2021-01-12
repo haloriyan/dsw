@@ -223,7 +223,7 @@
                     </div>
                     <div class="text-center">
                         <div class="d-inline-block w-50 shadow rounded p-5">
-                            <form action="#" method="POST" class="text-left" id="formBuy">
+                            <form action="{{ route('ticket.buy.order') }}" method="POST" class="text-left" id="formBuy">
                                 {{ csrf_field() }}
                                 <input type="hidden" id="userID" value="{{ $myData->id }}">
                                 <input type="hidden" name="price" id="price" value="{{ $ticket->price }}">

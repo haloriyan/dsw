@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use \Midtrans\Snap as Snap;
 use \Midtrans\Config as Config;
 
+use App\Http\Controllers\TeamController as TeamCtrl;
 use App\Http\Controllers\EventController as EventCtrl;
 use App\Http\Controllers\TicketController as TicketCtrl;
 use \App\Http\Controllers\RundownController as RundownCtrl;
@@ -26,6 +27,12 @@ class UserController extends Controller
     }
     public static function me() {
         return Auth::guard('user')->user();
+    }
+    public static function get($filter = NULL) {
+        if ($filter == NULL) {
+            return new User;
+        }
+        return User::where($filter);
     }
     public function loginPage(Request $req) {
         $ref = $req->ref;
@@ -264,6 +271,24 @@ class UserController extends Controller
             'eventTypes' => $this->eventTypes,
             'myData' => $myData,
             'tickets' => $tickets,
+        ]);
+    }
+    public function myTeam() {
+        $isHaveTeam = true;
+        $myData = self::me();
+        
+        $team = TeamCtrl::isHaveTeam($myData->id);
+        if ($team == "") {
+            $isHaveTeam = false;
+        }
+
+        $team = json_decode(json_encode($team), FALSE);
+
+        return view('pages.team', [
+            'eventTypes' => $this->eventTypes,
+            'myData' => $myData,
+            'team' => $team,
+            'isHaveTeam' => $isHaveTeam,
         ]);
     }
 }

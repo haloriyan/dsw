@@ -10,7 +10,7 @@
         <!-- Responsive -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <title>{{ $myData->name }} &#8211; Data Science Weekend</title>
+        <title>My Team &#8211; Data Science Weekend</title>
 <link rel='dns-prefetch' href='//maps.googleapis.com' />
 <link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
@@ -189,8 +189,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 <link rel="icon" href="./../wp-content/uploads/2020/10/cropped-DSW-logo-black-2-192x192.png" sizes="192x192" />
 <link rel="apple-touch-icon" href="./../wp-content/uploads/2020/10/cropped-DSW-logo-black-2-180x180.png" />
 <meta name="msapplication-TileImage" content="./wp-content/uploads/2020/10/cropped-DSW-logo-black-2-270x270.png" />
-        <style type="text/css" id="wp-custom-css">
-            body { background-color: #fff !important; }
+		<style type="text/css" id="wp-custom-css">
 			i.fa.fa-link {display: none;}
 @media only screen and (min-width: 992px) {#contact .sec-title.centered {text-align: center;margin-left: -350px;}}
 		</style>
@@ -210,8 +209,17 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                   #qlwapp .qlwapp-box .qlwapp-user {
                     color: var(--qlwapp-scheme-text);
                   }
+                  .resultArea {
+                      margin-top: 20px;
+                      box-shadow: 1px 1px 5px 1px #ddd;
+                      border-radius: 6px;
+                  }
+                  .resultArea li {
+                      line-height: 35px;
+                      padding: 10px 20px;
+                  }
+                  .pointer { cursor: pointer; }
                           </style>
-                    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
                 </head>
     <body data-rsssl=1 class="page-template-default page page-id-2958 wp-custom-logo theme-miexpo woocommerce-no-js elementor-default elementor-kit-2523 elementor-page elementor-page-2958">
         <div class="page-wrapper">
@@ -226,8 +234,8 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
     <section class="page-title">
         <div class="auto-container">
             <div class="content">
-                    <h1>{{ $myData->name }}</h1><!-- Breadcrumb NavXT 6.2.0 -->
-<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Data Science Weekend." href="./../index.html" class="home"><span property="name">Data Science Weekend</span></a><meta property="position" content="1"></span> &gt; Profile                </div>
+                    <h1>My Team</h1><!-- Breadcrumb NavXT 6.2.0 -->
+<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Data Science Weekend." href="./../index.html" class="home"><span property="name">Data Science Weekend</span></a><meta property="position" content="1"></span> &gt; My Team                </div>
         </div>
     </section>
     <!--End Page Title-->
@@ -236,75 +244,121 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 		<div class="row clearfix page-content">
 								<div class="col-sm-12">
 					
-    <article id="post-2958" class="post-2958 page type-page status-publish hentry">
+<article id="post-2958" class="post-2958 page type-page status-publish hentry">
         <div class="entry-content">
-       		<div data-elementor-type="wp-page" data-elementor-id="2958" class="elementor elementor-2958" data-elementor-settings="[]">
-                <form action="{{ route('user.updateProfile') }}" method="POST">
-                    @php
-                        $employmentStatus = ["Bekerja","Mahasiswa","Pelajar"];
-                        $genders = ["Laki-laki","Perempuan"];
-                    @endphp
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <label for="name">Nama :</label>
-                        <input type="text" class="form-control" name="name" id="name" required value="{{ $myData->name }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">No. Telepon :</label>
-                        <input type="text" class="form-control" name="phone" id="phone" required value="{{ $myData->phone }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="instance">Instansi :</label>
-                        <input type="text" class="form-control" name="instance" id="instance" required value="{{ $myData->instance }}">
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="gender">Jenis Kelamin :</label>
-                            <select name="gender" class="form-control">
-                                @foreach ($genders as $gender)
-                                    @php
-                                        $isSelected = $gender == $myData->gender ? "selected='selected'" : "";
-                                    @endphp
-                                    <option $isSelected>{{ $gender }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="employment_status">Status :</label>
-                            <select name="employment_status" class="form-control w-100">
-                                @foreach ($employmentStatus as $status)
-                                    @php
-                                        $isSelected = $status == $myData->employment_status ? "selected='selected'" : "";
-                                    @endphp
-                                    <option {{ $isSelected }}>{{ $status }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                        <h3 class="mt-4">Social</h3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="linkedin">LinkedIn :</label>
-                                <input type="text" class="form-control" name="social_linkedin" id="linkedin" value="{{ $myData->social_linkedin }}">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="medium">Medium :</label>
-                                <input type="text" class="form-control" name="social_medium" id="medium" value="{{ $myData->social_medium }}">
-                            </div>
-                            <div class="col-md-6 mt-3">
-                                <label for="facebook">Facebook :</label>
-                                <input type="text" class="form-control" name="social_facebook" id="facebook" value="{{ $myData->social_facebook }}">
-                            </div>
-                            <div class="col-md-6 mt-3">
-                                <label for="instagram">Instagram :</label>
-                                <input type="text" class="form-control" name="social_instagram" id="instagram" value="{{ $myData->social_instagram }}">
-                            </div>
-                        </div>
-                    </div>
-                    <button class="primer lebar-100 mt-5">Update</button>
-                </form>
-            </div>
+        		<div data-elementor-type="wp-page" data-elementor-id="2958" class="elementor elementor-2958" data-elementor-settings="[]">
+						<div class="elementor-inner">
+							<div class="elementor-section-wrap">
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-5b074e1 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5b074e1" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4817415" data-id="4817415" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+                <div class="elementor-widget-wrap">
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-ff36d7a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ff36d7a" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+								<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-5b6e0cd" data-id="5b6e0cd" data-element_type="column">
+									<div class="elementor-column-wrap elementor-element-populated">
+										<div class="elementor-widget-wrap">
+											<div class="elementor-element elementor-element-40dae9c elementor-widget elementor-widget-heading" data-id="40dae9c" data-element_type="widget" data-widget_type="heading.default">
+												<div class="elementor-widget-container">
+													<div class="elementor-element elementor-element-65d008f elementor-widget elementor-widget-text-editor" data-id="65d008f" data-element_type="widget" data-widget_type="text-editor.default">
+														<div class="elementor-widget-container">
+															<div class="elementor-text-editor elementor-clearfix">
+																<p>
+                                                                    @if (!$isHaveTeam)
+                                                                        <div id="messageArea">
+                                                                            <h3>Kamu tidak punya team</h3>
+                                                                            <p class="mt-2">
+                                                                                Untuk mengikuti kompetisi Danthon, kamu wajib bergabung dalam sebuah tim. Atau kamu bisa membuat tim kamu sendiri dan undang temanmu.
+                                                                            </p>
+                                                                            <button class="btn btn-lg btn-primary" onclick="createTeam()">Buat Team</button>
+                                                                        </div>
+                                                                        <form action="{{ route('user.team.store') }}" method="POST" class="d-none" id="formCreate">
+                                                                            {{ csrf_field() }}
+                                                                            <h3>Buat Team</h3>
+                                                                            <div class="form-group mt-4">
+                                                                                <label for="name">Nama Team :</label>
+                                                                                <input type="text" class="form-control" name="name" required>
+                                                                            </div>
+                                                                            <button class="btn btn-success btn-lg mt-2">Submit</button>
+                                                                        </form>
+                                                                    @else
+                                                                        <h3>Tim {{ $team->name }}</h3>
+                                                                        <input type="hidden" id="teamID" value="{{ $team->id }}">
+                                                                        <div class="row mt-4">
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="chief">Ketua :</label>
+                                                                                    <h4>{{ $team->chief->name }}</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                @php
+                                                                                    $removeBtn1 = "";
+                                                                                    $removeBtn2 = "";
+                                                                                    if ($myData->id == $team->user_chief) {
+                                                                                        $removeBtn1 = '<i class="fas fa-times text-danger ml-1 pointer" onclick="removeMember(`user_1`)"></i>';
+                                                                                        $removeBtn2 = '<i class="fas fa-times text-danger ml-1 pointer" onclick="removeMember(`user_2`)"></i>';
+                                                                                    }
+                                                                                @endphp
+                                                                                <div class="form-group">
+                                                                                    <label for="user_1">Anggota 1 :</label>
+                                                                                    @if ($team->user_1 != null)
+                                                                                        <h4>{{ $team->first_member->name }}
+                                                                                            {!! $removeBtn1 !!}
+                                                                                        </h4>
+                                                                                    @else
+                                                                                        <input type="text" class="form-control" name="user_1" id="user_1" placeholder="Cari peserta..." oninput="searchUser('user_1', this.value)">
+                                                                                        <div class="resultArea d-none" id="searchResultArea1"></div>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <label for="chief">Anggota 2 :</label>
+                                                                                    @if ($team->user_2 != null)
+                                                                                        <h4>{{ $team->second_member->name }}
+                                                                                            {{-- <i class="fas fa-times text-danger ml-1 pointer" onclick="removeMember('user_2')"></i> --}}
+                                                                                            {!! $removeBtn2 !!}
+                                                                                        </h4>
+                                                                                    @else
+                                                                                        <input type="text" class="form-control" name="user_2" id="user_2" placeholder="Cari peserta..." oninput="searchUser('user_2', this.value)">
+                                                                                        <div class="resultArea d-none" id="searchResultArea2"></div>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <p class="text-muted mt-3">
+                                                                            Pastikan anggotamu sudah terdaftar di website Data Science Weekend dan sudah memverifikasi email setelah mendaftar
+                                                                        </p>
+                                                                    @endif
+                                                                </p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+		</div>
+								</div>
+					</div>
+		</section>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+                <!-- End Timer Section -->
+        		</div>
+				</div>
+						</div>
+					</div>
+		</div>
 								</div>
 					</div>
 		</section>
@@ -486,5 +540,72 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 <script type='text/javascript' src='./../wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.0.9' id='elementor-frontend-js'></script>
 <script type='text/javascript' src='./../wp-content/plugins/timeline-widget-addon-for-elementor/assets/js/twae-horizontal.min.js' id='twae-horizontal-js-js'></script>
 <script type="text/javascript">var tcb_post_lists=JSON.parse('[]');</script>
+<script>
+	let prices = document.querySelectorAll(".price-block-two");
+	prices.forEach(price => {
+		price.setAttribute('class', 'price-block-two col-md-4');
+	})
+</script>
+<script>
+    let teamID = select("#teamID").value;
+    if (!teamID) {
+        teamID = 0;
+    }
+    const createTeam = () => {
+        select("#messageArea").classList.add('d-none');
+        select("#formCreate").classList.remove('d-none');
+    }
+    const searchUser = (id, value) => {
+        let area = id == "user_1" ? "#searchResultArea1" : "#searchResultArea2";
+        if (value.length < 3) {
+            select(area).classList.add('d-none');
+            return false;
+        }
+        let req = post("{{ route('api.team.searchUser') }}", {
+            team_id: teamID,
+            myID: "{{ $myData->id }}",
+            q: value,
+        })
+        .then(datas => {
+            select(area).classList.remove('d-none');
+            select(area).innerHTML = "";
+            datas.forEach(user => {
+                createElement({
+                    el: 'li',
+                    attributes: [
+                        ['class', 'pointer'],
+                        ['onclick', `chooseUser(${id}, ${user.id})`]
+                    ],
+                    html: `${user.name} (${user.email})`,
+                    createTo: area,
+                });
+            });
+        });
+    }
+    const chooseUser = (id, userID) => {
+        id = id.getAttribute('name');
+        let req = post("{{ route('api.team.assignUser') }}", {
+            team_id: teamID,
+            id: id,
+            userID: userID
+        })
+        .then(res => {
+            if (res.status == 200) {
+                window.location.reload();
+            }
+        })
+    }
+    const removeMember = col => {
+        let req = post("{{ route('api.team.removeUser') }}", {
+            team_id: teamID,
+            column: col
+        })
+        .then(res => {
+            if (res.status == 200) {
+                window.location.reload();
+            }
+        })
+    }
+</script>
 </div></body>
 </html>

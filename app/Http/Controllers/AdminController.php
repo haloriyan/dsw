@@ -9,6 +9,7 @@ use App\Admin;
 use Illuminate\Http\Request;
 
 use \App\Http\Controllers\FaqController as FaqCtrl;
+use \App\Http\Controllers\TeamController as TeamCtrl;
 use \App\Http\Controllers\RoleController as RoleCtrl;
 use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\JudgeController as JudgeCtrl;
@@ -285,5 +286,22 @@ class AdminController extends Controller
 			'admins' => $admins
 		]);
 	}
+	public function team() {
+		$teams = TeamCtrl::get()
+		->with(['chief','firstMember','secondMember'])
+		->get();
 
+		$teams = json_decode(json_encode($teams), FALSE);
+
+		return view('admin.team.index', [
+			'teams' => $teams
+		]);
+	}
+	public function users() {
+		$users = UserCtrl::get()->get();
+
+		return view('admin.user.index', [
+			'users' => $users
+		]);
+	}
 }

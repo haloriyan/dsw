@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => "team"], function() {
+    Route::post('searchUser', "TeamController@searchUser")->name('api.team.searchUser');
+    Route::post('assignUser', "TeamController@assignUser")->name('api.team.assignUser');
+    Route::post('removeUser', "TeamController@removeUser")->name('api.team.removeUser');
+});
