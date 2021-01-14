@@ -364,99 +364,82 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 							<div class="elementor-widget-wrap">
 						<div class="elementor-element elementor-element-6d93049e elementor-widget elementor-widget-timeline_area__o" data-id="6d93049e" data-element_type="widget" data-widget_type="timeline_area__o.default">
 				<div class="elementor-widget-container">
-			        <!-- Programs Section -->
-        <section class="programs-section"  style="background-image:url('');">
-            <!-- Section Icons -->
-            <div class="section-icons">
-                <div class="icon-one"><img src="{{ env('APP_URL') }}/wp-content/themes/miexpo/assets/images/icons/icon-26.png" alt="" /></div>
-                <div class="icon-two"><img src="{{ env('APP_URL') }}/wp-content/themes/miexpo/assets/images/icons/icon-27.png" alt="" /></div>
-                <div class="icon-three"><img src="{{ env('APP_URL') }}/wp-content/themes/miexpo/assets/images/icons/icon-28.png" alt="" /></div>
-            </div>
-            <div class="auto-container">
-                <!-- Sec Title -->
-                <div class="sec-title centered">
-                    <div class="title">Roadmap</div>
-                    <h2>Data Science Weekend</h2>
-                    <div class="separator"></div>
-                </div>
-                <div class="inner-container">
-                    
-                                                            <!-- Programs Block -->
-                        <div class="programs-block">
-                            <div class="inner-block clearfix wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="content col-lg-6 col-md-12 col-sm-12">
-                                    <div class="content-inner">
-                                        <!-- Program Info -->
-                                        <div class="program-info">ROAD to DSW <span class="time">Oct 12 - Nov 30</span><span class="dott"></span></div>
-                                        <div class="title"></div>
-                                        <h3>
-                                            
-                                        <a href="./story-telling-competition/index.html"  target="_blank" rel="nofollow">Story Telling Competition</a></h3>
-                                        <div class="text"><p><span style="font-weight: 400;">These are the very first Data Storytelling Competition presented as one of the Data Science Weekend sessions. The purpose of this contest is to encourage professionals, researchers and students to demonstrate the value of their visualization research through effective visual data storytelling.</span></p></div>
+                    <section class="events-section">
+                        <div class="auto-container">
+                            <!-- Sec Title -->
+                            <div class="sec-title centered">
+                                <div class="title">Data Science Weekend</div>
+                                <h2>Rundown</h2>
+                                <div class="separator"></div>
+                            </div>
+                            
+                            <!-- Events Info Tabs -->
+                            <div class="events-info-tabs">
+                                <!-- Events Tabs -->
+                                <div class="events-tabs tabs-box">
+                                    <!--Tab Btns-->
+                                    <ul class="tab-btns tab-buttons clearfix">
+                                        @php
+                                            use Carbon\Carbon;
+                                            $i = 0;
+                                        @endphp
+                                        @foreach ($rundowns as $rundown)
+                                            @php
+                                                $isActive = $i++ == 0 ? "active-btn" : "";
+                                            @endphp
+                                            <li data-tab="#rundown{{ $rundown->id }}" class="tab-btn {{ $isActive }}">{{ $rundown->title }} <span>{{ Carbon::parse($rundown->date)->format('d M Y') }}</span></li>
+                                        @endforeach
+                                    </ul>
+                                    <!--Tabs Container-->
+                                    <div class="tabs-content">
+                                        @php
+                                            $o = 0;
+                                        @endphp
+                                        @foreach ($rundowns as $rundown)
+                                            @php
+                                                $isTabActive = $o++ == 0 ? "active-tab" : "";
+                                            @endphp
+                                            <div class="tab {{ $isTabActive }}" id="rundown{{ $rundown->id }}">
+                                                <div class="content">
+                                                    <div class="event-block">
+                                                        <div class="inner-block">
+                                                            <div class="row clearfix">
+                                                                @foreach ($rundown->events as $event)
+                                                                    <div class="image-column col-lg-5 col-sm-12 col-md-12">
+                                                                        <div class="inner-column">
+                                                                            <div class="image">
+                                                                                <!--Overlay Box-->
+                                                                                <div class="overlay-box">
+                                                                                    <div class="overlay-inner">
+                                                                                        <div class="content">
+                                                                                            <h3><a href="">Workshop</a></h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="event-time">08.00 <br> --- <br> 10.00</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-column col-lg-7 col-sm-12 col-md-12">
+                                                                        <div class="inner-column">
+                                                                            <div class="name">Data Science Weekend</div>
+                                                                            <h2><a href="">{{ $event->title }}</a></h2>
+                                                                            <div class="text"><span style="font-weight: 400;">{{ $event->description 	}}...<br/> <a href="{{ route('user.event', $event->id) }}">Read More...</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-                                            <!-- Programs Block -->
-                        <div class="programs-block style-two">
-                            <div class="inner-block clearfix wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="content col-lg-6 col-md-12 col-sm-12">
-                                    <div class="content-inner">
-                                        <!-- Program Info -->
-                                        <div class="program-info">ROAD to DSW <span class="time">Oct 19 - Nov 30</span><span class="dott"></span></div>
-                                        <div class="title"></div>
-                                        <h3>
-                                            
-                                        <a href="./danthon/index.html"  target="_blank" rel="nofollow">Danthon</a></h3>
-                                        <div class="text"><p><span style="font-weight: 400;">Danthon (Data National Hackathon), a hackathon challenge focusing on analyzing, solving and hacking the real data problem. The challenge is to give analysis, insight, and problem solving modelling provided by real data cases from industry and/or public data. The participant teams will be selected by assessments test first then the finale sessions will held on the end workshop’s day</span></p></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                                            <!-- Programs Block -->
-                        <div class="programs-block">
-                            <div class="inner-block clearfix wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="content col-lg-6 col-md-12 col-sm-12">
-                                    <div class="content-inner">
-                                        <!-- Program Info -->
-                                        <div class="program-info">MAIN EVENT <span class="time">NOV 28</span><span class="dott"></span></div>
-                                        <div class="title"></div>
-                                        <h3>
-                                            
-                                        <a href="./workshop/index.html"  target="_blank" rel="nofollow">Workshop Data Science, Engineer, Analytics, and Social Impact</a></h3>
-                                        <div class="text"><p><span style="font-weight: 400;">A one day hands-on online learning from master-class session offers data science experience, future technology knowledge and tips  through various classes and skill sets by mainly three branch subjects. There are  Data Sciences, Data Engineer, Data Analytics branch subjects to be learned by many practitioners and experts from various data and tech industries. The Workshops use real dataset from real data case</span></p></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                                            <!-- Programs Block -->
-                        <div class="programs-block style-two">
-                            <div class="inner-block clearfix wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="content col-lg-6 col-md-12 col-sm-12">
-                                    <div class="content-inner">
-                                        <!-- Program Info -->
-                                        <div class="program-info">MAIN EVENT <span class="time">NOV 29 - NOV 30</span><span class="dott"></span></div>
-                                        <div class="title"></div>
-                                        <h3>
-                                            
-                                        <a href="./concert/index.html"  target="_blank" rel="nofollow">Concert, Talks, and Awards</a></h3>
-                                        <div class="text"><p>Our main event will be held on these days</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                                                        
-                    <div class="btn-box text-center">
-                                            <a href="./rundown-data-science-weekend/index.html"  target="_blank" rel="nofollow" class="theme-btn btn-style-one">get More Details</a>
-                    </div>
-                
-                </div>
-                <div class="side-img paroller" data-paroller-factor="0.80" data-paroller-factor-lg="0.150" data-paroller-type="foreground" data-paroller-direction="vertical">
-                    <img src="{{ env('APP_URL') }}/wp-content/themes/miexpo/assets/images/resource/id-card.png" alt="" />
-                </div>
-            </div>
-        </section>
-        <!-- End Programs Section -->
+                    </section>
         		</div>
 				</div>
 						</div>
@@ -494,55 +477,27 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                         
                         <!--Accordian Box-->
                         <ul class="accordion-box">
-                                                                                                <li class="accordion block">
-                                        <div class="acc-btn"><div class="icon-outer"><span class="icon icon-plus fas fa-plus"></span> <span class="icon icon-minus fas fa-minus"></span></div>Apa itu DSW?</div>
-                                        <div class="acc-content">
-                                            <div class="content">
-                                                <div class="text"><p><span style="font-weight: 400;">Data Science Weekend adalah acara terbesar 2 tahunan yang diselenggarakan oleh Data Science Indonesia. Acara ini terdiri dari seminar, workshop, talkshow, dan kompetisi di bidang data.</span></p></div>
+                            @foreach ($faqs as $faq)
+                                <li class="accordion block">
+                                    <div class="acc-btn">
+                                        <div class="icon-outer">
+                                            <span class="icon icon-plus fas fa-plus"></span>
+                                            <span class="icon icon-minus fas fa-minus"></span>
+                                        </div>
+                                        {{ $faq->question }}
+                                    </div>
+                                    <div class="acc-content">
+                                        <div class="content">
+                                            <div class="text">
+                                                <p>
+                                                    <span style="font-weight: 400;">{{ $faq->answer }}</span>
+                                                </p>
                                             </div>
                                         </div>
-                                    </li>
-                                                                    <li class="accordion block">
-                                        <div class="acc-btn"><div class="icon-outer"><span class="icon icon-plus fas fa-plus"></span> <span class="icon icon-minus fas fa-minus"></span></div>Bagaimana cara pembelian tiket DSW?</div>
-                                        <div class="acc-content">
-                                            <div class="content">
-                                                <div class="text"><p>Anda dapat membeli tiket DSW di halaman tiket.</p></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                                                    <li class="accordion block">
-                                        <div class="acc-btn"><div class="icon-outer"><span class="icon icon-plus fas fa-plus"></span> <span class="icon icon-minus fas fa-minus"></span></div>Benefit apa saja yang didapatkan setelah mengikuti acara DSW?</div>
-                                        <div class="acc-content">
-                                            <div class="content">
-                                                <div class="text"><p><span style="font-weight: 400;">Benefit yang didapat umumnya adalah sertifikat dan materi untuk setiap tipe tiket, tapi khusus untuk tiket Kilo, Mega, Giga akan mendapat benefit lebih. Untuk lebih lengkapnya bisa di cek di info tiket</span></p></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                                                    <li class="accordion block">
-                                        <div class="acc-btn"><div class="icon-outer"><span class="icon icon-plus fas fa-plus"></span> <span class="icon icon-minus fas fa-minus"></span></div>Bila saya tidak dapat hadir, apakah dapat digantikan teman saya?</div>
-                                        <div class="acc-content">
-                                            <div class="content">
-                                                <div class="text"><p>Tidak</p></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                                                    <li class="accordion block">
-                                        <div class="acc-btn"><div class="icon-outer"><span class="icon icon-plus fas fa-plus"></span> <span class="icon icon-minus fas fa-minus"></span></div>Bila saya tidak dapat hadir, apakah tetap dapat sertifikat?</div>
-                                        <div class="acc-content">
-                                            <div class="content">
-                                                <div class="text"><p>Tidak</p></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                                                    <li class="accordion block">
-                                        <div class="acc-btn"><div class="icon-outer"><span class="icon icon-plus fas fa-plus"></span> <span class="icon icon-minus fas fa-minus"></span></div>Kapan saya akan mendapatkan sertifikat?</div>
-                                        <div class="acc-content">
-                                            <div class="content">
-                                                <div class="text"><p><span style="font-weight: 400;">1 Minggu setelah acara.</span></p></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                                                                    </ul>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
                 

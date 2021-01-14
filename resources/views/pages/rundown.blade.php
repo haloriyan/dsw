@@ -298,21 +298,13 @@
 								</div>
 							</div>
 						@endforeach
-					
-
-                                                            							</div>
-						</div>
-						
-
-                    
-                    			
 					</div>
-
 				</div>
 			</div>
-			
 		</div>
 	</section>
+			
+		</div>
 	<!-- End Events Section -->
 
         		</div>

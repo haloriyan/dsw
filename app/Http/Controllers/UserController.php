@@ -12,6 +12,7 @@ use App\Mail\NewUserNotification;
 use \Midtrans\Snap as Snap;
 use \Midtrans\Config as Config;
 
+use App\Http\Controllers\FaqController as FaqCtrl;
 use App\Http\Controllers\TeamController as TeamCtrl;
 use App\Http\Controllers\EventController as EventCtrl;
 use App\Http\Controllers\TicketController as TicketCtrl;
@@ -113,11 +114,16 @@ class UserController extends Controller
         $tickets = TicketCtrl::get()
         ->with('event')
         ->get();
+
+        $faqs = FaqCtrl::get();
+        $rundowns = RundownCtrl::get()->with('events')->get();
         
         return view('pages.index', [
             'eventTypes' => $this->eventTypes,
             'myData' => $this->myData,
-            'tickets' => $tickets
+            'tickets' => $tickets,
+            'faqs' => $faqs,
+            'rundowns' => $rundowns
         ]);
     }
     public function contact() {
