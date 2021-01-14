@@ -9,10 +9,9 @@ Route::get('ticket', "UserController@ticket")->name('user.ticket');
 Route::get('my-ticket', "UserController@myTicket")->name('user.myTicket');
 Route::get('invoice', "UserController@invoice")->name('user.invoice');
 Route::get('my-team', "UserController@myTeam")->name('user.myTeam');
+Route::get('active', "UserController@active")->name('user.active');
 
-Route::get('test', function() {
-	return view('pages.danthon.index');
-});
+Route::get('test', "UserController@testMail");
 
 Route::group(['prefix' => "team"], function() {
 	Route::get('create', "TeamController@create")->name('user.team.create');

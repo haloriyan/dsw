@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Mail;
 use Session;
 use App\User;
 use Illuminate\Http\Request;
+use App\Mail\NewUserNotification;
 
 use \Midtrans\Snap as Snap;
 use \Midtrans\Config as Config;
@@ -78,16 +80,44 @@ class UserController extends Controller
             'is_active' => 0,
         ]);
 
+        Mail::to($req->email)
+        ->send(new NewUserNotification());
+
         return redirect()->route('user.loginPage')->with([
             'message' => "Pendaftaran berhasil. Silahkan login atau verifikasi email terlebih dahulu"
         ]);
     }
+    public function testMail() {
+        $sen = Mail::to("riyan.satria.619@gmail.com")
+        ->send(new NewUserNotification([
+            'name' => "Riyan Satria",
+            'email' => "riyan.satria.619@gmail.com"
+        ]));
+        if ($sen) {
+            return "done";
+        }else {
+            return Mail::failures();
+        }
+        // return view('email.Verification');
+    }
+    public function activate($email) {
+        $email = base64_decode($email);
+        $activatingUser = User::where('email', $email)->update([
+            'is_active' => 1
+        ]);
+
+        return view('user.activate');
+    }
     public function index() {
         $this->myData = self::me();
+        $tickets = TicketCtrl::get()
+        ->with('event')
+        ->get();
         
         return view('pages.index', [
             'eventTypes' => $this->eventTypes,
-            'myData' => $this->myData
+            'myData' => $this->myData,
+            'tickets' => $tickets
         ]);
     }
     public function contact() {

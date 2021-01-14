@@ -329,124 +329,20 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 			</div>
 		
 			<div class="row clearfix">
-                                                            <!-- Price Block Two -->
-                        <div class="price-block-two col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                <!-- Price Block Two -->
+                @foreach ($tickets as $ticket)
+                    <div class="price-block-two col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="icon-box">
-                                    <span class="fa fa-ticket"></span>
-                                </div>
-                                <div class="title">Bit</div>
-                                <div class="price">100.000<span>Talk Only</span></div>
-                                <div class="text"><ul>
- 	<li><i class="fas fa-check"></i> Seminar</li>
- 	<li><i class="fas fa-check"></i> Certificate</li>
-<li><i class="fas fa-check"></i> Materi</li>
-</ul></div>
-                                <a
-                                        href="./events/data-science-weekend-2020/index.html"
-                                         target="_blank" rel="nofollow" class="theme-btn buy-btn"
-                                    >
-                                        buy ticket                                    </a>
+                            <div class="icon-box">
+                                <span class="fa fa-ticket"></span>
                             </div>
+                            <div class="title">{{ $ticket->event->title }}</div>
+                            <div class="price">@currency($ticket->price)<span>{{ $ticket->name }}</span></div>
+                            <div class="text">{{ $ticket->description }}</div>
+                            <a href="./events/data-science-weekend-2020/index.html" target="_blank" rel="nofollow" class="theme-btn buy-btn">buy ticket                                    </a>
                         </div>
-                                            <!-- Price Block Two -->
-                        <div class="price-block-two col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="icon-box">
-                                    <span class="fa fa-ticket"></span>
-                                </div>
-                                <div class="title">Byte</div>
-                                <div class="price">150.000<span>Workshop Only</span></div>
-                                <div class="text"><ul>
- 	<li><i class="fas fa-check"></i> Workshop</li>
- 	<li><i class="fas fa-check"></i> Certificate</li>
- <li><i class="fas fa-check"></i> Materi</li>
-</ul></div>
-                                <a
-                                        href="./events/data-science-weekend-2020/index.html"
-                                         target="_blank" rel="nofollow" class="theme-btn buy-btn"
-                                    >
-                                        buy ticket                                    </a>
-                            </div>
-                        </div>
-                                            <!-- Price Block Two -->
-                        <div class="price-block-two col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="icon-box">
-                                    <span class="fa fa-ticket"></span>
-                                </div>
-                                <div class="title">Social</div>
-                                <div class="price">80.000<span>Social Impact</span></div>
-                                <div class="text"><ul><li> </li><li><i class="fas fa-check"></i> Social Impact</li></ul></div>
-                                <a
-                                        href="./events/data-science-weekend-2020/index.html"
-                                         target="_blank" rel="nofollow" class="theme-btn buy-btn"
-                                    >
-                                        buy ticket                                    </a>
-                            </div>
-                        </div>
-                                            <!-- Price Block Two -->
-                        <div class="price-block-two col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="icon-box">
-                                    <span class="fa fa-ticket"></span>
-                                </div>
-                                <div class="title">Kilo</div>
-                                <div class="price">300.000<span>Talks, Concert, and Exhibition</span></div>
-                                <div class="text"><ul>
- 	<li><i class="fas fa-check"></i> All Talks, 2-4 Concert, Awards, Exhibition</li>
- 	<li><i class="fas fa-check"></i> Certificate</li>
- 	<li><i class="fas fa-check"></i>
-Materi</li>
- 	<li><i class="fas fa-check"> </i> Photo</li>
-
-</ul></div>
-                                <a
-                                        href="./events/data-science-weekend-2020/index.html"
-                                         target="_blank" rel="nofollow" class="theme-btn buy-btn"
-                                    >
-                                        buy ticket                                    </a>
-                            </div>
-                        </div>
-                                            <!-- Price Block Two -->
-                        <div class="price-block-two col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="icon-box">
-                                    <span class="fa fa-ticket"></span>
-                                </div>
-                                <div class="title">Mega</div>
-                                <div class="price">350.000<span>Talks, Concert, and Exhibition</span></div>
-                                <div class="text"> 	<li><i class="fas fa-check"></i> All Talks, All Concert, Awards, Exhibition</li>
- 	<li><i class="fas fa-check"></i> Certificate</li>
- 	<li><i class="fas fa-check"></i> Photo</li>
- 	<li><i class="fas fa-check"></i> Materi</li></div>
-                                <a
-                                        href="./events/data-science-weekend-2020/index.html"
-                                         target="_blank" rel="nofollow" class="theme-btn buy-btn"
-                                    >
-                                        buy ticket                                    </a>
-                            </div>
-                        </div>
-                                            <!-- Price Block Two -->
-                        <div class="price-block-two col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="icon-box">
-                                    <span class="fa fa-ticket"></span>
-                                </div>
-                                <div class="title">Giga</div>
-                                <div class="price">400.000<span>Complete Pack</span></div>
-                                <div class="text"> 	<li><i class="fas fa-check"></i> All Talks, Concert, Awards, Exhibition, and Workshop</li>
- 	<li><i class="fas fa-check"></i> Certificate</li>
- 	<li><i class="fas fa-check"></i> Photo</li>
- 	<li><i class="fas fa-check"></i> Materi</li></div>
-                                <a
-                                        href="./events/data-science-weekend-2020/index.html"
-                                         target="_blank" rel="nofollow" class="theme-btn buy-btn"
-                                    >
-                                        buy ticket                                    </a>
-                            </div>
-                        </div>
-                                    				
+                    </div>		
+                @endforeach
 			</div>
 			
 		</div>

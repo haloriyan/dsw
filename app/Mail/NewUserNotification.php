@@ -11,14 +11,18 @@ class NewUserNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $name;
+    public $email;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($props)
     {
-        //
+        $this->name = $props['name'];
+        $this->email = $props['email'];
     }
 
     /**
@@ -28,6 +32,6 @@ class NewUserNotification extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('email.Verification');
     }
 }

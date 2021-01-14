@@ -232,32 +232,13 @@
                             <div class="icon-box">
                                 <span class="fa fa-ticket"></span>
                             </div>
-                            <div class="title">{{ $ticket->name }}</div>
-                            <div class="price">@currency($ticket->price) <span>{{ $ticket->event->title }}</span> </div>
+                            <div class="title">{{ $ticket->event->title }}</div>
+                            <div class="price">@currency($ticket->price) <span>{{ $ticket->name }}</span> </div>
                             <div class="text">{{ $ticket->description }}</div>
                             <a href="{{ route('ticket.buy', $ticket->id) }}" target="_blank" class="theme-btn buy-btn">buy ticket</a>
                         </div>
                     </div>
                 @endforeach
-                        <div class="price-block-two col-xl-3 col-lg-6 col-md-6 col-sm-12 d-none">
-                        <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                                <div class="icon-box">
-                                    <span class="fa fa-ticket"></span>
-                                </div>
-                                <div class="title">Bit</div>
-                                <div class="price">100.000<span>Talk Only</span></div>
-                                <div class="text"><ul>
- 	<li><i class="fas fa-check"></i> Seminar</li>
- 	<li><i class="fas fa-check"></i> Certificate</li>
-<li><i class="fas fa-check"></i> Materi</li>
-</ul></div>
-                                <a
-                                        href="./events/data-science-weekend-2020/index.html"
-                                         target="_blank" rel="nofollow" class="theme-btn buy-btn"
-                                    >
-                                        buy ticket                                    </a>
-                            </div>
-                        </div>      				
 			</div>
 			
 		</div>
