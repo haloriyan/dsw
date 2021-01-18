@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\TicketTypeController as TicketTypeCtrl;
+use \App\Http\Controllers\TicketOrderController as TicketOrderCtrl;
 
 class TicketController extends Controller
 {
@@ -64,6 +65,24 @@ class TicketController extends Controller
 
         return redirect()->route('admin.ticket')->with([
             'message' => "Ticket berhasil dihapus"
+        ]);
+    }
+    public function participant($ticketID) {
+        $ticket = self::get([
+            ['id', '=', $ticketID]
+        ])
+        ->with('event')
+        ->first();
+
+        $participants = TicketOrderCtrl::get([
+            ['ticket_id', '=', $ticketID]
+        ])
+        ->with('user')
+        ->get();
+
+        return view('admin.ticket.participant', [
+            'participants' => $participants,
+            'ticket' => $ticket,
         ]);
     }
 }

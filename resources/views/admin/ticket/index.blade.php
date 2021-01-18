@@ -47,6 +47,12 @@
                                 <td>{{ $ticket->description }}</td>
                                 <td>{{ $ticket->price }}</td>
                                 <td>
+                                    <a href="{{ route('admin.ticket.participant', $ticket->id) }}" class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="far fa-edit"></i>
+                                        </span>
+                                        <span class="text">Peserta</span>
+                                    </a>
                                     <a href="{{ route('ticket.edit', $ticket->id) }}" class="btn btn-success btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="far fa-edit"></i>

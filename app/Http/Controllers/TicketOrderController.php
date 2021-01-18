@@ -17,13 +17,18 @@ class TicketOrderController extends Controller
     }
     public function buy(Request $req) {
         $myData = UserCtrl::me();
+        $ticket = TicketCtrl::get([
+            ['id', '=', $req->ticket_id]
+        ])->first();
+
+        $status = $ticket->price > 0 ? 0 : 1;
 
         $order = TicketOrder::create([
             'user_id' => $req->user_id,
             'ticket_id' => $req->ticket_id,
             'qty' => $req->qty,
             'total_pay' => $req->total_pay,
-            'status' => 0
+            'status' => $status
         ]);
 
         return response()->json($order);

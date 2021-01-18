@@ -65,6 +65,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('rundown', 'AdminController@rundown')->name('admin.rundown')->middleware('Admin');
 	Route::get('ticket-type', 'AdminController@ticketType')->name('admin.ticketType')->middleware('Admin');
 	Route::get('ticket/{typeID?}', 'AdminController@ticket')->name('admin.ticket')->middleware('Admin');
+	Route::get('ticket/{typeID}/participant', 'TicketController@participant')->name('admin.ticket.participant')->middleware('Admin');
 	Route::get('role', 'AdminController@role')->name('admin.role')->middleware('Admin');
 	
 	Route::get('team', 'AdminController@team')->name('admin.team')->middleware('Admin');
