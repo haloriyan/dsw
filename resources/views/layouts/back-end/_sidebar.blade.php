@@ -27,7 +27,83 @@
                 Master
             </div>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.event') }}">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>Event</span>
+                </a>
+                <ul>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.eventType') }}" class="nav-link">
+                            <span>Jenis Event</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.ticket') }}">
+                    <i class="fas fa-tags"></i>
+                    <span>Tiket</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.sponsor') }}">
+                    <i class="fas fa-ad"></i>
+                    <span>Sponsor</span>
+                </a>
+                <ul>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.sponsorType') }}" class="nav-link">
+                            <span>Jenis Sponsor</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.contact') }}">
+                    <i class="fas fa-fw fa-phone-alt"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.faq') }}">
+                    <i class="fas fa-fw fa-question"></i>
+                    <span>FAQ</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.contact') }}">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Speaker</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.judge') }}">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Juri</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.rundown') }}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Rundown</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.timeline') }}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Timeline</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.team') }}">
+                    <i class="fas fa-users"></i>
+                    <span>Team</span>
+                </a>
+            </li>
+
             <!-- Nav Item - User -->
+            {{--
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.faq') }}">
                     <i class="fas fa-fw fa-question"></i>
@@ -97,6 +173,7 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+            --}}
 
         </ul>
         <!-- End of Sidebar -->

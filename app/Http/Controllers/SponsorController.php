@@ -33,7 +33,7 @@ class SponsorController extends Controller
             'type_id' => $req->type_id,
             'name' => $req->name,
             'address' => $req->address,
-            'bidang_kerja' => $req->bidang_kerja,
+            'field' => $req->bidang_kerja,
             'phone' => $req->phone,
             'link' => $req->link,
             'logo' => $logoFileName
@@ -70,7 +70,7 @@ class SponsorController extends Controller
             'type_id' => $req->type_id,
             'name' => $req->name,
             'address' => $req->address,
-            'bidang_kerja' => $req->bidang_kerja,
+            'field' => $req->bidang_kerja,
             'phone' => $req->phone,
             'link' => $req->link,
         ];

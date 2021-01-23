@@ -34,32 +34,34 @@
                                     </thead>
                                     <tbody>
                                         @php $i = 1; @endphp
-                                        @foreach ($eventTypes as $type)
-                                            <tr>
-                                                <td>{{ $i++ }}</td>
-                                                <td>{{ $type->name }}</td>
-                                                <td>
-                                                    <form action="{{ route('eventType.delete', [$type->id]) }}" method="POST">
-                                                    <a href="{{ route('eventType.edit',$type->id) }}" class="btn btn-success btn-icon-split">
-                                                        <span class="icon text-white-50">
-                                                            <i class="far fa-edit"></i>
-                                                        </span>
-                                                        <span class="text">Edit</span>
-                                                    </a>
+                                        @if ($eventTypes->count() > 0)
+                                            @foreach ($eventTypes as $type)
+                                                <tr>
+                                                    <td>{{ $i++ }}</td>
+                                                    <td>{{ $type->name }}</td>
+                                                    <td>
+                                                        <form action="{{ route('eventType.delete', [$type->id]) }}" method="POST">
+                                                        <a href="{{ route('eventType.edit',$type->id) }}" class="btn btn-success btn-icon-split">
+                                                            <span class="icon text-white-50">
+                                                                <i class="far fa-edit"></i>
+                                                            </span>
+                                                            <span class="text">Edit</span>
+                                                        </a>
 
-                                                    @csrf
-                                                    @method('DELETE')
+                                                        @csrf
+                                                        @method('DELETE')
 
-                                                    <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                        <span class="icon text-white-50">
-                                                            <i class="fas fa-trash"></i>
-                                                        </span>
-                                                        <span class="text">Delete</span>
-                                                    </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                                        <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                            <span class="icon text-white-50">
+                                                                <i class="fas fa-trash"></i>
+                                                            </span>
+                                                            <span class="text">Delete</span>
+                                                        </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

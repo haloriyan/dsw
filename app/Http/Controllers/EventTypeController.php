@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class EventTypeController extends Controller
 {
-    public static function get() {
-        return new EventType;
+    public static function get($filter = NULL) {
+        if ($filter == NULL) {
+            return new EventType;
+        }
+        return EventType::where($filter);
     }
 
     public function create()

@@ -41,7 +41,7 @@
                                 <input type="hidden" name="data_id" value="{{ $eventType->id }}" class="form-control">
                             </div>
                             <div class="form-group">
-                                <strong>Jenis Sponsor: </strong>
+                                <strong>Jenis Event: </strong>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="name" value="{{ $eventType->name }}">
                                 </div>

@@ -6,6 +6,7 @@ use Auth;
 use Hash;
 use Session;
 use App\Admin;
+use App\EventType;
 use Illuminate\Http\Request;
 
 use \App\Http\Controllers\FaqController as FaqCtrl;
@@ -173,7 +174,8 @@ class AdminController extends Controller
     }
 
 	public function eventType() {
-		$eventTypes = EventTypeCtrl::get();
+		$eventTypes = EventTypeCtrl::get()->get();
+
 		return view('admin.eventType.index')->with([
 			'eventTypes' => $eventTypes
 		]);

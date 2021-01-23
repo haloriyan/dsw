@@ -10,6 +10,9 @@ Route::get('my-ticket', "UserController@myTicket")->name('user.myTicket');
 Route::get('invoice', "UserController@invoice")->name('user.invoice');
 Route::get('my-team', "UserController@myTeam")->name('user.myTeam');
 Route::get('active', "UserController@active")->name('user.active');
+Route::get('admin', function() {
+	return redirect()->route('admin.loginPage');
+})->name('admin');
 
 Route::get('test', "UserController@testMail");
 

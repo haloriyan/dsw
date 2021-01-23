@@ -64,7 +64,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="bidang_kerja">Bidang Pekerjaan :</label>
-                                <input type="text" class="form-control" value="{{ $sponsor->bidang_kerja }}" name="bidang_kerja" id="bidang_kerja" required>
+                                <input type="text" class="form-control" value="{{ $sponsor->field }}" name="bidang_kerja" id="bidang_kerja" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">No. Telepon :</label>
