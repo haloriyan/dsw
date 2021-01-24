@@ -100,7 +100,13 @@
                     <i class="fas fa-users"></i>
                     <span>Team</span>
                 </a>
-            </li>
+			</li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.role') }}">
+                    <i class="fas fa-cogs"></i>
+                    <span>Admin Role</span>
+                </a>
+			</li>
 
             <!-- Nav Item - User -->
             {{--
