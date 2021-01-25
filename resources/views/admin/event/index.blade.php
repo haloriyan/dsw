@@ -47,16 +47,18 @@
                                                 <td>{{ $event->rundown->title }}</td>
                                                 <td>
                                                     <form action="{{ route('event.delete',$event->id) }}" method="POST">
-                                                        <a href="{{ route('admin.timeline', $event->id) }}" class="btn btn-info btn-icon-split">
+                                                        <a href="{{ route('admin.timeline', $event->id) }}" class="btn btn-warning btn-icon-split">
                                                             <span class="icon text-white">
                                                                 Timeline
                                                             </span>
                                                         </a>
-                                                    <a href="{{ route('event.view',$event->id) }}" class="btn btn-info btn-icon-split">
-                                                        <span class="icon text-white">
-                                                            <i class="fas fa-eye"></i> 
-                                                        </span>
-                                                    </a>
+                                                    @if (!empty($event->timeline))
+                                                        <a href="{{ route('event.view',$event->id) }}" class="btn btn-info btn-icon-split">
+                                                            <span class="icon text-white">
+                                                                <i class="fas fa-eye"></i>
+                                                            </span>
+                                                        </a>
+                                                    @endif
                                                     <a href="{{ route('event.edit',$event->id) }}" class="btn btn-success btn-icon-split" id="editBtn">
                                                         <span class="icon text-white">
                                                             <i class="far fa-edit"></i>

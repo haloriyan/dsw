@@ -10,6 +10,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Rundown</h1>
+        <a href="{{ route('admin.rundown') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
     </div>
 
     <!-- DataTales Example -->
@@ -30,7 +32,7 @@
             <p>{{ $rundown->notes }}</p>
             <p>{{ $rundown->start_time }} - {{ $rundown->end_time }}</p>
 
-            <button class="btn btn-secondary" onclick="history.back(-1)">kembali</button>
+            {{-- <button class="btn btn-secondary" onclick="history.back(-1)">kembali</button> --}}
         </div>
     </div>
 @endsection

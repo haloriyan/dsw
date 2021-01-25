@@ -77,7 +77,7 @@
                             <div class="form-group">
                                 <label for="logo">Logo :</label>
                                 <input type="file" class="form-control" value="{{ $sponsor->logo }}" name="logo" id="logo" accept="image/*">
-                                <label>Jika Tidak Ingin Di Ubah Kosongkan Saja</label>
+                                <label class="mt-2">Jika Tidak Ingin Di Ubah Kosongkan Saja</label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

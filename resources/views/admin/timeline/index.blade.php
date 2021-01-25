@@ -56,20 +56,19 @@
                                 <td>{{ Carbon::parse($timeline->judgement_date)->format('d M Y') }}</td>
                                 <td>{{ Carbon::parse($timeline->main_date)->format('d M Y') }}</td>
                                 <td>
-                                    <a href="{{ route('timeline.edit',$timeline->id) }}" class="btn btn-success btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="far fa-edit"></i>
-                                        </span>
-                                        <span class="text">Edit</span>
-                                    </a>
                                     <form action="{{ route('timeline.delete', $timeline->id) }}" method="POST">
+                                        <a href="{{ route('timeline.edit',$timeline->id) }}" class="btn btn-success btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="far fa-edit"></i>
+                                            </span>
+                                        </a>
+
                                         @csrf
                                         @method("DELETE")
                                         <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                             </span>
-                                            <span class="text">Delete</span>
                                         </button>
                                     </form>
                                 </td>

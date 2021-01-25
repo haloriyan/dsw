@@ -72,7 +72,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.contact') }}">
+                <a class="nav-link" href="{{ route('admin.speaker') }}">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Speaker</span>
                 </a>

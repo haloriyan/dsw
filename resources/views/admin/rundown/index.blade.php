@@ -41,32 +41,29 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $rundown->title }}</td>
                                 <td>
-                                    <a href="{{ route('admin.event', $rundown->id) }}" class="btn btn-info btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
-                                        <span class="text">Event</span>
-                                    </a>
-                                    <a href="{{ route('rundown.view', $rundown->id) }}" class="btn btn-info btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
-                                        <span class="text">Detail</span>
-                                    </a>
-                                    <a href="{{ route('rundown.edit', $rundown->id) }}" class="btn btn-success btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="far fa-edit"></i>
-                                        </span>
-                                        <span class="text">Edit</span>
-                                    </a>
                                     <form action="{{ route('rundown.delete', $rundown->id) }}" method="POST">
+                                        <a href="{{ route('admin.event', $rundown->id) }}" class="btn btn-warning btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-fw fa-calendar"></i>
+                                            </span>
+                                        </a>
+                                        <a href="{{ route('rundown.view', $rundown->id) }}" class="btn btn-info btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-eye"></i>
+                                            </span>
+                                        </a>
+                                        <a href="{{ route('rundown.edit', $rundown->id) }}" class="btn btn-success btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="far fa-edit"></i>
+                                            </span>
+                                        </a>
+
                                         @csrf
                                         @method("DELETE")
                                         <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                             </span>
-                                            <span class="text">Delete</span>
                                         </button>
                                     </form>
                                 </td>

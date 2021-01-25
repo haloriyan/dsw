@@ -14,7 +14,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Faq</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Data Juri</h6>
     </div>
     <div class="card-body">
         @if ($message = Session::get('success'))
@@ -57,7 +57,6 @@
                                     <span class="icon text-white-50">
                                         <i class="far fa-edit"></i>
                                     </span>
-                                    <span class="text">Edit</span>
                                 </a>
 
                                 @csrf
@@ -67,7 +66,6 @@
                                     <span class="icon text-white-50">
                                         <i class="fas fa-trash"></i>
                                     </span>
-                                    <span class="text">Delete</span>
                                 </button>
                                 </form>
                             </td>
