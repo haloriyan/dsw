@@ -64,6 +64,8 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('event/{rundownID?}', 'AdminController@event')->name('admin.event')->middleware('Admin');
 	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker')->middleware('Admin');
 	Route::get('judge', 'AdminController@judge')->name('admin.judge')->middleware('Admin');
+	Route::get('judge/create', 'JudgeController@create')->name('judge.create')->middleware('Admin');
+	Route::get('judge/{id}/edit', 'JudgeController@edit')->name('judge.edit')->middleware('Admin');
 	Route::get('timeline/{eventID?}', 'AdminController@timeline')->name('admin.timeline')->middleware('Admin');
 	Route::get('rundown', 'AdminController@rundown')->name('admin.rundown')->middleware('Admin');
 	Route::get('ticket-type', 'AdminController@ticketType')->name('admin.ticketType')->middleware('Admin');
@@ -187,6 +189,6 @@ Route::group(['prefix' => 'speaker'], function() {
 
 Route::group(['prefix' => 'judge'], function() {
 	Route::post('store', 'JudgeController@store')->name('judge.store');
-	Route::post('update', 'JudgeController@update')->name('judge.update');
-	Route::delete('delete', 'JudgeController@delete')->name('judge.delete');
+	Route::post('{id}/update', 'JudgeController@update')->name('judge.update');
+	Route::delete('{id}/delete', 'JudgeController@delete')->name('judge.delete');
 });

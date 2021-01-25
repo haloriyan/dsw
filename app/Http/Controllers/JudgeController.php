@@ -6,6 +6,8 @@ use Storage;
 use App\Judge;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\EventController as EventCtrl;
+
 class JudgeController extends Controller
 {
     public static function get($eventID = NULL) {
@@ -13,6 +15,22 @@ class JudgeController extends Controller
             return Judge::with('event')->get();
         }
         return Judge::where('event_id', $eventID)->get();
+    }
+    public function create() {
+        $events = EventCtrl::get()->get();
+
+        return view('admin.judge.create', [
+            'events' => $events
+        ]);
+    }
+    public function edit($id) {
+        $judge = Judge::find($id);
+        $events = EventCtrl::get()->get();
+
+        return view('admin.judge.edit', [
+            'events' => $events,
+            'judge' => $judge
+        ]);
     }
     public function store(Request $req) {
         $photo = $req->file('photo');
@@ -33,8 +51,7 @@ class JudgeController extends Controller
             'message' => "Data juri berhasil ditambahkan"
         ]);
     }
-    public function update(Request $req) {
-        $id = $req->data_id;
+    public function update($id, Request $req) {
         $judge = Judge::where('id', $id);
         
         $toUpdate = [
@@ -59,8 +76,7 @@ class JudgeController extends Controller
             'message' => "Data juri berhasil diubah"
         ]);
     }
-    public function delete(Request $req) {
-        $id = $req->data_id;
+    public function delete($id, Request $req) {
         $judge = Judge::where('id', $id);
         $deletePhoto = Storage::delete('public/judge_photo/'.$judge->first()->photo);
         $deleteData = $judge->delete();
