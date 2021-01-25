@@ -67,22 +67,44 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
     public function register(Request $req) {
-        $saveData = User::create([
-            'name' => $req->name,
-            'email' => $req->email,
-            'password' => bcrypt($req->password),
-            'phone' => $req->phone,
-            'instance' => $req->instance,
-            'gender' => $req->gender,
-            'employment_status' => $req->employment_status,
-            'reason' => $req->reason,
-            'has_joined_dsi' => $req->has_joined_dsi,
-            'interested_with_dsi' => $req->interested_with_dsi,
-            'is_active' => 0,
-        ]);
+        if ($req->via == "") {
+            Mail::to($req->email)
+            ->send(new NewUserNotification());
+            $datas = [
+                'name' => $req->name,
+                'email' => $req->email,
+                'password' => bcrypt($req->password),
+                'phone' => $req->phone,
+                'instance' => $req->instance,
+                'gender' => $req->gender,
+                'employment_status' => $req->employment_status,
+                'reason' => $req->reason,
+                'has_joined_dsi' => $req->has_joined_dsi,
+                'interested_with_dsi' => $req->interested_with_dsi,
+                'is_active' => 0,
+            ];
+        }else {
+            $datas = [
+                'name' => $req->name,
+                'email' => $req->email,
+                'password' => bcrypt($req->password),
+                'gender' => $req->gender,
+                'is_active' => 1
+            ];
+        }
+        $saveData = User::create($datas);
 
-        Mail::to($req->email)
-        ->send(new NewUserNotification());
+        if ($req->via != "") {
+            $myData = self::me();
+            $team = User::where('id', $myData->id)->with('myTeam')->first();
+            $assign = TeamCtrl::assignUserViaRegister([
+                'team_id' => $team->id,
+                'user' => $saveData,
+                'column' => $req->column
+            ]);
+
+            return redirect()->route('user.myTeam');
+        }
 
         return redirect()->route('user.loginPage')->with([
             'message' => "Pendaftaran berhasil. Silahkan login atau verifikasi email terlebih dahulu"

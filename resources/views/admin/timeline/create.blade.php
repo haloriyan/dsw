@@ -23,12 +23,16 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="event">Event :</label>
-                    <select name="event_id" id="event" class="form-control" required>
-                        <option value="">Pilih event...</option>
-                        @foreach ($events as $event)
-                            <option value="{{ $event->id }}">{{ $event->title }}</option>
-                        @endforeach
-                    </select>
+                    @if ($eventID == NULL)
+                        <select name="event_id" id="event" class="form-control" required>
+                            <option value="">Pilih event...</option>
+                            @foreach ($events as $event)
+                                <option value="{{ $event->id }}">{{ $event->title }}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <h4>{{ $events->title }}</h4>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="type">Type :</label>

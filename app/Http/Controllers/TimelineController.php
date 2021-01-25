@@ -15,11 +15,19 @@ class TimelineController extends Controller
         }
         return Timeline::where($filter)->get();
     }
-    public function create() {
-        $events = EventCtrl::get()->get();
+    public function create($eventID = NULL) {
+        $filter = [];
+        if ($eventID != NULL) {
+            $filter = [
+                ['id', '=', $eventID]
+            ];
+        }
+        $data = EventCtrl::get($filter);
+        $events = $eventID != NULL ? $data->first() : $data->get();
         
         return view('admin.timeline.create', [
-            'events' => $events
+            'events' => $events,
+            'eventID' => $eventID
         ]);
     }
     public function store(Request $req) {

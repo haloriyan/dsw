@@ -120,6 +120,9 @@
     const removeReq = key => {
         select(`.requirements[key='${key}']`).remove();
     }
+    const removePrize = key => {
+        select(`.prize[key='${key}']`).remove();
+    }
 </script>
 @endsection
 

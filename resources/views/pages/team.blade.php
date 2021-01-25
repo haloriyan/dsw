@@ -331,8 +331,49 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                                                                             </div>
                                                                         </div>
                                                                         <p class="text-muted mt-3">
-                                                                            Pastikan anggotamu sudah terdaftar di website Data Science Weekend dan sudah memverifikasi email setelah mendaftar
+                                                                            <button class="d-none btn btn-primary mt-3" data-toggle="modal" data-target="#addUser" id="createUser">Tambahkan anggota belum terdaftar</button>
                                                                         </p>
+                                                                        <div class="modal fade" id="addUser" tabindex="-1" role="dialog">
+                                                                            <div class="modal-dialog modal-md" role="document">
+                                                                                <form action="{{ route('user.register') }}" class="modal-content" method="POST">
+                                                                                    {{ csrf_field() }}
+                                                                                    <input type="hidden" name="column" id="column">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title float-left" id="scrollmodalLabel">Tambah Anggota Belum Terdaftar</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <input type="hidden" name="via" value="teamAssignment">
+                                                                                        <div class="form-group">
+                                                                                            <label for="name">Nama :</label>
+                                                                                            <input type="text" class="form-control" name="name" required id="name">
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="email">Email :</label>
+                                                                                            <input type="email" class="form-control" name="email" required>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="password">Password :</label>
+                                                                                            <input type="password" class="form-control" name="password" required>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="gender">Jenis kelamin :</label>
+                                                                                            <select name="gender" class="form-control" required>
+                                                                                                <option value="">-- PILIH JENIS KELAMIN --</option>
+                                                                                                <option>Laki-laki</option>
+                                                                                                <option>Perempuan</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                                        <button class="btn btn-success">Daftarkan</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
                                                                     @endif
                                                                 </p>
 															</div>
@@ -555,6 +596,12 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
         select("#messageArea").classList.add('d-none');
         select("#formCreate").classList.remove('d-none');
     }
+    const createUser = (id, name) => {
+        let col = id.getAttribute('name');
+        select("button#createUser").click();
+        select("#addUser #name").value = name;
+        select("#addUser #column").value = col;
+    }
     const searchUser = (id, value) => {
         let area = id == "user_1" ? "#searchResultArea1" : "#searchResultArea2";
         if (value.length < 3) {
@@ -569,6 +616,17 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
         .then(datas => {
             select(area).classList.remove('d-none');
             select(area).innerHTML = "";
+            if (datas.length == 0) {
+                createElement({
+                    el: 'li',
+                    attributes: [
+                        ['class', 'pointer'],
+                        ['onclick', `createUser(${id}, '${value}')`]
+                    ],
+                    html: `Tidak menemukan temanmu? Klik untuk menambahkan`,
+                    createTo: area,
+                });
+            }
             datas.forEach(user => {
                 createElement({
                     el: 'li',
