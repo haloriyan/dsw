@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
-            $table->string('employment_status');
-            $table->string('reason');
+            $table->string('employment_status')->nullable();
+            $table->string('reason')->nullable();
             $table->string('gender', 55);
             $table->string('address')->nullable();
             $table->string('social_linkedin')->nullable();

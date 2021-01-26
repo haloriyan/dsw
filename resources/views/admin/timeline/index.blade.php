@@ -8,9 +8,12 @@
 
 @section('content')
     <!-- Page Heading -->
+    @php
+        $routeCreate = $event != "" ? route('timeline.create', $event->id) : route('timeline.create');
+    @endphp
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Timeline</h1>
-        <a href="{{ route('timeline.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        <a href="{{ $routeCreate }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-plus-square fa-sm text-white-50"></i> Tambah</a>
     </div>
 

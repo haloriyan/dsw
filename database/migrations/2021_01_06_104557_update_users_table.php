@@ -14,9 +14,9 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-            $table->tinyInteger('has_joined_dsi')->after('social_facebook');
-            $table->string('phone')->after('password');
-            $table->string('instance')->after('phone');
+            $table->tinyInteger('has_joined_dsi')->after('social_facebook')->nullable();
+            $table->string('phone')->after('password')->nullable();
+            $table->string('instance')->after('phone')->nullable();
         });
     }
 

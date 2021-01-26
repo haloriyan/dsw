@@ -15,7 +15,7 @@ class AlterTicketsTable extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             $table->bigInteger('event_id')->unsigned()->index();
-            $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         });
     }
 

@@ -37,14 +37,23 @@
                                     <li>{{ $prize }}</li>
                                 @endforeach
                             </div>
-                            <div class="col-md-6 mt-4">
-                                <h5>Pendaftaran : {{ Carbon::parse($event->timeline->open_date)->format('d M Y') }}</h5>
-                                <h5>Penutupan : {{ Carbon::parse($event->timeline->close_date)->format('d M Y') }}</h5>
-                            </div>
-                            <div class="col-md-6 mt-4">
-                                <h5>Penjurian : {{ Carbon::parse($event->timeline->judgement_date)->format('d M Y') }}</h5>
-                                <h5>Acara Utama : {{ Carbon::parse($event->timeline->main_date)->format('d M Y') }}</h5>
-                            </div>
+                            @if ($event->timeline != "")
+                                <div class="col-md-6 mt-4">
+                                    <h5>Pendaftaran : {{ Carbon::parse($event->timeline->open_date)->format('d M Y') }}</h5>
+                                    <h5>Penutupan : {{ Carbon::parse($event->timeline->close_date)->format('d M Y') }}</h5>
+                                </div>
+                                <div class="col-md-6 mt-4">
+                                    <h5>Penjurian : {{ Carbon::parse($event->timeline->judgement_date)->format('d M Y') }}</h5>
+                                    <h5>Acara Utama : {{ Carbon::parse($event->timeline->main_date)->format('d M Y') }}</h5>
+                                </div>
+                            @else
+                                <div class="alert alert-danger w-100 mt-4 p-3 rounded">
+                                    Event ini belum memiliki timeline.
+                                    <a href="{{ route('admin.timeline', $event->id) }}" class="">
+                                        Buat Timeline
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

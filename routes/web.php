@@ -101,7 +101,7 @@ Route::group(['prefix' => 'ticket-type'], function() {
 });
 
 Route::group(['prefix' => 'timeline'], function() {
-	Route::get('create', 'TimelineController@create')->name('timeline.create')->middleware('Admin');
+	Route::get('create/{eventID?}', 'TimelineController@create')->name('timeline.create')->middleware('Admin');
 	Route::post('store', 'TimelineController@store')->name('timeline.store')->middleware('Admin');
 	Route::get('{id}/edit', 'TimelineController@edit')->name('timeline.edit')->middleware('Admin');
 	Route::post('{id}/update', 'TimelineController@update')->name('timeline.update')->middleware('Admin');

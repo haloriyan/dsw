@@ -119,8 +119,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="{{ asset('js/base.js') }}"></script>
 <script>
-    let iPP = select("#iPP").value;
-    let iPPPrize = select("#iPPPrize").value;
+    let iPP = parseInt(select("#iPP").value);
+    let iPPPrize = parseInt(select("#iPPPrize").value);
     
     const moreReq = () => {
         iPP += 1;
@@ -150,6 +150,9 @@
     }
     const removeReq = key => {
         select(`.requirements[key='${key}']`).remove();
+    }
+    const removePrize = key => {
+        select(`.prize[key='${key}']`).remove();
     }
 </script>
 @endsection

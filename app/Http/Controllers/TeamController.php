@@ -68,6 +68,9 @@ class TeamController extends Controller
 
         return response()->json(['status' => 200]);
     }
+    public static function assignUserViaRegister($data) {
+        return Team::where('id', $data['team_id'])->update([$data['column'] => $data['user']->id]);
+    }
     public function removeUser(Request $req) {
         $remove = Team::where('id', $req->team_id)->update([$req->column => null]);
         return response()->json(['status' => 200]);
