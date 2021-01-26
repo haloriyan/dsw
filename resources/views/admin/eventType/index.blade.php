@@ -45,7 +45,6 @@
                                                             <span class="icon text-white-50">
                                                                 <i class="far fa-edit"></i>
                                                             </span>
-                                                            <span class="text">Edit</span>
                                                         </a>
 
                                                         @csrf
@@ -55,7 +54,6 @@
                                                             <span class="icon text-white-50">
                                                                 <i class="fas fa-trash"></i>
                                                             </span>
-                                                            <span class="text">Delete</span>
                                                         </button>
                                                         </form>
                                                     </td>

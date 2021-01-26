@@ -5,7 +5,9 @@
 @section('content')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Juri</h1>
+    <h1 class="h3 mb-0 text-gray-800">Tambah Juri</h1>
+    <a href="{{ route('admin.judge') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
 </div>
 
 <!-- DataTales Example -->
@@ -53,10 +55,9 @@
                     <input type="file" class="form-control" name="photo" required>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button class="btn btn-success">Simpan</button>
-            </div>
+             <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
         </form>
     </div>
 </div>

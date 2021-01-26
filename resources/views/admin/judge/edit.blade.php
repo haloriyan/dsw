@@ -5,14 +5,16 @@
 @section('content')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Juri</h1>
+    <h1 class="h3 mb-0 text-gray-800">Edit Juri</h1>
+    <a href="{{ route('admin.judge') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
 </div>
 
 <!-- DataTales Example -->
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Tambah Data</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Data</h6>
     </div>
     <div class="card-body">
         @if ($message = Session::get('success'))
@@ -57,9 +59,8 @@
                     <div class="mt-2 text-muted">kosongkan jika tidak ingin mengganti foto</div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button class="btn btn-success">Simpan</button>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>

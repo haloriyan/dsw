@@ -28,9 +28,9 @@
 @section('content')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Tambah Aturan Role</h1>
-    <a href="{{ route('role.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-plus-square fa-sm text-white-50"></i> Tambah</a>
+    <h1 class="h3 mb-0 text-gray-800">Edit Aturan Role</h1>
+    <a href="{{ route('admin.role') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
 </div>
 
 <!-- DataTales Example -->
@@ -82,7 +82,9 @@
                 @endforeach
             </div>
 
-            <button class="btn btn-primary mt-3">Submit</button>
+            <div class="text-right">
+                <button class="btn btn-primary mt-2">Submit</button>
+            </div>
         </form>
     </div>
 </div>

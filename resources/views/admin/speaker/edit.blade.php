@@ -4,8 +4,6 @@
 
 @section('content')
 
-@section('content')
-
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Edit Speaker</h1>
@@ -74,9 +72,8 @@
                         <input value="{{ $speaker->linkedin_profile }}" type="text" class="form-control" name="linkedin_profile" required>
                     </div>
                     <div class="form-group">
-                        <label for="name">Foto :</label><i class="fas fa-question fa-sm" data-toggle="tooltip"
-                        title="Kosongi jika tidak update" style="color: Tomato;"></i>
                         <input type="file" class="form-control" name="photo" accept="image/*">
+                        <label class="mt-2">Jika Tidak Ingin Di Ubah Kosongkan Saja</label>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-right">

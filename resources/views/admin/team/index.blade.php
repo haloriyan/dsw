@@ -57,7 +57,6 @@
                                         <span class="icon text-white-50">
                                             <i class="far fa-eye"></i>
                                         </span>
-                                        <span class="text">Detail</span>
                                     </a>
                                     {{--
                                     <form action="{{ route('timeline.delete', $timeline->id) }}" method="POST">
