@@ -46,7 +46,7 @@
                                                 <td>{{ $event->title }}</td>
                                                 <td>{{ $event->rundown->title }}</td>
                                                 <td>
-                                                    <form action="{{ route('event.delete',$event->id) }}" method="POST">
+                                                    <form action="{{ route('event.delete',$event->id) }}" method="POST" class="deleteEvent" ticket-count="{{ $event->tickets->count() }}">
                                                         <a href="{{ route('admin.timeline', $event->id) }}" class="btn btn-warning btn-icon-split">
                                                             <span class="icon text-white">
                                                                 Timeline
@@ -68,7 +68,7 @@
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                    <button type="submit" class="btn btn-danger btn-icon-split">
                                                         <span class="icon text-white">
                                                             <i class="fas fa-trash"></i>
                                                         </span>
@@ -87,10 +87,24 @@
 @section('pagejs')
 
     <!-- Page level plugins -->
+    <script src="{{ asset('js/base.js') }}"></script>
     <script src="{{ asset('sb-admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('sb-admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sb-admin/js/demo/datatables-demo.js') }}"></script>
+    <script>
+        selectAll(".deleteEvent").forEach(form => {
+            form.onsubmit = e => {
+                let ticketCount = form.getAttribute('ticket-count');
+                if (ticketCount > 0) {
+                    alert("Gagal menghapus event karena ada data tiket untuk event ini");
+                    e.preventDefault();
+                }else {
+                    return confirm('Apakah Anda yakin ingin menghapus data ini?');
+                }
+            }
+        });
+    </script>
 
 @endsection

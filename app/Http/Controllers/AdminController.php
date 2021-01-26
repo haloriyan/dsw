@@ -184,11 +184,13 @@ class AdminController extends Controller
 		$rundown = "";
 		$eventTypes = EventTypeCtrl::get();
 		if ($rundownID == NULL) {
-			$events = EventCtrl::get()->get();
+			$events = EventCtrl::get()->with('tickets')->get();
 		}else {
 			$events = EventCtrl::get([
 				['rundown_id', '=', $rundownID]
-			])->get();
+			])
+			->with('tickets')
+			->get();
 			$rundown = RundownCtrl::get([
 				['id', '=', $rundownID]
 			])->first();
