@@ -10,8 +10,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Tiket {{ $ticket->name }} ({{ $ticket->event->title}})</h1>
-        {{-- <a href="{{ route('ticket.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-plus-square fa-sm text-white-50"></i> Tambah</a> --}}
+        <a href="{{ route('admin.ticket') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
     </div>
 
     <!-- DataTales Example -->

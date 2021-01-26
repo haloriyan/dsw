@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <strong>Linkedin : </strong>
-                    {{ $speaker->linkedin_profile }}
+                    <a href="{{ $speaker->linkedin_profile }}" target="_blank">{{ $speaker->linkedin_profile }}</a>
                 </div>
                 <div class="form-group">
                     <strong>photo : </strong><br><br>
