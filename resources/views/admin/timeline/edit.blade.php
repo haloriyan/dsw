@@ -76,6 +76,20 @@ $types = ["Straight","Waves"];
                         <i class="fas fa-fw fa-calendar iconDate"></i>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="openDate2">Tanggal Pendaftaran Gelombang 2 (opsional) :</label>
+                        <input type="text" name="open_date_2" id="openDate2" class="form-control date" value="{{ $timeline->open_date_2 }}">
+                        <i class="fas fa-fw fa-calendar iconDate"></i>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="closeDate2">Tanggal Penutupan Gelombang 2 (opsional) :</label>
+                        <input type="text" name="close_date_2" id="closeDate2" class="form-control date" value="{{ $timeline->close_date_2 }}">
+                        <i class="fas fa-fw fa-calendar iconDate"></i>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="judgementDate">Tanggal Penjurian :</label>

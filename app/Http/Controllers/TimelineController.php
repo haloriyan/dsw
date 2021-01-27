@@ -22,11 +22,18 @@ class TimelineController extends Controller
                 ['id', '=', $eventID]
             ];
         }
-        $data = EventCtrl::get($filter);
+        $data = EventCtrl::get($filter)->with('timeline');
         $events = $eventID != NULL ? $data->first() : $data->get();
+
+        $eventsHasNoTimeline = [];
+        foreach ($events as $event) {
+            if ($event->timeline == "") {
+                array_push($eventsHasNoTimeline, $event);
+            }
+        }
         
         return view('admin.timeline.create', [
-            'events' => $events,
+            'events' => $eventsHasNoTimeline,
             'eventID' => $eventID
         ]);
     }
@@ -36,6 +43,8 @@ class TimelineController extends Controller
             'type' => $req->type,
             'open_date' => $req->open_date,
             'close_date' => $req->close_date,
+            'open_date_2' => $req->open_date_2,
+            'close_date_2' => $req->close_date_2,
             'judgement_date' => $req->judgement_date,
             'main_date' => $req->main_date,
         ]);
@@ -45,12 +54,19 @@ class TimelineController extends Controller
         ]);
     }
     public function edit($id) {
-        $timeline = Timeline::find($id);
+        $timeline = Timeline::where('id', $id)->with('event')->first();
         $events = EventCtrl::get()->get();
+        
+        $eventsHasNoTimeline = [];
+        foreach ($events as $evt) {
+            if ($evt->timeline == "" || $evt->id == $timeline->event_id) {
+                array_push($eventsHasNoTimeline, $evt);
+            }
+        }
         
         return view('admin.timeline.edit', [
             'timeline' => $timeline,
-            'events' => $events
+            'events' => $eventsHasNoTimeline
         ]);
     }
     public function update($id, Request $req) {
@@ -59,6 +75,8 @@ class TimelineController extends Controller
             'type' => $req->type,
             'open_date' => $req->open_date,
             'close_date' => $req->close_date,
+            'open_date_2' => $req->open_date_2,
+            'close_date_2' => $req->close_date_2,
             'judgement_date' => $req->judgement_date,
             'main_date' => $req->main_date,
         ]);
@@ -72,6 +90,13 @@ class TimelineController extends Controller
 
         return redirect()->route('admin.timeline')->with([
             'message' => "Data timeline berhasil dihapus"
+        ]);
+    }
+    public function view($id) {
+        $timeline = Timeline::where('id', $id)->with('event')->first();
+
+        return view('admin.timeline.view', [
+            'timeline' => $timeline
         ]);
     }
 }
