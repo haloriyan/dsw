@@ -40,10 +40,8 @@
                             <th>No</th>
                             <th>Event</th>
                             <th>Type</th>
-                            <th>Register</th>
-                            <th>Close</th>
-                            <th>Judgement</th>
-                            <th>Main</th>
+                            <th>Pendaftaran</th>
+                            <th>Penutupan</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -56,12 +54,15 @@
                                 <td>{{ $timeline->type }}</td>
                                 <td>{{ Carbon::parse($timeline->open_date)->format('d M Y') }}</td>
                                 <td>{{ Carbon::parse($timeline->close_date)->format('d M Y') }}</td>
-                                <td>{{ Carbon::parse($timeline->judgement_date)->format('d M Y') }}</td>
-                                <td>{{ Carbon::parse($timeline->main_date)->format('d M Y') }}</td>
                                 <td>
                                     <form action="{{ route('timeline.delete', $timeline->id) }}" method="POST">
+                                        <a href="{{ route('timeline.view',$timeline->id) }}" class="btn btn-primary btn-icon-split">
+                                            <span class="icon">
+                                                <i class="far fa-eye"></i>
+                                            </span>
+                                        </a>
                                         <a href="{{ route('timeline.edit',$timeline->id) }}" class="btn btn-success btn-icon-split">
-                                            <span class="icon text-white-50">
+                                            <span class="icon">
                                                 <i class="far fa-edit"></i>
                                             </span>
                                         </a>
@@ -69,7 +70,7 @@
                                         @csrf
                                         @method("DELETE")
                                         <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            <span class="icon text-white-50">
+                                            <span class="icon">
                                                 <i class="fas fa-trash"></i>
                                             </span>
                                         </button>

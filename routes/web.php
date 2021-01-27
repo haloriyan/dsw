@@ -104,6 +104,7 @@ Route::group(['prefix' => 'timeline'], function() {
 	Route::get('create/{eventID?}', 'TimelineController@create')->name('timeline.create')->middleware('Admin');
 	Route::post('store', 'TimelineController@store')->name('timeline.store')->middleware('Admin');
 	Route::get('{id}/edit', 'TimelineController@edit')->name('timeline.edit')->middleware('Admin');
+	Route::get('{id}/view', 'TimelineController@view')->name('timeline.view')->middleware('Admin');
 	Route::post('{id}/update', 'TimelineController@update')->name('timeline.update')->middleware('Admin');
 	Route::delete('{id}/delete', 'TimelineController@delete')->name('timeline.delete')->middleware('Admin');
 });

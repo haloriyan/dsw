@@ -67,6 +67,20 @@
                         <i class="fas fa-fw fa-calendar iconDate"></i>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="openDate2">Tanggal Pendaftaran Gelombang 2 (opsional) :</label>
+                        <input type="text" name="open_date_2" id="openDate2" class="form-control date">
+                        <i class="fas fa-fw fa-calendar iconDate"></i>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="closeDate2">Tanggal Penutupan Gelombang 2 (opsional) :</label>
+                        <input type="text" name="close_date_2" id="closeDate2" class="form-control date">
+                        <i class="fas fa-fw fa-calendar iconDate"></i>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="judgementDate">Tanggal Penjurian :</label>
@@ -97,15 +111,57 @@
 <script src="{{ asset('sb-admin/js/demo/datatables-demo.js') }}"></script>
 <script>
     $(document).ready(function () {
-        $(document).on('click', '.date', function(){
-                $(this).datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    format: 'yyyy-mm-dd',
-                    todayHighlight: true
-                }).focus();
+        const months = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+        // $(document).on('click', '.date', function(){
+        //         $(this).datepicker({
+        //             changeMonth: true,
+        //             changeYear: true,
+        //             dateFormat: 'yyyy-mm-dd',
+        //             todayHighlight: true
+        //         }).focus();
+        //     });
+        $("#openDate").datepicker({
+            format: 'yyyy-mm-dd',
+            todayHighlight: true,
+        });
+        $("#openDate2").datepicker({
+            format: 'yyyy-mm-dd',
+            todayHighlight: true,
+        });
+        $("#closeDate").datepicker({
+            format: 'yyyy-mm-dd',
+            todayHighlight: true,
+        });
+        $("#closeDate2").datepicker({
+            format: 'yyyy-mm-dd',
+            todayHighlight: true,
+        });
+        $("#judgementDate").datepicker({
+            format: 'yyyy-mm-dd',
+            todayHighlight: true,
+        });
+        const formatDate = (date) => {
+            return `${date.getFullYear()}-${months[date.getMonth()]}-${date.getDate()}`;
+        }
+        $("#openDate").on('changeDate', selected => {
+            // console.log(selected.date.valueOf());
+            let date = new Date(selected.date);
+            let startDate = formatDate(date);
+            $("#closeDate").datepicker({
+                minDate: date,
+                dateFormat: 'yyyy-mm-dd'
             });
+        });
+        $("#openDate2").on('changeDate', selected => {
+            let startDate = new Date(selected.date.valueOf());
+            $("#closeDate2").datepicker({
+                format: 'yyyy-mm-dd',
+                todayHighlight: true,
+                minDate: '2021-01-10'
+            });
+        });
 
+        /*
         $("#openDate").on('changeDate', function(selected) {
             var startDate = new Date(selected.date.valueOf());
             $("#closeDate").datepicker({
@@ -120,20 +176,21 @@
                     $("#closeDate").val($("#openDate").val());
                 }
         });
+        */
 
         $("#closeDate").on('changeDate', function(selected) {
             var startDate = new Date(selected.date.valueOf());
-            $("#judgementDate").datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    format: 'yyyy-mm-dd',
-                    todayHighlight: true,
-                    setStartDate: startDate
-            });
-            $("#judgementDate").datepicker('setStartDate', startDate);
-                if($("#closeDate").val() > $("#judgementDate").val()){
-                    $("#judgementDate").val($("#closeDate").val());
-                }
+            // $("#judgementDate").datepicker({
+            //         changeMonth: true,
+            //         changeYear: true,
+            //         format: 'yyyy-mm-dd',
+            //         todayHighlight: true,
+            //         setStartDate: startDate
+            // });
+            // $("#judgementDate").datepicker('setStartDate', startDate);
+            //     if($("#closeDate").val() > $("#judgementDate").val()){
+            //         $("#judgementDate").val($("#closeDate").val());
+            //     }
         });
 
         $("#judgementDate").on('changeDate', function(selected) {

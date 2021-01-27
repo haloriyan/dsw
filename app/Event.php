@@ -21,4 +21,7 @@ class Event extends Model
     public function rundown() {
         return $this->belongsTo('App\Rundown', 'rundown_id');
     }
+    public function tickets() {
+        return $this->hasMany('App\Ticket', 'event_id');
+    }
 }
