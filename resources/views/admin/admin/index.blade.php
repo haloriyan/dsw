@@ -56,12 +56,7 @@
                             <td>{{ $admin->phone }}</td>
                             <td>{{ $admin->role }}</td>
                             <td>
-                                <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-success btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="far fa-edit"></i>
-                                    </span>
-                                    <span class="text">Edit</span>
-                                </a>
+
                                 <form action="{{ route('admin.delete', $admin->id) }}" method="POST">
                                     @csrf
                                     @method("DELETE")
@@ -69,8 +64,13 @@
                                         <span class="icon text-white-50">
                                             <i class="fas fa-trash"></i>
                                         </span>
-                                        <span class="text">Delete</span>
                                     </button>
+
+                                    <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-success btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="far fa-edit"></i>
+                                        </span>
+                                    </a>
                                 </form>
                             </td>
                         </tr>

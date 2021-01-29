@@ -47,12 +47,11 @@
                             <td>{{ $judge->linkedin_profile }}</td>
                             <td>
                                 <form action="{{ route('judge.delete',$judge->id) }}" method="POST">
-                                {{-- <a href="{{ route('judge.view',$judge->id) }}" class="btn btn-info btn-icon-split">
+                                <a href="{{ route('judge.view',$judge->id) }}" class="btn btn-info btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-eye"></i>
                                     </span>
-                                    <span class="text">Detail</span>
-                                </a> --}}
+                                </a>
                                 <a href="{{ route('judge.edit',$judge->id) }}" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="far fa-edit"></i>

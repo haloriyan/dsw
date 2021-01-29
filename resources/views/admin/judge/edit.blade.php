@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Foto :</label>
-                    <input type="file" class="form-control" name="photo">
+                    <input type="file" class="form-control" accept="image/*" name="photo">
                     <div class="mt-2 text-muted">kosongkan jika tidak ingin mengganti foto</div>
                 </div>
             </div>

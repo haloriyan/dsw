@@ -79,7 +79,8 @@ class AdminController extends Controller
 		}
 
 		$updateData = Admin::where('id', $myData)->update([
-			'password' => bcrypt($new_password)
+            'password' => bcrypt($new_password),
+            'updated_at' => date('Y-m-d H:i:s')
 		]);
 
 		return redirect()->route('admin.profile')->with([
@@ -108,7 +109,8 @@ class AdminController extends Controller
 			'role' => $role,
 			'is_super' => 0,
 			'username' => $req->username,
-			'phone' => $req->phone,
+            'phone' => $req->phone,
+            'created_at' => date('Y-m-d H:i:s'),
 		]);
 
 		return redirect()->route('admin.admin')->with([
@@ -130,13 +132,13 @@ class AdminController extends Controller
 			'username' => $req->username,
 			'phone' => $req->phone,
 		];
-		
+
 		if ($req->password != "") {
 			$toUpdate['password'] = bcrypt($req->password);
 		}
 
 		$updateData = Admin::where('id', $id)->update($toUpdate);
-		
+
 		return redirect()->route('admin.admin')->with([
 			'message' => "Data admin berhasil diperbarui"
 		]);
@@ -241,7 +243,7 @@ class AdminController extends Controller
 	}
 	public function rundown() {
 		$rundowns = RundownCtrl::get()->get();
-		
+
 		return view('admin.rundown.index', [
 			'rundowns' => $rundowns
 		]);
@@ -264,13 +266,13 @@ class AdminController extends Controller
 			])
 			->with('type')
 			->get();
-			
+
 			$type = TicketTypeCtrl::get([
 				['id', '=', $typeID]
 			])
 			->first();
 		}
-		
+
 		return view('admin.ticket.index', [
 			'tickets' => $tickets,
 			'type' => $type
@@ -278,7 +280,7 @@ class AdminController extends Controller
 	}
 	public function role() {
 		$roles = RoleCtrl::get()->get();
-		
+
 		return view('admin.role.index', [
 			'roles' => $roles
 		]);

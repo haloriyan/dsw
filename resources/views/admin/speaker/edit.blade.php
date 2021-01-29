@@ -34,24 +34,14 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="hidden" value={{ $speaker->id }} name="id">
-                    </div>
-                    <div class="form-group">
-                        @php
-                        $eventSpe = [];
-                            foreach ($eventspeaker as $eventspe) {
-                                $eventSpe[] = $eventspe->events_id;
-                            }
-                        @endphp
                         <label for="event">Event :</label>
-                        <select name="event[]" class="form-control" id="event" multiple="multiple" required>
-                            <option value="">-- Plih Event --</option>
+                        <select name="event_id" class="form-control" required id="event_id_edit">
+                            <option value="">Pilih event...</option>
                             @foreach ($events as $event)
-                                <option value="{{ $event->id }}"
-                                    @php echo in_array($event->id, $eventSpe) ? 'selected': '' @endphp
-                                >
-                                    {{ $event->title }}
-                                </option>
+                                @php
+                                    $isSelected = $event->id == $speaker->event_id ? "selected='selected'" : "";
+                                @endphp
+                                <option {{ $isSelected }} value="{{ $event->id }}">{{ $event->title }}</option>
                             @endforeach
                         </select>
                     </div>

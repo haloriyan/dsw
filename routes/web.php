@@ -48,14 +48,14 @@ Route::group(['prefix' => 'admin'], function() {
 
 	Route::get('profile', 'AdminController@profile')->name('admin.profile')->middleware('Admin');
 	Route::post('profile/update', 'AdminController@updateProfile')->name('admin.profile.update')->middleware('Admin');
-	
+
 	Route::get('admin', 'AdminController@admin')->name('admin.admin')->middleware('Admin');
 	Route::get('create', 'AdminController@create')->name('admin.create')->middleware('Admin');
 	Route::post('store', 'AdminController@store')->name('admin.store')->middleware('Admin');
 	Route::get('{id}/edit', 'AdminController@edit')->name('admin.edit')->middleware('Admin');
 	Route::post('{id}/update', 'AdminController@update')->name('admin.update')->middleware('Admin');
 	Route::delete('{id}/delete', 'AdminController@delete')->name('admin.delete')->middleware('Admin');
-	
+
 	Route::get('faq', 'AdminController@faq')->name('admin.faq')->middleware('Admin');
     Route::get('contact', 'AdminController@contact')->name('admin.contact')->middleware('Admin');
     Route::get('sponsor-type', 'AdminController@sponsorType')->name('admin.sponsorType')->middleware('Admin');
@@ -72,10 +72,10 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('ticket/{typeID?}', 'AdminController@ticket')->name('admin.ticket')->middleware('Admin');
 	Route::get('ticket/{typeID}/participant', 'TicketController@participant')->name('admin.ticket.participant')->middleware('Admin');
 	Route::get('role', 'AdminController@role')->name('admin.role')->middleware('Admin');
-	
+
 	Route::get('team', 'AdminController@team')->name('admin.team')->middleware('Admin');
 	Route::get('team/{id}/detail', 'TeamController@detail')->name('admin.team.detail')->middleware('Admin');
-	
+
 	Route::get('user', 'AdminController@user')->name('admin.user')->middleware('Admin');
 });
 
@@ -185,11 +185,12 @@ Route::group(['prefix' => 'speaker'], function() {
 
 	Route::post('store', 'SpeakerController@store')->name('speaker.store');
 	Route::post('update', 'SpeakerController@update')->name('speaker.update');
-	Route::delete('delete', 'SpeakerController@delete')->name('speaker.delete');
+	Route::delete('{id}/delete', 'SpeakerController@delete')->name('speaker.delete');
 });
 
 Route::group(['prefix' => 'judge'], function() {
 	Route::post('store', 'JudgeController@store')->name('judge.store');
-	Route::post('{id}/update', 'JudgeController@update')->name('judge.update');
+    Route::post('{id}/update', 'JudgeController@update')->name('judge.update');
+    Route::get('{id}/view', 'JudgeController@view')->name('judge.view');
 	Route::delete('{id}/delete', 'JudgeController@delete')->name('judge.delete');
 });
