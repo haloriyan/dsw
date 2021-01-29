@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Event;
-use App\EventSpeaker;
 use App\Speaker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
+use App\Http\Controllers\EventController as EventCtrl;
 
 class SpeakerController extends Controller
 {
@@ -35,6 +36,7 @@ class SpeakerController extends Controller
             $photoFileName = $photo->getClientOriginalName();
 
             $validateData = $this->validate($req, [
+                'event_id' => 'required',
                 'name' => 'required',
                 'phone' => 'required',
                 'email' => 'required',
@@ -42,7 +44,8 @@ class SpeakerController extends Controller
                 'photo' =>  'required|max:4096',
             ]);
 
-            $speaker = Speaker::create([
+            $saveData = Speaker::create([
+                'event_id' => $req->event_id,
                 'name' => $req->name,
                 'phone' => $req->phone,
                 'email' => $req->email,
@@ -51,18 +54,6 @@ class SpeakerController extends Controller
             ]);
 
             $photo->storeAs('public/speaker_photo', $photoFileName);
-
-            $finalArray = array();
-                foreach($req->event as $value){
-                    array_push($finalArray, array(
-                            'events_id' =>  $value,
-                            'speaker_id' =>  $speaker->id,
-                            'created_at' => date('Y-m-d H:i:s')
-                        )
-                    );
-                };
-
-            EventSpeaker::insert($finalArray);
 
             DB::commit();
 
@@ -84,13 +75,11 @@ class SpeakerController extends Controller
 
 	public function edit($id) {
         $speaker = Speaker::where('id', $id)->first();
-        $eventspeaker = EventSpeaker::all()->where('speaker_id', $speaker->id);
-        $events = Event::all();
+        $events = EventCtrl::get()->get();
 
 		return view('admin.speaker.edit')->with([
             'speaker' => $speaker,
             'events' => $events,
-            'eventspeaker' => $eventspeaker
         ]);
     }
 
@@ -99,8 +88,8 @@ class SpeakerController extends Controller
         DB::beginTransaction();
         try {
             $id = $req->id;
-
             $validateData = $this->validate($req, [
+                'event_id' => 'required',
                 'name' => 'required',
                 'phone' => 'required',
                 'email' => 'required',
@@ -112,6 +101,7 @@ class SpeakerController extends Controller
             // echo'<pre>'; var_dump($speaker); die;
 
             $speakerUpdate = [
+
                 'name' => $req->name,
                 'phone' => $req->phone,
                 'email' => $req->email,
@@ -127,24 +117,6 @@ class SpeakerController extends Controller
             }
             $speaker->update($speakerUpdate);
 
-            $eventspeaker = EventSpeaker::where('speaker_id', $speaker->id);
-            // echo'<pre>'; var_dump($eventspeaker); die;
-
-            $eventspeaker->delete();
-
-            $finalArray = array();
-            foreach($req->event as $value){
-                array_push($finalArray, array(
-                    'events_id' =>  $value,
-                    'speaker_id' =>  $speaker->id,
-                    'created_at' => $speaker->created_at,
-                    'updated_at' => date('Y-m-d H:i:s')
-                    )
-                );
-            };
-
-            EventSpeaker::insert($finalArray);
-
             DB::commit();
 
             return redirect()->route('admin.speaker')->with([
@@ -155,8 +127,8 @@ class SpeakerController extends Controller
             return redirect()->back()->withErrors(['error' => $th->getLine()]);
         }
     }
-    public function delete(Request $req) {
-        $id = $req->data_id;
+
+    public function delete($id) {
         $speaker = Speaker::where('id', $id);
         $deletePhoto = Storage::delete('public/speaker_photo/'.$speaker->first()->photo);
         $deleteData = $speaker->delete();

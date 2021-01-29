@@ -35,8 +35,8 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <label for="event">Event :</label>
-                        <select name="event[]" class="form-control" id="event" multiple="multiple" required>
-                            <option value="">-- Plih Event --</option>
+                        <select name="event_id" class="form-control" required id="event_id_edit">
+                            <option value="">Pilih event...</option>
                             @foreach ($events as $event)
                                 <option value="{{ $event->id }}">{{ $event->title }}</option>
                             @endforeach
@@ -71,16 +71,15 @@
     </div>
 </div>
 @endsection
-@section('pagejs')
-<script>
-    $(document).ready(function ()
-    {
-            $('#event').select2();
 
-            $('#event').on('change', function() {
-                var event = $(this).val();
-                console.log(event);
-            })
-    });
-</script>
+@section('pagejs')
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('sb-admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('sb-admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('sb-admin/js/demo/datatables-demo.js') }}"></script>
+
 @endsection
+

@@ -102,10 +102,17 @@
                 </a>
 			</li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.role') }}">
+                <a class="nav-link" href="{{ route('admin.admin') }}">
                     <i class="fas fa-cogs"></i>
-                    <span>Admin Role</span>
+                    <span>Admin</span>
                 </a>
+                <ul>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.role') }}" class="nav-link">
+                            <span>Admin Roles</span>
+                        </a>
+                    </li>
+                </ul>
 			</li>
 
             <!-- Nav Item - User -->

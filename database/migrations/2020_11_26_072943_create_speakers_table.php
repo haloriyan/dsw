@@ -15,6 +15,7 @@ class CreateSpeakersTable extends Migration
     {
         Schema::create('speakers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('events_id')->constrained('events')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('phone', 15);
             $table->string('email');
