@@ -58,14 +58,15 @@
                             <td>
 
                                 <form action="{{ route('admin.delete', $admin->id) }}" method="POST">
-                                    @csrf
-                                    @method("DELETE")
-                                    <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-trash"></i>
-                                        </span>
-                                    </button>
-
+                                    @if ($admin->role != 'superadmin')
+                                        @csrf
+                                        @method("DELETE")
+                                        <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                        </button>
+                                    @endif
                                     <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-success btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="far fa-edit"></i>
