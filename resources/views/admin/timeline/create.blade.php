@@ -32,66 +32,78 @@
         @endif
         <form action="{{ route('timeline.store') }}" method="POST">
             {{ csrf_field() }}
-            <div class="form-group">
-                <label for="event">Event :</label>
-                <select name="event_id" id="event" class="form-control" required>
-                    <option value="">Pilih event...</option>
-                    @foreach ($events as $event)
-                    <option value="{{ $event->id }}">{{ $event->title }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group d-none">
-                <label for="type">Type :</label>
-                <select name="type" id="type" class="form-control">
-                    <option value="straight">Straight</option>
-                    <option value="waves">Waves</option>
-                </select>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="openDate">Tanggal Pendaftaran :</label>
-                        <input type="text" name="open_date" id="openDate" class="form-control date">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
+            @if (count($events) == 0)
+                <h3>Tidak ada event yang belum memiliki timeline</h3>
+            @else
+                <div class="form-group">
+                    <label for="event">Event :</label>
+                    @if ($eventID == NULL)
+                        <select name="event_id" id="event" class="form-control" required>
+                            <option value="">Pilih event...</option>
+                            @foreach ($events as $event)
+                                <option value="{{ $event->id }}">{{ $event->title }}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <h3>{{ $events[0]->title }}
+                            <a href="{{ route('timeline.create') }}">
+                                <small><i class="fas fa-times ml-2 text-danger"></i></small>
+                            </a>
+                        </h3>
+                    @endif
+                </div>
+                <div class="form-group d-none">
+                    <label for="type">Type :</label>
+                    <select name="type" id="type" class="form-control">
+                        <option value="straight">Straight</option>
+                        <option value="waves">Waves</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="openDate">Tanggal Pendaftaran :</label>
+                            <input type="text" name="open_date" id="openDate" class="form-control date">
+                            <i class="fas fa-fw fa-calendar iconDate"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="closeDate">Tanggal Penutupan :</label>
+                            <input type="text" name="close_date" id="closeDate" class="form-control date">
+                            <i class="fas fa-fw fa-calendar iconDate"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="openDate2">Tanggal Pendaftaran Gelombang 2 (opsional) :</label>
+                            <input type="text" name="open_date_2" id="openDate2" class="form-control date">
+                            <i class="fas fa-fw fa-calendar iconDate"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="closeDate2">Tanggal Penutupan Gelombang 2 (opsional) :</label>
+                            <input type="text" name="close_date_2" id="closeDate2" class="form-control date">
+                            <i class="fas fa-fw fa-calendar iconDate"></i>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="closeDate">Tanggal Penutupan :</label>
-                        <input type="text" name="close_date" id="closeDate" class="form-control date">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="judgementDate">Tanggal Penjurian :</label>
+                    <input type="text" name="judgement_date" id="judgementDate" class="form-control date">
+                    <i class="fas fa-fw fa-calendar iconDate2"></i>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="openDate2">Tanggal Pendaftaran Gelombang 2 (opsional) :</label>
-                        <input type="text" name="open_date_2" id="openDate2" class="form-control date">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="mainDate">Tanggal Acara/Main :</label>
+                    <input type="text" name="main_date" id="mainDate" class="form-control date">
+                    <i class="fas fa-fw fa-calendar iconDate2"></i>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="closeDate2">Tanggal Penutupan Gelombang 2 (opsional) :</label>
-                        <input type="text" name="close_date_2" id="closeDate2" class="form-control date">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="judgementDate">Tanggal Penjurian :</label>
-                <input type="text" name="judgement_date" id="judgementDate" class="form-control date">
-                <i class="fas fa-fw fa-calendar iconDate2"></i>
-            </div>
-            <div class="form-group">
-                <label for="mainDate">Tanggal Acara/Main :</label>
-                <input type="text" name="main_date" id="mainDate" class="form-control date">
-                <i class="fas fa-fw fa-calendar iconDate2"></i>
-            </div>
 
-            <div class="text-right">
-                <button class="btn btn-primary mt-2">Submit</button>
-            </div>
+                <div class="text-right">
+                    <button class="btn btn-primary mt-2">Submit</button>
+                </div>
+            @endif
         </form>
     </div>
 </div>

@@ -26,10 +26,14 @@ class TimelineController extends Controller
         $events = $eventID != NULL ? $data->first() : $data->get();
 
         $eventsHasNoTimeline = [];
-        foreach ($events as $event) {
-            if ($event->timeline == "") {
-                array_push($eventsHasNoTimeline, $event);
+        if ($eventID == NULL) {
+            foreach ($events as $event) {
+                if ($event->timeline == "") {
+                    array_push($eventsHasNoTimeline, $event);
+                }
             }
+        }else {
+            array_push($eventsHasNoTimeline, $events);
         }
         
         return view('admin.timeline.create', [
