@@ -32,35 +32,6 @@
         @endif
         <form action="{{ route('timeline.store') }}" method="POST">
             {{ csrf_field() }}
-<<<<<<< HEAD
-            <div class="form-group">
-                <label for="event">Event :</label>
-                @if ($eventID == NULL)
-                <select name="event_id" id="event" class="form-control" required>
-                    <option value="">Pilih event...</option>
-                    @foreach ($events as $event)
-                    <option value="{{ $event->id }}">{{ $event->title }}</option>
-                    @endforeach
-                </select>
-                @else
-                <h4>{{ $events->title }}</h4>
-                @endif
-            </div>
-            <div class="form-group d-none">
-                <label for="type">Type :</label>
-                <select name="type" id="type" class="form-control">
-                    <option value="straight">Straight</option>
-                    <option value="waves">Waves</option>
-                </select>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="openDate">Tanggal Pendaftaran :</label>
-                        <input type="text" name="open_date" id="openDate" class="form-control date">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
-                    </div>
-=======
             @if (count($events) == 0)
                 <h3>Tidak ada event yang belum memiliki timeline</h3>
             @else
@@ -80,7 +51,6 @@
                             </a>
                         </h3>
                     @endif
->>>>>>> af77a0297c0418323f4c02ef2a75c348bcc87545
                 </div>
                 <div class="form-group d-none">
                     <label for="type">Type :</label>
