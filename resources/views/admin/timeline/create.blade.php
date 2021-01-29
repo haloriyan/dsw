@@ -45,7 +45,7 @@
                 <h4>{{ $events->title }}</h4>
                 @endif
             </div>
-            <div class="form-group">
+            <div class="form-group d-none">
                 <label for="type">Type :</label>
                 <select name="type" id="type" class="form-control">
                     <option value="straight">Straight</option>
