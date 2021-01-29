@@ -48,7 +48,7 @@ $types = ["Straight","Waves"];
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group d-none">
                 <label for="type">Type :</label>
                 <select name="type" id="type" class="form-control">
                     @foreach ($types as $type)
