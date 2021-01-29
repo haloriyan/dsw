@@ -53,6 +53,18 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="title">Rundown :</label>
+                        <select name="rundown_id" class="form-control" required>
+                            <option value="">-- Pilih Rundown --</option>
+                            @foreach ($rundowns as $rundown)
+                                @php
+                                    $isSelected = $event->rundown_id == $rundown->id ? "selected='selected'" : "";
+                                @endphp
+                                <option {{ $isSelected }} value="{{ $rundown->id }}">{{ $rundown->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="title">Nama event :</label>
                         <input type="text" class="form-control" name="title" value="{{ $event->title }}">
                     </div>
@@ -121,7 +133,7 @@
 <script>
     let iPP = parseInt(select("#iPP").value);
     let iPPPrize = parseInt(select("#iPPPrize").value);
-    
+
     const moreReq = () => {
         iPP += 1;
         createElement({
