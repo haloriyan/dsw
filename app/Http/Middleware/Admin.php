@@ -21,9 +21,8 @@ class Admin
     {
         $myData = Auth::guard('admin')->user();
         if ($myData == "") {
-            return redirect()->route('admin.loginPage')->with([
-                'message' => 'Anda harus login dahulu sebelum melanjutkan',
-                'isErrorMessage' => 1
+            return redirect()->route('admin.loginPage')->withErrors([
+                'message' => 'Anda harus login dahulu sebelum melanjutkan'
             ]);
         }
         $currentRoute = Route::current();

@@ -46,6 +46,7 @@
                         </select>
                     @else
                         <h3>{{ $events[0]->title }}
+                            <input type="hidden" name="event_id" value="{{ $events[0]->id }}">
                             <a href="{{ route('timeline.create') }}">
                                 <small><i class="fas fa-times ml-2 text-danger"></i></small>
                             </a>
