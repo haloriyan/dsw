@@ -62,7 +62,7 @@
                 <select name="role" class="form-control" id="roleName">
                     @foreach ($roles as $role)
                         @php
-                            $isSelected = $data->role == $role ? "selected='selected'" : "";
+                            $isSelected = $admin->role == $role ? "selected='selected'" : "";
                         @endphp
                         <option {{ $isSelected }}>{{ $role }}</option>
                     @endforeach
