@@ -121,11 +121,11 @@ class SpeakerController extends Controller
             DB::commit();
 
             return redirect()->route('admin.speaker')->with([
-                'message' => "Data speaker berhasil ditambahkan"
+                'message' => "Data speaker berhasil diupdate"
             ]);
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect()->back()->withErrors(['error' => $th->getLine()]);
+            return redirect()->back()->withErrors(['error' => $th->getMessage()]);
         }
     }
 
