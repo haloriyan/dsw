@@ -14,6 +14,11 @@
                 </div>
             @endforeach
         @endif
+        @if ($message != "")
+            <div class="bg-hijau-transparan rounded p-2">
+                {{ $message }}
+            </div>
+        @endif
         <div class="mt-2">Email :</div>
         <input type="email" class="box" name="email" required>
         <div class="mt-2">Password :</div>

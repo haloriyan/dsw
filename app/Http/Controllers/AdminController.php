@@ -32,6 +32,7 @@ class AdminController extends Controller
 	public function loginPage() {
 		$message = Session::get('message');
 		$isErrorMessage = Session::get('isErrorMessage');
+
 		return view('admin.login', [
 			'message' => $message,
 			'isError' => $isErrorMessage
@@ -78,13 +79,17 @@ class AdminController extends Controller
 			return redirect()->route('admin.profile')->withErrors(['Old password is not match']);
 		}
 
-		$updateData = Admin::where('id', $myData)->update([
+		$updateData = Admin::where('id', $myData->id)->update([
 			'password' => bcrypt($new_password)
 		]);
 
-		return redirect()->route('admin.profile')->with([
-			'message' => "Password has been changed"
-		]);
+		if ($updateData) {
+			$this->logout();
+			
+			return redirect()->route('admin.loginPage')->with([
+				'message' => "Profil berhasil diupdate. Silahkan login kembali"
+			]);
+		}
 	}
 	public function add() {
 		return view('admin.admin.add');
