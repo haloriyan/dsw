@@ -23,6 +23,12 @@ class JudgeController extends Controller
             'events' => $events
         ]);
     }
+    public function view($id)
+    {
+        $judge = Judge::where('id' , $id)->first();
+        $events = EventCtrl::get()->first();
+        return view('admin.judge.view',['judge' => $judge , 'events' => $events]);
+    }
     public function edit($id) {
         $judge = Judge::find($id);
         $events = EventCtrl::get()->get();
@@ -53,7 +59,7 @@ class JudgeController extends Controller
     }
     public function update($id, Request $req) {
         $judge = Judge::where('id', $id);
-        
+
         $toUpdate = [
             'event_id' => $req->event_id,
             'name' => $req->name,
@@ -71,7 +77,7 @@ class JudgeController extends Controller
         }
 
         $judge->update($toUpdate);
-        
+
         return redirect()->route('admin.judge')->with([
             'message' => "Data juri berhasil diubah"
         ]);
@@ -80,7 +86,7 @@ class JudgeController extends Controller
         $judge = Judge::where('id', $id);
         $deletePhoto = Storage::delete('public/judge_photo/'.$judge->first()->photo);
         $deleteData = $judge->delete();
-        
+
         return redirect()->route('admin.judge')->with([
             'message' => "Data juri berhasil dihapus"
         ]);

@@ -190,6 +190,7 @@ Route::group(['prefix' => 'speaker'], function() {
 
 Route::group(['prefix' => 'judge'], function() {
 	Route::post('store', 'JudgeController@store')->name('judge.store');
-	Route::post('{id}/update', 'JudgeController@update')->name('judge.update');
+    Route::post('{id}/update', 'JudgeController@update')->name('judge.update');
+    Route::get('{id}/view', 'JudgeController@view')->name('judge.view');
 	Route::delete('{id}/delete', 'JudgeController@delete')->name('judge.delete');
 });

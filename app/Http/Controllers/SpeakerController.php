@@ -69,7 +69,8 @@ class SpeakerController extends Controller
     public function view($id)
     {
         $speaker = Speaker::where('id' , $id)->first();
-        return view('admin.speaker.view',['speaker' => $speaker]);
+        $events = EventCtrl::get()->first();
+        return view('admin.speaker.view',['speaker' => $speaker , 'events' => $events]);
     }
 
 
@@ -101,7 +102,7 @@ class SpeakerController extends Controller
             // echo'<pre>'; var_dump($speaker); die;
 
             $speakerUpdate = [
-
+                'event_id' => $req->event_id,
                 'name' => $req->name,
                 'phone' => $req->phone,
                 'email' => $req->email,

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Speaker extends Model
 {
     protected $fillable = [
-        'name','phone','email','linkedin_profile','photo'
+        'event_id', 'name','phone','email','linkedin_profile','photo'
     ];
 
-    public function eventspeaker() {
-        return $this->hasMany('App\EventSpeaker', 'speaker_id');
+    public function event() {
+        return $this->belongsTo('App\Event', 'event_id');
     }
 }
