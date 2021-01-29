@@ -56,10 +56,12 @@ class EventController extends Controller
         $event = Event::where('id', $id)->with('type')->first();
         // $event = json_decode(json_encode($event), FALSE);
         $eventType = EventType::all();
-        
+        $rundowns = RundownCtrl::get()->get();
+
 		return view('admin.event.edit')->with([
             'event' => $event ,
-            'eventTypes' => $eventType
+            'eventTypes' => $eventType,
+            'rundowns' => $rundowns,
         ]);
     }
 
@@ -75,7 +77,7 @@ class EventController extends Controller
             'requirements' => $requirements,
             'prize' => $prizes
         ]);
-        
+
         return redirect()->route('admin.event');
     }
 
