@@ -79,19 +79,13 @@ class AdminController extends Controller
 			return redirect()->route('admin.profile')->withErrors(['Old password is not match']);
 		}
 
-<<<<<<< HEAD
-		$updateData = Admin::where('id', $myData)->update([
-            'password' => bcrypt($new_password),
-            'updated_at' => date('Y-m-d H:i:s')
-=======
 		$updateData = Admin::where('id', $myData->id)->update([
 			'password' => bcrypt($new_password)
->>>>>>> 41dbe2bbb818786c4ab28ccc0391a4b024885ca2
 		]);
 
 		if ($updateData) {
 			$this->logout();
-			
+
 			return redirect()->route('admin.loginPage')->with([
 				'message' => "Profil berhasil diupdate. Silahkan login kembali"
 			]);
