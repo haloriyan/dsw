@@ -28,6 +28,20 @@
             </div>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.admin') }}">
+                    <i class="fas fa-cogs"></i>
+                    <span>Admin</span>
+                </a>
+                <ul>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.role') }}" class="nav-link">
+                            <span>Admin Roles</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.event') }}">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>Event</span>
@@ -100,19 +114,6 @@
                     <i class="fas fa-users"></i>
                     <span>Team</span>
                 </a>
-			</li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.admin') }}">
-                    <i class="fas fa-cogs"></i>
-                    <span>Admin</span>
-                </a>
-                <ul>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.role') }}" class="nav-link">
-                            <span>Admin Roles</span>
-                        </a>
-                    </li>
-                </ul>
 			</li>
 
             <!-- Nav Item - User -->
