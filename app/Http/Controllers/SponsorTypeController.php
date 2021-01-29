@@ -29,7 +29,7 @@ class SponsorTypeController extends Controller
 	public function edit($id) {
 		$SponsorType = SponsorType::find($id);
 
-		return view('admin.SponsorType.edit')->with([
+		return view('admin.sponsorType.edit')->with([
 			'sponsorType' => $SponsorType
 		]);
     }
