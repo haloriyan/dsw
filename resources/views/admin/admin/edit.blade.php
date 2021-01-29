@@ -2,6 +2,10 @@
 
 @section('title', 'User Admin')
 
+@php
+    $roles = ["superadmin","admin","event","publikasi","sponsor","lo"];
+@endphp
+
 @section('content')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -55,13 +59,13 @@
             </div>
             <div class="form-group">
                 <label for="role">Role :</label>
-                <select name="role" class="form-control">
-                    <option>superadmin</option>
-                    <option>admin</option>
-                    <option>event</option>
-                    <option>publikasi</option>
-                    <option>sponsor</option>
-                    <option>lo</option>
+                <select name="role" class="form-control" id="roleName">
+                    @foreach ($roles as $role)
+                        @php
+                            $isSelected = $data->role == $role ? "selected='selected'" : "";
+                        @endphp
+                        <option {{ $isSelected }}>{{ $role }}</option>
+                    @endforeach
                 </select>
             </div>
             <button class="btn btn-primary">Submit</button>
