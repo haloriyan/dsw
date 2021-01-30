@@ -30,8 +30,8 @@
                     {{ $sponsor->address }}
                 </div>
                 <div class="form-group">
-                    <strong>Bidang Pekerjaan : </strong>
-                    {{ $sponsor->bidang_kerja }}
+                    <strong>Bidang Sponsor : </strong>
+                    {{ $sponsor->field }}
                 </div>
                 <div class="form-group">
                     <strong>Link Website / Social Media : </strong>

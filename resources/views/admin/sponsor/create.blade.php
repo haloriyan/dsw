@@ -53,7 +53,7 @@
                                             <textarea type="text" class="form-control" name="address" id="address" rows="5" required></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="bidang_kerja">Bidang Pekerjaan :</label>
+                                            <label for="bidang_kerja">Bidang Sponsor :</label>
                                             <input type="text" class="form-control" name="bidang_kerja" id="bidang_kerja" required>
                                         </div>
                                         <div class="form-group">

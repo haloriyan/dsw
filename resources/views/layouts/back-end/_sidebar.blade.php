@@ -40,7 +40,18 @@
                     </li>
                 </ul>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.rundown') }}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Rundown</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.timeline') }}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Timeline</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.event') }}">
                     <i class="fas fa-fw fa-calendar"></i>
@@ -95,18 +106,6 @@
                 <a class="nav-link" href="{{ route('admin.judge') }}">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Juri</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.rundown') }}">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Rundown</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.timeline') }}">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Timeline</span>
                 </a>
             </li>
             <li class="nav-item">

@@ -77,7 +77,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('team', 'AdminController@team')->name('admin.team')->middleware('Admin');
 	Route::get('team/{id}/detail', 'TeamController@detail')->name('admin.team.detail')->middleware('Admin');
 
-	Route::get('user', 'AdminController@user')->name('admin.user')->middleware('Admin');
+	Route::get('user', 'AdminController@users')->name('admin.user')->middleware('Admin');
 });
 
 Route::group(['prefix' => 'ticket'], function() {

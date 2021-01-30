@@ -23,6 +23,7 @@ use \App\Http\Controllers\TimelineController as TimelineCtrl;
 use \App\Http\Controllers\EventTypeController as EventTypeCtrl;
 use \App\Http\Controllers\TicketTypeController as TicketTypeCtrl;
 use App\Http\Controllers\SponsorTypeController as SponsorTypeCtrl;
+use App\Http\Controllers\UserController as UserCtrl;
 
 class AdminController extends Controller
 {
