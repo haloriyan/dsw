@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\JudgesContact;
 use App\SpeakerContact;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,17 @@ class ContactController extends Controller
     public static function store($data) {
         $saveData = SpeakerContact::create([
             'speaker_id' => $data['speaker_id'],
+            'icon' => $data['icon'],
+            'name' => $data['name'],
+            'value' => $data['value'],
+        ]);
+
+        return $saveData;
+    }
+
+    public static function stored($data) {
+        $saveData = JudgesContact::create([
+            'judges_id' => $data['judges_id'],
             'icon' => $data['icon'],
             'name' => $data['name'],
             'value' => $data['value'],
@@ -70,5 +82,9 @@ class ContactController extends Controller
 
     public static function delete($speakerID) {
         return SpeakerContact::where('speaker_id', $speakerID)->delete();
+    }
+
+    public static function deleted($judgesID) {
+        return JudgesContact::where('judges_id', $judgesID)->delete();
     }
 }

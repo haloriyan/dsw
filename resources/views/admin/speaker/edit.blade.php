@@ -162,14 +162,6 @@
 
 @section('pagejs')
 <script>
-    $(document).ready(function ()
-    {
-            $('#event').select2();
-            $('#event').on('change', function() {
-                var event = $(this).val();
-                console.log(event);
-            })
-    });
     const updatingContact = () => {
         select("#isUpdatingContact").value = 1;
     }
@@ -202,7 +194,7 @@
     <input type="text" class="form-control" name="speaker_contacts_name[]">
     </div>
     <div class="col-md-3">
-    <label>Value :</label>
+    <label>Link :</label>
     <input type="text" class="form-control" name="speaker_contacts_value[]">
     </div>
     <div class="col-md-1">

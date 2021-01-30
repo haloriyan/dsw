@@ -10,9 +10,9 @@ class Speaker extends Model
         'event_id','name','phone','email','linkedin_profile','photo'
     ];
 
-    public function eventspeaker() {
-        return $this->hasMany('App\EventSpeaker', 'speaker_id');
-    }
+    // public function eventspeaker() {
+    //     return $this->hasMany('App\EventSpeaker', 'speaker_id');
+    // }
     public function contacts() {
         return $this->hasMany('App\SpeakerContact', 'speaker_id');
     }

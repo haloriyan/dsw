@@ -84,18 +84,12 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.contact') }}">
                     <i class="fas fa-fw fa-phone-alt"></i>
                     <span>Contact</span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.faq') }}">
-                    <i class="fas fa-fw fa-question"></i>
-                    <span>FAQ</span>
-                </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.speaker') }}">
                     <i class="fas fa-fw fa-users"></i>
@@ -114,7 +108,12 @@
                     <span>Team</span>
                 </a>
 			</li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.faq') }}">
+                    <i class="fas fa-fw fa-question"></i>
+                    <span>FAQ</span>
+                </a>
+            </li>
             <!-- Nav Item - User -->
             {{--
             <li class="nav-item">

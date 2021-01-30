@@ -190,8 +190,11 @@ Route::group(['prefix' => 'speaker'], function() {
 });
 
 Route::group(['prefix' => 'judge'], function() {
-	Route::post('store', 'JudgeController@store')->name('judge.store');
-    Route::post('{id}/update', 'JudgeController@update')->name('judge.update');
+    Route::get('create', 'JudgeController@create')->name('judge.create');
     Route::get('{id}/view', 'JudgeController@view')->name('judge.view');
+    Route::get('{id}/edit', 'JudgeController@edit')->name('judge.edit');
+
+	Route::post('store', 'JudgeController@store')->name('judge.store');
+	Route::post('update', 'JudgeController@update')->name('judge.update');
 	Route::delete('{id}/delete', 'JudgeController@delete')->name('judge.delete');
 });

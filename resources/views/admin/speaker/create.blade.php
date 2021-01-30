@@ -10,15 +10,21 @@
         background-color: #fff !important;
         display: none;
     }
+
     .iconPreview i.text-danger {
         margin-top: 4px;
         cursor: pointer;
     }
-    #iconResult { display: none; }
+
+    #iconResult {
+        display: none;
+    }
+
     .suggestionArea {
         border: 1px solid #ddd;
         border-radius: 5px;
     }
+
     .suggestionArea div {
         border-bottom: 1px solid #ddd;
         padding: 8px 15px;
@@ -65,7 +71,7 @@
                         <select name="event_id" class="form-control" id="event" required>
                             <option value="">-- Plih Event --</option>
                             @foreach ($events as $event)
-                                <option value="{{ $event->id }}">{{ $event->title }}</option>
+                            <option value="{{ $event->id }}">{{ $event->title }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -96,8 +102,11 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <label>Icon :</label>
-                                    <input type="text" class="form-control" name="speaker_contacts_icon[]" oninput="searchIcon(this.value, this)" id="icon" required>
-                                    <div class="form-control iconPreview" id="iconPreviewAdd" onclick="removeIcon(this)"><i class="fab fa-facebook"></i> <i class="fas fa-times float-right mt-1 text-danger"></i></div>
+                                    <input type="text" class="form-control" name="speaker_contacts_icon[]"
+                                        oninput="searchIcon(this.value, this)" id="icon" required>
+                                    <div class="form-control iconPreview" id="iconPreviewAdd"
+                                        onclick="removeIcon(this)"><i class="fab fa-facebook"></i> <i
+                                            class="fas fa-times float-right mt-1 text-danger"></i></div>
                                     <div class="suggestionArea" id="iconResult">
                                         <li><i class="fab fa-facebook"></i></li>
                                         <li><i class="fab fa-instagram"></i></li>
@@ -130,14 +139,6 @@
 
 @section('pagejs')
 <script>
-    $(document).ready(function ()
-    {
-            $('#event').select2();
-            $('#event').on('change', function() {
-                var event = $(this).val();
-                console.log(event);
-            })
-    });
     const moreContact = () => {
         createElement({
             el: 'div',
@@ -153,15 +154,15 @@
         <li><i class="fab fa-instagram"></i></li>
         <li><i class="fab fa-twitter"></i></li>
     </div>
-</div>
-<div class="col-md-4">
-    <label>Name :</label>
-    <input type="text" class="form-control" name="speaker_contacts_name[]">
-</div>
-<div class="col-md-4">
-    <label>Value :</label>
-    <input type="text" class="form-control" name="speaker_contacts_value[]">
-</div>`,
+    </div>
+    <div class="col-md-4">
+        <label>Name :</label>
+        <input type="text" class="form-control" name="speaker_contacts_name[]">
+    </div>
+    <div class="col-md-4">
+        <label>Link :</label>
+        <input type="text" class="form-control" name="speaker_contacts_value[]">
+    </div>`,
             createTo: '#contactArea'
         })
     }
@@ -225,4 +226,3 @@
     }
 </script>
 @endsection
-

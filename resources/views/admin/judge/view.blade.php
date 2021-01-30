@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Speaker')
+@section('title', 'Juri')
 
 @section('content')
 <!-- Page Heading -->
@@ -18,12 +18,12 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Judge : </strong>
+                    <strong>Juri : </strong>
                     {{ $judge->name }}
                 </div>
                 <div class="form-group">
                     <strong>Events : </strong>
-                    {{ $events->title }}
+                    {{ $judge->event->title }}
                 </div>
                 <div class="form-group">
                     <strong>Email : </strong>
@@ -45,6 +45,16 @@
                     @else
                     "Logo Tidak Ada"
                     @endif
+                </div>
+                <div class="form-group">
+                    <strong>Contacts :</strong> <br />
+                    @foreach ($judge->contacts as $contact)
+                        <li class="mt-3">
+                            <a href="{{ $contact->value }}" target="_blank">
+                                <i class="{{ $contact->icon }}"></i> {{ $contact->name }}
+                            </a>
+                        </li>
+                    @endforeach
                 </div>
             </div>
         </div>

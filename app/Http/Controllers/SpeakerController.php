@@ -35,15 +35,6 @@ class SpeakerController extends Controller
             $photo = $req->file('photo');
             $photoFileName = $photo->getClientOriginalName();
 
-            // $validateData = $this->validate($req, [
-            //     'event_id' => $req->event_id,
-            //     'name' => 'required',
-            //     'phone' => 'required',
-            //     'email' => 'required',
-            //     'linkedin_profile' => 'required',
-            //     'photo' =>  'required|max:4096',
-            // ]);
-
             $speaker = Speaker::create([
                 'event_id' => $req->event_id,
                 'name' => $req->name,
@@ -72,18 +63,6 @@ class SpeakerController extends Controller
             }
 
             $photo->storeAs('public/speaker_photo', $photoFileName);
-
-            // $finalArray = array();
-            //     foreach($req->event as $value){
-            //         array_push($finalArray, array(
-            //                 'events_id' =>  $value,
-            //                 'speaker_id' =>  $speaker->id,
-            //                 'created_at' => date('Y-m-d H:i:s')
-            //             )
-            //         );
-            //     };
-
-            // EventSpeaker::insert($finalArray);
 
             DB::commit();
 
@@ -167,23 +146,6 @@ class SpeakerController extends Controller
                     }
                 }
             }
-
-            // $eventspeaker = EventSpeaker::where('speaker_id', $speaker->id);
-
-            // $eventspeaker->delete();
-
-            // $finalArray = array();
-            // foreach($req->event as $value){
-            //     array_push($finalArray, array(
-            //         'events_id' =>  $value,
-            //         'speaker_id' =>  $speaker->id,
-            //         'created_at' => $speaker->created_at,
-            //         'updated_at' => date('Y-m-d H:i:s')
-            //         )
-            //     );
-            // };
-
-            // EventSpeaker::insert($finalArray);
 
             DB::commit();
 
