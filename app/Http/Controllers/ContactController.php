@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\SpeakerContact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -19,7 +20,17 @@ class ContactController extends Controller
         return view('admin.contact.create');
     }
 
-    public function store(Request $req) {
+    public static function store($data) {
+        $saveData = SpeakerContact::create([
+            'speaker_id' => $data['speaker_id'],
+            'icon' => $data['icon'],
+            'name' => $data['name'],
+            'value' => $data['value'],
+        ]);
+
+        return $saveData;
+    }
+    public function storesss(Request $req) {
         $saveData = Contact::create([
             'icon' => $req->icon,
             'name' => $req->name,
@@ -44,7 +55,7 @@ class ContactController extends Controller
 		]);
     }
 
-    public function update(Request $req) {
+    public function updatesss(Request $req) {
         $id = $req->contact_id;
 
         $saveData = Contact::where('id', $id)
@@ -57,8 +68,7 @@ class ContactController extends Controller
         return redirect()->route('admin.contact')->with(['message' => "Kontak berhasil ditambahkan"]);
     }
 
-    public function delete($id) {
-        Contact::where('id', $id)->delete();
-        return redirect()->route('admin.contact')->with(['message' => "Data berhasil dihapus"]);
+    public static function delete($speakerID) {
+        return SpeakerContact::where('speaker_id', $speakerID)->delete();
     }
 }

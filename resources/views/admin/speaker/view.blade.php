@@ -23,10 +23,7 @@
                 </div>
                 <div class="form-group">
                     <strong>Events : </strong>
-                    @foreach ($speaker->eventspeaker as $events)
-                    {{ $loop->first ? '' : ', ' }}
-                    {{ $events['event']['title'] }}
-                    @endforeach
+                    {{ $speaker->event->title }}
                 </div>
                 <div class="form-group">
                     <strong>Email : </strong>
@@ -48,6 +45,16 @@
                     @else
                     "Logo Tidak Ada"
                     @endif
+                </div>
+                <div class="form-group">
+                    <strong>Contacts :</strong> <br />
+                    @foreach ($speaker->contacts as $contact)
+                        <li class="mt-3">
+                            <a href="{{ $contact->value }}">
+                                <i class="{{ $contact->icon }}"></i> {{ $contact->name }}
+                            </a>
+                        </li>
+                    @endforeach
                 </div>
             </div>
         </div>

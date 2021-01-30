@@ -79,7 +79,11 @@ function createElement(props) {
     if(props.html !== undefined) {
         el.innerHTML = props.html
     }
-    select(props.createTo).appendChild(el)
+    if (typeof props.createTo == "string") {
+        select(props.createTo).appendChild(el);
+    }else {
+        props.createTo.appendChild(el);
+    }
 }
 
 function toIdr(angka) {

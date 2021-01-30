@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    protected $fillable = ['icon','name','value'];
+    protected $fillable = ['event_id','icon','name','value'];
 }

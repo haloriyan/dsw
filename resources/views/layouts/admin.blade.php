@@ -70,6 +70,7 @@
 
     @include('layouts.back-end._js')
 
+    <script src="{{ asset('js/base.js') }}"></script>
     @yield('pagejs')
 
 </body>
