@@ -10,6 +10,7 @@ use App\EventType;
 use Illuminate\Http\Request;
 
 use \App\Http\Controllers\FaqController as FaqCtrl;
+use \App\Http\Controllers\UserController as UserCtrl;
 use \App\Http\Controllers\TeamController as TeamCtrl;
 use \App\Http\Controllers\RoleController as RoleCtrl;
 use \App\Http\Controllers\EventController as EventCtrl;
@@ -302,15 +303,64 @@ class AdminController extends Controller
 
 		$teams = json_decode(json_encode($teams), FALSE);
 
+		$toExport = [];
+		foreach ($teams as $team) {
+			$firstMember = $team->first_member != NULL ? $team->first_member->name : "";
+			$secondMember = $team->second_member != NULL ? $team->second_member->name : "";
+			array_push($toExport, [
+				'ID' => $team->id,
+				'Nama Team' => $team->name,
+				'Ketua' => $team->chief->name,
+				'Anggota 1' => $firstMember,
+				'Anggota 2' => $secondMember
+			]);
+		}
+		$toExport = json_encode($toExport);
+
 		return view('admin.team.index', [
-			'teams' => $teams
+			'teams' => $teams,
+			'toExport' => $toExport
 		]);
 	}
-	public function users() {
-		$users = UserCtrl::get()->get();
+	public function participant() {
+		$particpants = UserCtrl::get()
+		->orderBy('created_at', 'DESC')
+		->get();
 
-		return view('admin.user.index', [
-			'users' => $users
+		$toExport = [];
+		foreach ($particpants as $user) {
+			$hasJoinedDSI = $user->has_joined_dsi == 1 ? "Sudah" : "Belum";
+			if ($user->interested_with_dsi == 1) {
+                $interestedWithDSI = "Ya";
+            }else if ($user->interested_with_dsi === 0) {
+                $interestedWithDSI = "Tidak";
+            }else {
+                $interestedWithDSI = "";
+            }
+
+			array_push($toExport, [
+				'Nama' => $user->name,
+				'Email' => $user->email,
+				'Telepon' => $user->phone,
+				'Instansi' => $user->instance,
+				'Status' => $user->employment_status,
+				'Alasan Mengikuti DSW' => $user->reason,
+				'Gender' => $user->gender,
+				'Alamat' => $user->address,
+				'LinkedIn' => $user->social_linkedin,
+				'Medium' => $user->social_medium,
+				'Facebook' => $user->social_facebook,
+				'Instagram' => $user->social_instagram,
+				'Sudah bergabung dengan DSI?' => $hasJoinedDSI,
+				'Tertarik bergabung dengan DSI?' => $interestedWithDSI
+			]);
+		}
+
+		$toExport = json_encode($toExport);
+
+		return view('admin.participant.index', [
+			'participants' => $particpants,
+			'toExport' => $toExport
 		]);
 	}
 }

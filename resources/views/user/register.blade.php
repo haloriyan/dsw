@@ -39,9 +39,9 @@
     <div id="interestedArea" class="d-none">
         <div class="mt-2">Tertarik bergabung dengan DSI?</div>
         <select name="interested_with_dsi" class="box">
-            <option value="">-- PILIH --</option>
+            <option value="" selected>-- PILIH --</option>
             <option value="1">Ya, saya tertarik</option>
-            <option value="0" selected>Tidak</option>
+            <option value="0">Tidak</option>
         </select>
     </div>
 

@@ -80,9 +80,25 @@ class TicketController extends Controller
         ->with('user')
         ->get();
 
+        $toExport = [];
+        foreach ($participants as $participant) {
+            $status = $participant->status == 1 ? "Sudah dibayar" : "Belum dibayar";
+            array_push($toExport, [
+                'Tiket' => $ticket->name,
+                'Event' => $ticket->event->title,
+                'ID Peserta' => $participant->user->id,
+                'Nama Peserta' => $participant->user->name,
+                "Quantity" => $participant->qty,
+                "Total Bayar" => $participant->total_pay,
+                "Status" => $status
+            ]);
+        }
+        $toExport = json_encode($toExport);
+
         return view('admin.ticket.participant', [
             'participants' => $participants,
             'ticket' => $ticket,
+            'toExport' => $toExport,
         ]);
     }
 }

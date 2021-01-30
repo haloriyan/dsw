@@ -18,7 +18,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data Peserta
-                <input type="hidden" name="datas" id="datas" value="{{ $participants }}">
+                <input type="hidden" name="datas" id="datas" value="{{ $toExport }}">
                 <button class="btn btn-success float-right" onclick="downloadData()">
                     <i class="fas fa-download"></i> &nbsp; Download Data
                 </button>
@@ -93,7 +93,7 @@
             downloadFile(csv);
         }
         const downloadFile = dataCSV => {
-            let fileName = "data.csv";
+            let fileName = "Peserta_{{ $ticket->name}}_{{ date('Y-m-d') }}_{{ time() }}.csv";
             let blob = new Blob(["\ufeff", dataCSV]);
             let url = URL.createObjectURL(blob);
 

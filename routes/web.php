@@ -15,8 +15,6 @@ Route::get('admin', function() {
 	return redirect()->route('admin.loginPage');
 })->name('admin');
 
-Route::get('test', "UserController@testMail");
-
 Route::group(['prefix' => "team"], function() {
 	Route::get('create', "TeamController@create")->name('user.team.create');
 	Route::post('store', "TeamController@store")->name('user.team.store');
@@ -73,11 +71,16 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('ticket/{typeID?}', 'AdminController@ticket')->name('admin.ticket')->middleware('Admin');
 	Route::get('ticket/{typeID}/participant', 'TicketController@participant')->name('admin.ticket.participant')->middleware('Admin');
 	Route::get('role', 'AdminController@role')->name('admin.role')->middleware('Admin');
+	Route::get('participant', 'AdminController@participant')->name('admin.participant')->middleware('Admin');
+	
+	Route::group(['prefix' => "participant"], function() {
+		Route::get('/', "AdminController@participant")->name('admin.participant')->middleware('Admin');
+		Route::get('export', "UserController@export")->name('participant.export')->middleware('Admin');
+		Route::get('{id}/view', "UserController@view")->name('participant.view')->middleware('Admin');
+	});
 	
 	Route::get('team', 'AdminController@team')->name('admin.team')->middleware('Admin');
 	Route::get('team/{id}/detail', 'TeamController@detail')->name('admin.team.detail')->middleware('Admin');
-	
-	Route::get('user', 'AdminController@user')->name('admin.user')->middleware('Admin');
 });
 
 Route::group(['prefix' => 'ticket'], function() {

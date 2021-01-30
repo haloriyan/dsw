@@ -96,6 +96,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.participant') }}">
+                    <i class="fas fa-users"></i>
+                    <span>Peserta</span>
+                </a>
+			</li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.team') }}">
                     <i class="fas fa-users"></i>
                     <span>Team</span>
