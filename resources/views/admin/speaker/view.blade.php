@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <strong>Events : </strong>
-                    {{ $events->title }}
+                    {{ $speaker->event->title }}
                 </div>
                 <div class="form-group">
                     <strong>Email : </strong>
@@ -45,6 +45,16 @@
                     @else
                     "Logo Tidak Ada"
                     @endif
+                </div>
+                <div class="form-group">
+                    <strong>Contacts :</strong> <br />
+                    @foreach ($speaker->contacts as $contact)
+                        <li class="mt-3">
+                            <a href="{{ $contact->value }}" target="_blank">
+                                <i class="{{ $contact->icon }}"></i> {{ $contact->name }}
+                            </a>
+                        </li>
+                    @endforeach
                 </div>
             </div>
         </div>
