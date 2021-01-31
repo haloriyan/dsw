@@ -103,18 +103,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.rundown') }}">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Rundown</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.timeline') }}">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Timeline</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.participant') }}">
                     <i class="fas fa-users"></i>
                     <span>Peserta</span>
