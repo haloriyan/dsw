@@ -15,7 +15,11 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Team</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Team
+                <button class="btn btn-sm btn-success float-right" onclick="exportCsv()">
+                    <i class="fas fa-file-upload mr-3"></i> Export
+                </button>
+            </h6>
         </div>
         <div class="card-body">
             @if ($message = Session::get('success'))
@@ -72,6 +76,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                        <input style="margin-top: -500px;opacity: 0.01;" type="text" id="toExport" value="{{ $toExport }}">
                     </tbody>
                 </table>
             </div>
@@ -87,5 +92,32 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sb-admin/js/demo/datatables-demo.js') }}"></script>
+    <script>
+        const replacer = (key, val) => {
+            return val === null ? '' : val;
+        }
+        const downloadFile = (dataCSV, fileName) => {
+            let downloadLink = document.createElement('a');
+            let blob = new Blob(["\ufeff", dataCSV]);
+            let url = URL.createObjectURL(blob);
+            downloadLink.href = url;
+            downloadLink.download = fileName;
+            downloadLink.click();
+        }
+
+        const exportToCSV = (datas, fileName) => {
+            datas = JSON.parse(datas);
+            const header = Object.keys(datas[0]);
+            let csv = datas.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+            csv.unshift(header.join(','));
+            csv = csv.join('\r\n');
+            downloadFile(csv, fileName);
+        }
+        const exportCsv = () => {
+            let toExport = select("#toExport").value;
+            let fileName = "Team_{{ date('Y-m-d') }}_{{ time() }}.csv";
+            exportToCSV(toExport, fileName);
+        }
+    </script>
 
 @endsection

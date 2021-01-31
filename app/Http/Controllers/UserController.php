@@ -8,9 +8,13 @@ use Session;
 use App\User;
 use Illuminate\Http\Request;
 use App\Mail\NewUserNotification;
+use App\Exports\UserExport;
+
 
 use \Midtrans\Snap as Snap;
 use \Midtrans\Config as Config;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Http\Controllers\FaqController as FaqCtrl;
 use App\Http\Controllers\TeamController as TeamCtrl;
@@ -68,11 +72,19 @@ class UserController extends Controller
     }
     public function register(Request $req) {
         if ($req->via == "") {
+            $name = $req->name;
+            $email = $req->email;
+
             Mail::to($req->email)
-            ->send(new NewUserNotification());
+            ->send(new NewUserNotification(
+                [
+                    'name' => $name,
+                    'email' => $email,
+                ]
+            ));
             $datas = [
-                'name' => $req->name,
-                'email' => $req->email,
+                'name' => $name,
+                'email' => $email,
                 'password' => bcrypt($req->password),
                 'phone' => $req->phone,
                 'instance' => $req->instance,
@@ -348,5 +360,22 @@ class UserController extends Controller
             'team' => $team,
             'isHaveTeam' => $isHaveTeam,
         ]);
+    }
+    public function view($userID) {
+        $participant = User::where('id', $userID)
+        ->first();
+
+        return view('admin.participant.view', [
+            'participant' => $participant
+        ]);
+    }
+    public function export() {
+        $filename = "users_".date('Y-m-d')."_".time().".xlsx";
+        
+        $download = Excel::download(new UserExport, $filename);
+
+        if ($download) {
+            return redirect()->route('admin.participant');
+        }
     }
 }
