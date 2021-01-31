@@ -53,7 +53,7 @@ class RoleController extends Controller
     public static function authenticate($module, $currentAction) {
         $myData = AdminCtrl::me();
         $role = $myData->role;
-        if ($role == "superadmin") {
+        if ($role == "superadmin" || $module == "dashboard") {
             return true;
         }
 
