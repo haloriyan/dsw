@@ -114,12 +114,12 @@ Route::group(['prefix' => 'timeline'], function() {
 });
 
 Route::group(['prefix' => 'rundown'], function() {
-	Route::get('create', 'RundownController@create')->name('rundown.create');
-	Route::post('store', 'RundownController@store')->name('rundown.store');
-	Route::get('{id}/view', 'RundownController@view')->name('rundown.view');
-	Route::get('{id}/edit', 'RundownController@edit')->name('rundown.edit');
-	Route::post('{id}/update', 'RundownController@update')->name('rundown.update');
-	Route::delete('{id}/delete', 'RundownController@delete')->name('rundown.delete');
+	Route::get('create', 'RundownController@create')->name('rundown.create')->middleware('Admin');
+	Route::post('store', 'RundownController@store')->name('rundown.store')->middleware('Admin');
+	Route::get('{id}/view', 'RundownController@view')->name('rundown.view')->middleware('Admin');
+	Route::get('{id}/edit', 'RundownController@edit')->name('rundown.edit')->middleware('Admin');
+	Route::post('{id}/update', 'RundownController@update')->name('rundown.update')->middleware('Admin');
+	Route::delete('{id}/delete', 'RundownController@delete')->name('rundown.delete')->middleware('Admin');
 });
 
 Route::group(['prefix' => 'faq'], function() {

@@ -51,6 +51,7 @@ class RoleController extends Controller
         return redirect()->route('admin.role');
     }
     public static function authenticate($module, $currentAction) {
+        // return $currentAction;
         $myData = AdminCtrl::me();
         $role = $myData->role;
         if ($role == "superadmin" || $module == "dashboard" || $module == "profile") {
@@ -75,6 +76,16 @@ class RoleController extends Controller
             return false;
         }
         return false;
+    }
+    public static function getModule() {
+        $currentRoute = Route::current();
+        $currentPrefix = explode("/", $currentRoute->getPrefix())[1];
+        $currentAction = explode(".", $currentRoute->getName())[1];
+        if ($currentPrefix == "admin") {
+            $currentPrefix = explode("/", $currentRoute->uri)[1];
+            $currentAction = "view";
+        }
+        return $currentPrefix;
     }
     public static function getRoutePrefixes() {
         $prefixes = [];
