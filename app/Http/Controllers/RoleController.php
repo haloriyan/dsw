@@ -51,7 +51,6 @@ class RoleController extends Controller
         return redirect()->route('admin.role');
     }
     public static function authenticate($module, $currentAction) {
-        // return $currentAction;
         $myData = AdminCtrl::me();
         $role = $myData->role;
         if ($role == "superadmin" || $module == "dashboard" || $module == "profile") {
