@@ -34,8 +34,7 @@ class Admin
         }
         
         $auth = RoleCtrl::authenticate($currentPrefix, $currentAction);
-        // echo $auth;
-        // die();
+        
         if (!$auth) {
             return redirect()->route('admin.error', 403);
         }

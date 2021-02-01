@@ -144,7 +144,7 @@ Route::group(['prefix' => 'contact'], function() {
 	Route::delete('{id}/delete', 'ContactController@delete')->name('contact.delete');
 });
 
-Route::group(['prefix' => 'sponsorType'], function() {
+Route::group(['prefix' => 'sponsor-type'], function() {
     Route::get('create', 'SponsorTypeController@create')->name('sponsorType.create');
     Route::get('{id}/edit', 'SponsorTypeController@edit')->name('sponsorType.edit');
 
@@ -164,7 +164,7 @@ Route::group(['prefix' => 'sponsor'], function() {
 	Route::delete('{id}/delete', 'SponsorController@delete')->name('sponsor.delete');
 });
 
-Route::group(['prefix' => 'eventType'], function() {
+Route::group(['prefix' => 'event-type'], function() {
     Route::get('create', 'EventTypeController@create')->name('eventType.create');
     Route::get('{id}/edit', 'EventTypeController@edit')->name('eventType.edit');
 
