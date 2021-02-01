@@ -363,4 +363,16 @@ class AdminController extends Controller
 			'toExport' => $toExport
 		]);
 	}
+	public function errorPage($errorCode) {
+		if ($errorCode == 403) {
+			$message = "Maaf, Anda tidak bisa mengakses halaman ini";
+		}else if ($errorCode == 404) {
+			$message = "Maaf, Halaman yang Anda cari tidak ditemukan";
+		}
+
+		return view("admin.error", [
+			'code' => $errorCode,
+			'message' => $message
+		]);
+	}
 }

@@ -7,6 +7,7 @@ use App\Judge;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\EventController as EventCtrl;
+use App\Http\Controllers\ContactController as ContactCtrl;
 
 class JudgeController extends Controller
 {
@@ -24,7 +25,7 @@ class JudgeController extends Controller
         ]);
     }
     public function edit($id) {
-        $judge = Judge::find($id);
+        $judge = Judge::where('id', $id)->with('contacts')->first();
         $events = EventCtrl::get()->get();
 
         return view('admin.judge.edit', [
@@ -36,7 +37,7 @@ class JudgeController extends Controller
         $photo = $req->file('photo');
         $photoFileName = $photo->getClientOriginalName();
 
-        $saveData = Judge::create([
+        $judge = Judge::create([
             'event_id' => $req->event_id,
             'name' => $req->name,
             'phone' => $req->phone,
@@ -46,6 +47,24 @@ class JudgeController extends Controller
         ]);
 
         $photo->storeAs('public/judge_photo', $photoFileName);
+
+        $contactsIcon = $req->judge_contacts_icon;
+        $contactsName = $req->judge_contacts_name;
+        $contactsValue = $req->judge_contacts_value;
+
+        $c = 0;
+        foreach ($contactsIcon as $icon) {
+            $iPP = $c++;
+
+            if ($icon != "" || $contactsName[$iPP] != "" || $contactsValue != "") {
+                $saveContact = ContactCtrl::store('judge', [
+                    'judge_id' => $judge->id,
+                    'icon' => $icon,
+                    'name' => $contactsName[$iPP],
+                    'value' => $contactsValue[$iPP],
+                ]);
+            }
+        }
 
         return redirect()->route('admin.judge')->with([
             'message' => "Data juri berhasil ditambahkan"
@@ -71,6 +90,30 @@ class JudgeController extends Controller
         }
 
         $judge->update($toUpdate);
+        $judge = $judge->first();
+
+        if ($req->is_updating_contact == 1) {
+            // delete contact, then create the new contacts
+            $deleteContacts = ContactCtrl::delete('judge', $id);
+            
+            $contactsIcon = $req->judge_contacts_icon;
+            $contactsName = $req->judge_contacts_name;
+            $contactsValue = $req->judge_contacts_value;
+
+            $c = 0;
+            foreach ($contactsIcon as $icon) {
+                $iPP = $c++;
+
+                if ($icon != "" || $contactsName[$iPP] != "" || $contactsValue != "") {
+                    $saveContact = ContactCtrl::store('judge', [
+                        'judge_id' => $judge->id,
+                        'icon' => $icon,
+                        'name' => $contactsName[$iPP],
+                        'value' => $contactsValue[$iPP],
+                    ]);
+                }
+            }
+        }
         
         return redirect()->route('admin.judge')->with([
             'message' => "Data juri berhasil diubah"

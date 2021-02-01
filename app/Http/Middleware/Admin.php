@@ -37,7 +37,7 @@ class Admin
         // echo $auth;
         // die();
         if (!$auth) {
-            die("403");
+            return redirect()->route('admin.error', 403);
         }
         return $next($request);
     }

@@ -63,7 +63,7 @@ class SpeakerController extends Controller
                 $iPP = $c++;
 
                 if ($icon != "" || $contactsName[$iPP] != "" || $contactsValue != "") {
-                    $saveContact = ContactCtrl::store([
+                    $saveContact = ContactCtrl::store('speaker', [
                         'speaker_id' => $speaker->id,
                         'icon' => $icon,
                         'name' => $contactsName[$iPP],
@@ -149,7 +149,7 @@ class SpeakerController extends Controller
 
             if ($req->is_updating_contact == 1) {
                 // delete contact, then create the new contacts
-                $deleteContacts = ContactCtrl::delete($id);
+                $deleteContacts = ContactCtrl::delete('speaker', $id);
                 
                 $contactsIcon = $req->speaker_contacts_icon;
                 $contactsName = $req->speaker_contacts_name;
@@ -160,7 +160,7 @@ class SpeakerController extends Controller
                     $iPP = $c++;
 
                     if ($icon != "" || $contactsName[$iPP] != "" || $contactsValue != "") {
-                        $saveContact = ContactCtrl::store([
+                        $saveContact = ContactCtrl::store('speaker', [
                             'speaker_id' => $speaker->id,
                             'icon' => $icon,
                             'name' => $contactsName[$iPP],

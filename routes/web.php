@@ -48,6 +48,8 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('profile', 'AdminController@profile')->name('admin.profile')->middleware('Admin');
 	Route::post('profile/update', 'AdminController@updateProfile')->name('admin.profile.update')->middleware('Admin');
 	
+	Route::get("error/{code}", "AdminController@errorPage")->name('admin.error');
+
 	Route::get('admin', 'AdminController@admin')->name('admin.admin')->middleware('Admin');
 	Route::get('create', 'AdminController@create')->name('admin.create')->middleware('Admin');
 	Route::post('store', 'AdminController@store')->name('admin.store')->middleware('Admin');

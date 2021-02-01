@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\JudgeContact;
 use App\SpeakerContact;
 use Illuminate\Http\Request;
 
@@ -20,13 +21,22 @@ class ContactController extends Controller
         return view('admin.contact.create');
     }
 
-    public static function store($data) {
-        $saveData = SpeakerContact::create([
-            'speaker_id' => $data['speaker_id'],
-            'icon' => $data['icon'],
-            'name' => $data['name'],
-            'value' => $data['value'],
-        ]);
+    public static function store($type, $data) {
+        if ($type == "speaker") {
+            $saveData = SpeakerContact::create([
+                'speaker_id' => $data['speaker_id'],
+                'icon' => $data['icon'],
+                'name' => $data['name'],
+                'value' => $data['value'],
+            ]);
+        }else {
+            $saveData = JudgeContact::create([
+                'judge_id' => $data['judge_id'],
+                'icon' => $data['icon'],
+                'name' => $data['name'],
+                'value' => $data['value'],
+            ]);
+        }
 
         return $saveData;
     }
@@ -68,7 +78,11 @@ class ContactController extends Controller
         return redirect()->route('admin.contact')->with(['message' => "Kontak berhasil ditambahkan"]);
     }
 
-    public static function delete($speakerID) {
-        return SpeakerContact::where('speaker_id', $speakerID)->delete();
+    public static function delete($type, $userID) {
+        if ($type == "speaker") {
+            return SpeakerContact::where('speaker_id', $userID)->delete();
+        }else {
+            return JudgeContact::where('judge_id', $userID)->delete();
+        }
     }
 }
