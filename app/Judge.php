@@ -16,4 +16,7 @@ class Judge extends Model
     public function event() {
         return $this->belongsTo('App\Event', 'event_id');
     }
+    public function contacts() {
+        return $this->hasMany('App\JudgeContact', 'judge_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\EventSpeaker;
 use App\Speaker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +36,15 @@ class SpeakerController extends Controller
             $photo = $req->file('photo');
             $photoFileName = $photo->getClientOriginalName();
 
+            // $validateData = $this->validate($req, [
+            //     'event_id' => $req->event_id,
+            //     'name' => 'required',
+            //     'phone' => 'required',
+            //     'email' => 'required',
+            //     'linkedin_profile' => 'required',
+            //     'photo' =>  'required|max:4096',
+            // ]);
+
             $speaker = Speaker::create([
                 'event_id' => $req->event_id,
                 'name' => $req->name,
@@ -43,7 +53,7 @@ class SpeakerController extends Controller
                 'linkedin_profile' => $req->linkedin_profile,
                 'photo' => $photoFileName,
             ]);
-
+            
             $contactsIcon = $req->speaker_contacts_icon;
             $contactsName = $req->speaker_contacts_name;
             $contactsValue = $req->speaker_contacts_value;
@@ -53,7 +63,7 @@ class SpeakerController extends Controller
                 $iPP = $c++;
 
                 if ($icon != "" || $contactsName[$iPP] != "" || $contactsValue != "") {
-                    $saveContact = ContactCtrl::store([
+                    $saveContact = ContactCtrl::store('speaker', [
                         'speaker_id' => $speaker->id,
                         'icon' => $icon,
                         'name' => $contactsName[$iPP],
@@ -63,6 +73,18 @@ class SpeakerController extends Controller
             }
 
             $photo->storeAs('public/speaker_photo', $photoFileName);
+
+            // $finalArray = array();
+            //     foreach($req->event as $value){
+            //         array_push($finalArray, array(
+            //                 'events_id' =>  $value,
+            //                 'speaker_id' =>  $speaker->id,
+            //                 'created_at' => date('Y-m-d H:i:s')
+            //             )
+            //         );
+            //     };
+
+            // EventSpeaker::insert($finalArray);
 
             DB::commit();
 
@@ -90,11 +112,13 @@ class SpeakerController extends Controller
         $speaker = Speaker::where('id', $id)
         ->with(['event','contacts'])
         ->first();
+        $eventspeaker = EventSpeaker::all()->where('speaker_id', $speaker->id);
         $events = Event::all();
 
 		return view('admin.speaker.edit')->with([
             'speaker' => $speaker,
             'events' => $events,
+            'eventspeaker' => $eventspeaker
         ]);
     }
 
@@ -107,7 +131,6 @@ class SpeakerController extends Controller
             $speaker = Speaker::where('id', $id)->first();
 
             $speakerUpdate = [
-                'event_id' => $req->event_id,
                 'name' => $req->name,
                 'phone' => $req->phone,
                 'email' => $req->email,
@@ -126,8 +149,8 @@ class SpeakerController extends Controller
 
             if ($req->is_updating_contact == 1) {
                 // delete contact, then create the new contacts
-                $deleteContacts = ContactCtrl::delete($id);
-
+                $deleteContacts = ContactCtrl::delete('speaker', $id);
+                
                 $contactsIcon = $req->speaker_contacts_icon;
                 $contactsName = $req->speaker_contacts_name;
                 $contactsValue = $req->speaker_contacts_value;
@@ -137,7 +160,7 @@ class SpeakerController extends Controller
                     $iPP = $c++;
 
                     if ($icon != "" || $contactsName[$iPP] != "" || $contactsValue != "") {
-                        $saveContact = ContactCtrl::store([
+                        $saveContact = ContactCtrl::store('speaker', [
                             'speaker_id' => $speaker->id,
                             'icon' => $icon,
                             'name' => $contactsName[$iPP],
@@ -147,18 +170,35 @@ class SpeakerController extends Controller
                 }
             }
 
+            // $eventspeaker = EventSpeaker::where('speaker_id', $speaker->id);
+
+            // $eventspeaker->delete();
+
+            // $finalArray = array();
+            // foreach($req->event as $value){
+            //     array_push($finalArray, array(
+            //         'events_id' =>  $value,
+            //         'speaker_id' =>  $speaker->id,
+            //         'created_at' => $speaker->created_at,
+            //         'updated_at' => date('Y-m-d H:i:s')
+            //         )
+            //     );
+            // };
+
+            // EventSpeaker::insert($finalArray);
+
             DB::commit();
 
             return redirect()->route('admin.speaker')->with([
-                'message' => "Data speaker berhasil diupdate"
+                'message' => "Data speaker berhasil ditambahkan"
             ]);
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect()->back()->withErrors(['error' => $th->getMessage()]);
+            return redirect()->back()->withErrors(['error' => $th->getLine()]);
         }
     }
-
-    public function delete($id) {
+    public function delete(Request $req) {
+        $id = $req->data_id;
         $speaker = Speaker::where('id', $id);
         $deletePhoto = Storage::delete('public/speaker_photo/'.$speaker->first()->photo);
         $deleteData = $speaker->delete();
