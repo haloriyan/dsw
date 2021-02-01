@@ -34,6 +34,8 @@ class Admin
         }
         
         $auth = RoleCtrl::authenticate($currentPrefix, $currentAction);
+        // echo $auth;
+        // die();
         if (!$auth) {
             die("403");
         }

@@ -40,8 +40,7 @@
                 <div class="form-group">
                     <strong>Logo : </strong><br><br>
                     @if (!empty($sponsor->logo))
-                    <img src="{{ asset('storage/sponsor/logo/'.$sponsor->logo) }}" style="width: 200px" ;
-                        height="200px">
+                    <img src="{{ asset('storage/sponsor/logo/'.$sponsor->logo) }}" style="height: 100px">
                     @else
                     "Logo Tidak Ada"
                     @endif

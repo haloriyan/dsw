@@ -174,6 +174,7 @@
         target.remove();
     }
     const moreContact = () => {
+        updatingContact();
         createElement({
             el: 'div',
             attributes: [
