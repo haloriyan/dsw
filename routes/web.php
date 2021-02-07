@@ -11,6 +11,8 @@ Route::get('invoice', "UserController@invoice")->name('user.invoice');
 Route::get('my-team', "UserController@myTeam")->name('user.myTeam');
 Route::get('active', "UserController@active")->name('user.active');
 
+Route::get('verification/{email}', "UserController@emailVerification");
+
 Route::get('admin', function() {
 	return redirect()->route('admin.loginPage');
 })->name('admin');

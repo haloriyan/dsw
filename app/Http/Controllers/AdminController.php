@@ -27,6 +27,40 @@ use App\Http\Controllers\SponsorTypeController as SponsorTypeCtrl;
 
 class AdminController extends Controller
 {
+	public static $menuIcons = [
+		"ticket" => "fas fa-tags",
+		"sponsor" => "fas fa-ad",
+		"sponsorType" => "fas fa-ad",
+		"faq" => "fas fa-question",
+		"role" => "fas fa-cogs",
+		"event" => "fas fa-calendar",
+		"event-type" => "fas fa-calendar",
+		"judge" => "fas fa-users",
+		"speaker" => "fas fa-users",
+		"team" => "fas fa-users",
+		"participant" => "fas fa-users",
+		"rundown" => "fas fa-calendar-alt",
+		"timeline" => "fas fa-calendar-alt",
+		"dashboard" => "fas fa-home",
+	];
+
+	public static function getMenus($role) {
+		$menus = RoleCtrl::get([
+			['role', '=', $role]
+		])
+		->groupBy('module')
+		->get();
+
+		$ret = [];
+		foreach ($menus as $menu) {
+			$menu->icon = self::$menuIcons[$menu->module];
+			$menu->module = ucwords($menu->module);
+			$menu->module = str_replace("-", " ", $menu->module);
+			$ret[] = $menu;
+		}
+
+		return $ret;
+	}
 	public static function me() {
 		return Auth::guard('admin')->user();
 	}
@@ -59,14 +93,22 @@ class AdminController extends Controller
 		return redirect()->route('admin.loginPage')->with(['message' => "Berhasil logout"]);
 	}
 	public function dashboard() {
-		return view('admin.dashboard');
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
+
+		return view('admin.dashboard', [
+			'menus' => $menus,
+			'myData' => $myData
+		]);
 	}
 	public function profile() {
 		$myData = self::me();
 		$message = Session::get('message');
+		$menus = self::getMenus($myData->role);
 
 		return view('admin.profile', [
 			'myData' => $myData,
+			'menus' => $menus,
 			'message' => $message
 		]);
 	}
@@ -93,7 +135,13 @@ class AdminController extends Controller
 		}
 	}
 	public function add() {
-		return view('admin.admin.add');
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
+
+		return view('admin.admin.add', [
+			'menus' => $menus,
+			'myData' => $myData
+		]);
 	}
 	public function store(Request $req) {
 		$validateData = $this->validate($req, [
@@ -125,8 +173,13 @@ class AdminController extends Controller
 	public function edit($id) {
 		$admin = Admin::find($id);
 
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
+
 		return view('admin.admin.edit', [
-			'admin' => $admin
+			'admin' => $admin,
+			'menus' => $menus,
+			'myData' => $myData,
 		]);
 	}
 	public function update($id, Request $req) {
@@ -149,7 +202,13 @@ class AdminController extends Controller
 		]);
 	}
 	public function create() {
-		return view('admin.admin.create');
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
+
+		return view('admin.admin.create', [
+			'menus' => $menus,
+			'myData' => $myData,
+		]);
 	}
 	public function delete($id) {
 		$deleteData = Admin::where('id', $id)->delete();
@@ -157,37 +216,68 @@ class AdminController extends Controller
 		return redirect()->route('admin.admin')->with(['message' => "Data admin berhasil dihapus"]);
 	}
 	public function faq() {
+		$myData = self::me();
 		$faqs = FaqCtrl::get();
-		return view('admin.faq.index')->with(['faqs' => $faqs]);
+		$menus = self::getMenus($myData->role);
+		
+		return view('admin.faq.index')->with([
+			'faqs' => $faqs,
+			'myData' => $myData,
+			'menus' => $menus,
+		]);
     }
 
 	public function contact() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$contacts = ContactCtrl::get();
-		return view('admin.contact.index')->with(['contacts' => $contacts]);
+
+		return view('admin.contact.index')->with([
+			'contacts' => $contacts,
+			'menus' => $menus,
+			'myData' => $myData,
+		]);
     }
 
     public function sponsorType() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$sponsorTypes = SponsorTypeCtrl::get();
+
 		return view('admin.sponsorType.index')->with([
 			'sponsorTypes' => $sponsorTypes,
+			'myData' => $myData,
+			'menus' => $menus,
 		]);
 	}
 
 	public function sponsor() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$sponsors = SponsorCtrl::get();
+
 		return view('admin.sponsor.index')->with([
-			'sponsors' => $sponsors
+			'sponsors' => $sponsors,
+			'myData' => $myData,
+			'menus' => $menus
 		]);
     }
 
 	public function eventType() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$eventTypes = EventTypeCtrl::get()->get();
 
 		return view('admin.eventType.index')->with([
-			'eventTypes' => $eventTypes
+			'eventTypes' => $eventTypes,
+			'menus' => $menus,
+			'myData' => $myData
 		]);
 	}
 	public function event($rundownID = NULL) {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
+
 		$rundown = "";
 		$eventTypes = EventTypeCtrl::get();
 		if ($rundownID == NULL) {
@@ -206,28 +296,41 @@ class AdminController extends Controller
 		return view('admin.event.index')->with([
 			'eventTypes' => $eventTypes,
 			'events' => $events,
+			'menus' => $menus,
+			'myData' => $myData,
 			'rundown' => $rundown
 		]);
 	}
 	public function speaker() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$speakers = SpeakerCtrl::get();
 		$events = EventCtrl::get()->get();
 
 		return view('admin.speaker.index')->with([
 			'speakers' => $speakers,
+			'myData' => $myData,
+			'menus' => $menus,
 			'events' => $events
 		]);
 	}
 	public function judge() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$events = EventCtrl::get()->get();
 		$judges = JudgeCtrl::get();
 
 		return view('admin.judge.index')->with([
 			'judges' => $judges,
+			'myData' => $myData,
+			'menus' => $menus,
 			'events' => $events
 		]);
 	}
 	public function timeline($eventID = NULL) {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
+
 		$event = "";
 		if ($eventID == NULL) {
 			$timelines = TimelineCtrl::get();
@@ -243,24 +346,36 @@ class AdminController extends Controller
 
 		return view('admin.timeline.index', [
 			'timelines' => $timelines,
+			'menus' => $menus,
+			'myData' => $myData,
 			'event' => $event
 		]);
 	}
 	public function rundown() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$rundowns = RundownCtrl::get()->get();
 
 		return view('admin.rundown.index', [
-			'rundowns' => $rundowns
+			'rundowns' => $rundowns,
+			'menus' => $menus,
+			'myData' => $myData,
 		]);
 	}
 	public function ticketType() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$types = TicketTypeCtrl::get();
 
 		return view('admin.ticketType.index', [
-			'types' => $types
+			'types' => $types,
+			'menus' => $menus,
+			'myData' => $myData,
 		]);
 	}
 	public function ticket($typeID = NULL) {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$type = new \stdClass();
 		$type->name = "";
 		if ($typeID == NULL) {
@@ -280,24 +395,36 @@ class AdminController extends Controller
 
 		return view('admin.ticket.index', [
 			'tickets' => $tickets,
+			'menus' => $menus,
+			'myData' => $myData,
 			'type' => $type
 		]);
 	}
 	public function role() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$roles = RoleCtrl::get()->get();
 
 		return view('admin.role.index', [
+			'menus' => $menus,
+			'myData' => $myData,
 			'roles' => $roles
 		]);
 	}
 	public function admin() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$admins = Admin::all();
 
 		return view('admin.admin.index', [
-			'admins' => $admins
+			'admins' => $admins,
+			'menus' => $menus,
+			'myData' => $myData,
 		]);
 	}
 	public function team() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$teams = TeamCtrl::get()
 		->with(['chief','firstMember','secondMember'])
 		->get();
@@ -320,10 +447,14 @@ class AdminController extends Controller
 
 		return view('admin.team.index', [
 			'teams' => $teams,
+			'menus' => $menus,
+			'myData' => $myData,
 			'toExport' => $toExport
 		]);
 	}
 	public function participant() {
+		$myData = self::me();
+		$menus = self::getMenus($myData->role);
 		$particpants = UserCtrl::get()
 		->orderBy('created_at', 'DESC')
 		->get();
@@ -361,6 +492,8 @@ class AdminController extends Controller
 
 		return view('admin.participant.index', [
 			'participants' => $particpants,
+			'menus' => $menus,
+			'myData' => $myData,
 			'toExport' => $toExport
 		]);
 	}

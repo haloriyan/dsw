@@ -378,4 +378,15 @@ class UserController extends Controller
             return redirect()->route('admin.participant');
         }
     }
+    public function emailVerification($email) {
+        $email = base64_decode($email);
+
+        $updateData = User::where('email', $email)->update([
+            'is_active' => 1
+        ]);
+
+        return redirect()->route('user.loginPage')->with([
+            'message' => "Akun Anda berhasil diaktifkan, silahkan login"
+        ]);
+    }
 }

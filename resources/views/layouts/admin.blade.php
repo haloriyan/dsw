@@ -14,7 +14,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        @include('layouts.back-end._sidebar')
+        @include('layouts.back-end._sidebar', ['menus' => $menus, 'myData' => $myData])
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">

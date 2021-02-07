@@ -13,6 +13,16 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
+            @if ($myData->role != "superadmin")
+                @foreach ($menus as $menu)
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="{{ $menu->icon }}"></i>
+                            <span>{{ $menu->module }}</span>
+                        </a>
+                    </li>
+                @endforeach
+            @else
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -192,6 +202,8 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
             --}}
+
+            @endif
 
         </ul>
         <!-- End of Sidebar -->
