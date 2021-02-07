@@ -62,7 +62,7 @@ class UserController extends Controller
         if (!$loggingIn) {
             return redirect()->route('user.loginPage', [
                 'ref' => $req->ref
-            ])->withErrors(['Email dan/atau Password salah']);
+            ])->withErrors(['Email atau Password salah']);
         }
         if ($req->ref != "") {
             return redirect($req->ref);
