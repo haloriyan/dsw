@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use App\TicketOrder;
+use App\Mail\CheckoutTicket;
 
 use Illuminate\Http\Request;
 use \App\Http\Controllers\UserController as UserCtrl;
@@ -36,9 +38,21 @@ class TicketOrderController extends Controller
     public function completeOrder(Request $req) {
         $id = $req->orderID;
 
-        $completing = TicketOrder::where('id', $id)->update([
+        $data = TicketOrder::where('id', $id);
+        $completing = $data->update([
             'status' => 1
         ]);
+
+        $order = $data->with('ticket.event')->first();
+        $ticket = $order->ticket;
+        $event = $order->ticket->event;
+
+        Mail::to()
+        ->send(new CheckoutTicket([
+            'event' => $event,
+            'ticket' => $ticket,
+            'order' => $order,
+        ]));
 
         return response()->json([
             'status' => 200,
