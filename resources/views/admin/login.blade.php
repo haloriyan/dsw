@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('title', "Login Admin")
+
 @section('content')
     <div class="rata-tengah mt-5">
         <h1>Login</h1>
