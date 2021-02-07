@@ -9,6 +9,13 @@
             {{ $message }}
         </div>
     @endif
+    @if ($errors->count() > 0)
+        @foreach ($errors->all() as $err)
+            <div class="bg-merah-transparan p-2 rounded">
+                {{ $err }}
+            </div>
+        @endforeach
+    @endif
     {{ csrf_field() }}
     <input type="hidden" name="ref" value="{{ $ref }}">
     <div class="mt-2">Email :</div>

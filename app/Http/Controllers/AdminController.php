@@ -49,6 +49,7 @@ class AdminController extends Controller
 			['role', '=', $role]
 		])
 		->groupBy('module')
+		->orderBy('module', 'ASC')
 		->get();
 
 		$ret = [];
