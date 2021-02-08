@@ -17,10 +17,14 @@ class RoleController extends Controller
         return AdminRole::where($filter);
     }
     public function create() {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $modules = self::getRoutePrefixes();
         
         return view('admin.role.create', [
-            'modules' => $modules
+            'modules' => $modules,
+            'menus' => $menus,
+            'myData' => $myData
         ]);
     }
     public function store(Request $req) {
@@ -33,11 +37,15 @@ class RoleController extends Controller
         return redirect()->route('admin.role');
     }
     public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $role = AdminRole::find($id);
         $modules = self::getRoutePrefixes();
 
         return view('admin.role.edit', [
             'data' => $role,
+            'menus' => $menus,
+            'myData' => $myData,
             'modules' => $modules
         ]);
     }
