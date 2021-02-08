@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\TicketType;
 use Illuminate\Http\Request;
 
+use \App\Http\Controllers\AdminController as AdminCtrl;
+
 class TicketTypeController extends Controller
 {
     public static function get($filter = NULL) {
@@ -14,7 +16,13 @@ class TicketTypeController extends Controller
         return TicketType::where($filter);
     }
     public function create() {
-        return view('admin.ticketType.create');
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
+        return view('admin.ticketType.create', [
+            'menus' => $menus,
+            'myData' => $myData,
+        ]);
     }
     public function store(Request $req) {
         $saveData = TicketType::create([
@@ -27,10 +35,14 @@ class TicketTypeController extends Controller
         ]);
     }
     public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $type = TicketType::find($id);
 
         return view('admin.ticketType.edit', [
-            'type' => $type
+            'type' => $type,
+            'menus' => $menus,
+            'myData' => $myData
         ]);
     }
     public function update($id, Request $req) {

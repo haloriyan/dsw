@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
+use \App\Http\Controllers\AdminController as AdminCtrl;
 use App\Http\Controllers\ContactController as ContactCtrl;
 
 class SpeakerController extends Controller
@@ -22,9 +23,14 @@ class SpeakerController extends Controller
 
     public function create()
     {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $events = Event::all();
+        
         return view('admin.speaker.create')->with([
-			'events' => $events
+            'events' => $events,
+            'menus' => $menus,
+            'myData' => $myData,
 		]);
     }
 
@@ -109,6 +115,9 @@ class SpeakerController extends Controller
 
 
 	public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $speaker = Speaker::where('id', $id)
         ->with(['event','contacts'])
         ->first();
@@ -118,6 +127,8 @@ class SpeakerController extends Controller
 		return view('admin.speaker.edit')->with([
             'speaker' => $speaker,
             'events' => $events,
+            'menus' => $menus,
+            'myData' => $myData,
             'eventspeaker' => $eventspeaker
         ]);
     }

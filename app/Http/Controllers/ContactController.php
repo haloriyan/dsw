@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Contact;
 use App\JudgeContact;
 use App\SpeakerContact;
+
 use Illuminate\Http\Request;
+use \App\Http\Controllers\AdminController as AdminCtrl;
 
 class ContactController extends Controller
 {
@@ -18,7 +20,13 @@ class ContactController extends Controller
 
     public function create()
     {
-        return view('admin.contact.create');
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
+        return view('admin.contact.create', [
+            'menus' => $menus,
+            'myData' => $myData
+        ]);
     }
 
     public static function store($type, $data) {
@@ -52,16 +60,27 @@ class ContactController extends Controller
 
     public function view($id)
     {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $contact = Contact::where('id' , $id)->first();
-        return view('admin.contact.view',['contact' => $contact]);
+
+        return view('admin.contact.view', [
+            'contact' => $contact,
+            'menus' => $menus,
+            'myData' => $myData
+        ]);
     }
 
 
 	public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
 		$contact = Contact::find($id);
 
 		return view('admin.contact.edit')->with([
-			'contact' => $contact
+            'contact' => $contact,
+            'menus' => $menus,
+            'myData' => $myData
 		]);
     }
 

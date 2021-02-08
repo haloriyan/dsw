@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\SponsorType;
+
 use Illuminate\Http\Request;
+use \App\Http\Controllers\AdminController as AdminCtrl;
 
 class SponsorTypeController extends Controller
 {
@@ -13,7 +15,13 @@ class SponsorTypeController extends Controller
 
     public function create()
     {
-        return view('admin.sponsorType.create');
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
+        return view('admin.sponsorType.create', [
+            'menus' => $menus,
+            'myData' => $myData,
+        ]);
     }
 
     public function store(Request $req) {
@@ -27,10 +35,14 @@ class SponsorTypeController extends Controller
     }
 
 	public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
 		$SponsorType = SponsorType::find($id);
 
 		return view('admin.SponsorType.edit')->with([
-			'sponsorType' => $SponsorType
+            'sponsorType' => $SponsorType,
+            'myData' => $myData,
+            'menus' => $menus,
 		]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Timeline;
 use Illuminate\Http\Request;
 
+use \App\Http\Controllers\AdminController as AdminCtrl;
 use \App\Http\Controllers\EventController as EventCtrl;
 
 class TimelineController extends Controller
@@ -16,6 +17,9 @@ class TimelineController extends Controller
         return Timeline::where($filter)->get();
     }
     public function create($eventID = NULL) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $filter = [];
         if ($eventID != NULL) {
             $filter = [
@@ -38,7 +42,9 @@ class TimelineController extends Controller
         
         return view('admin.timeline.create', [
             'events' => $eventsHasNoTimeline,
-            'eventID' => $eventID
+            'eventID' => $eventID,
+            'myData' => $myData,
+            'menus' => $menus
         ]);
     }
     public function store(Request $req) {
@@ -58,6 +64,9 @@ class TimelineController extends Controller
         ]);
     }
     public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $timeline = Timeline::where('id', $id)->with('event')->first();
         $events = EventCtrl::get()->get();
         
@@ -70,6 +79,8 @@ class TimelineController extends Controller
         
         return view('admin.timeline.edit', [
             'timeline' => $timeline,
+            'menus' => $menus,
+            'myData' => $myData,
             'events' => $eventsHasNoTimeline
         ]);
     }
@@ -97,10 +108,14 @@ class TimelineController extends Controller
         ]);
     }
     public function view($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $timeline = Timeline::where('id', $id)->with('event')->first();
 
         return view('admin.timeline.view', [
-            'timeline' => $timeline
+            'timeline' => $timeline,
+            'menus' => $menus,
+            'myData' => $myData
         ]);
     }
 }

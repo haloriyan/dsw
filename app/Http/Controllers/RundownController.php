@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Rundown;
 use Illuminate\Http\Request;
 
+use \App\Http\Controllers\AdminController as AdminCtrl;
+
 class RundownController extends Controller
 {
     public static function get($filter = NULL) {
@@ -14,7 +16,13 @@ class RundownController extends Controller
         return Rundown::where($filter);
     }
     public function create() {
-        return view('admin.rundown.create');
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
+        return view('admin.rundown.create', [
+            'myData' => $myData,
+            'menus' => $menus,
+        ]);
     }
     public function store(Request $req) {
         $saveData = Rundown::create([
@@ -30,10 +38,15 @@ class RundownController extends Controller
         ]);
     }
     public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $rundown = Rundown::find($id);
 
         return view('admin.rundown.edit', [
-            'rundown' => $rundown
+            'rundown' => $rundown,
+            'menus' => $menus,
+            'myData' => $myData
         ]);
     }
     public function update($id, Request $req) {
@@ -57,10 +70,15 @@ class RundownController extends Controller
         ]);
     }
     public function view($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $rundown = Rundown::find($id);
 
         return view('admin.rundown.view', [
-            'rundown' => $rundown
+            'rundown' => $rundown,
+            'myData' => $myData,
+            'menus' => $menus
         ]);
     }
 }
