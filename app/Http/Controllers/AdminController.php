@@ -42,6 +42,7 @@ class AdminController extends Controller
 		"rundown" => "fas fa-calendar-alt",
 		"timeline" => "fas fa-calendar-alt",
 		"dashboard" => "fas fa-home",
+		"admin" => "fas fa-home",
 	];
 
 	public static function getMenus($role) {
