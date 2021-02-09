@@ -46,7 +46,7 @@ class AdminController extends Controller
 	];
 
 	public static function splitCamelCase($string) {
-		return implode(preg_split('/(?<=\\w)(?=[A-Z])/', $string), " ");
+		return implode(" ", preg_split('/(?<=\\w)(?=[A-Z])/', $string));
 	}
 	public static function getMenus($role) {
 		$menus = RoleCtrl::get([
