@@ -40,7 +40,7 @@
             <p>{{ $message }}</p>
         </div>
         @endif
-        <form action="{{ route('role.store') }}" method="POST">
+        <form action="{{ route('role.store') }}" method="POST" id="formSubmit">
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="roleName">Role name :</label>
@@ -63,7 +63,7 @@
             </div>
             <div class="form-group">
                 <label for="actions">Actions :</label>
-                <input type="hidden" name="actions" id="actions">
+                <input type="hidden" name="actions" id="actions" required>
                 <br />
                 <div class="actions" onclick="toggleActions(this)">view</div>
                 <div class="actions" onclick="toggleActions(this)">create</div>
@@ -103,6 +103,13 @@
                 selectedActions.push(action);
             }
             select("#actions").value = selectedActions.join(",");
+        }
+
+        select("#formSubmit").onsubmit = e => {
+            if (selectedActions.length == 0 ) {
+                alert("Maaf, Anda belum memilih action");
+                e.preventDefault();
+            }
         }
     </script>
 

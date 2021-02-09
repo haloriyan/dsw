@@ -8,6 +8,7 @@ use App\Mail\CheckoutTicket;
 
 use Illuminate\Http\Request;
 use \App\Http\Controllers\UserController as UserCtrl;
+use \App\Http\Controllers\TicketController as TicketCtrl;
 
 class TicketOrderController extends Controller
 {

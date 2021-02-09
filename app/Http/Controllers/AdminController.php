@@ -29,6 +29,7 @@ class AdminController extends Controller
 {
 	public static $menuIcons = [
 		"ticket" => "fas fa-tags",
+		"ticketType" => "fas fa-tags",
 		"sponsor" => "fas fa-ad",
 		"sponsorType" => "fas fa-ad",
 		"faq" => "fas fa-question",
@@ -46,7 +47,7 @@ class AdminController extends Controller
 	];
 
 	public static function splitCamelCase($string) {
-		return implode(preg_split('/(?<=\\w)(?=[A-Z])/', $string), " ");
+		return implode(" ", preg_split('/(?<=\\w)(?=[A-Z])/', $string));
 	}
 	public static function getMenus($role) {
 		$menus = RoleCtrl::get([
