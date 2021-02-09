@@ -16,9 +16,9 @@
             @if ($myData->role != "superadmin")
                 @foreach ($menus as $menu)
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('admin.'.$menu->module) }}" class="nav-link">
                             <i class="{{ $menu->icon }}"></i>
-                            <span>{{ $menu->module }}</span>
+                            <span>{{ $menu->module_display }}</span>
                         </a>
                     </li>
                 @endforeach

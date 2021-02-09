@@ -100,7 +100,7 @@ Route::group(['prefix' => 'ticket'], function() {
 	Route::post('complete', 'TicketOrderController@completeOrder')->name('ticket.completeOrder');
 });
 
-Route::group(['prefix' => 'ticket-type'], function() {
+Route::group(['prefix' => 'ticketType'], function() {
 	Route::get('create', 'TicketTypeController@create')->name('ticketType.create')->middleware('Admin');
 	Route::post('store', 'TicketTypeController@store')->name('ticketType.store')->middleware('Admin');
 	Route::get('{id}/edit', 'TicketTypeController@edit')->name('ticketType.edit')->middleware('Admin');
@@ -146,7 +146,7 @@ Route::group(['prefix' => 'contact'], function() {
 	Route::delete('{id}/delete', 'ContactController@delete')->name('contact.delete');
 });
 
-Route::group(['prefix' => 'sponsor-type'], function() {
+Route::group(['prefix' => 'sponsorType'], function() {
     Route::get('create', 'SponsorTypeController@create')->name('sponsorType.create');
     Route::get('{id}/edit', 'SponsorTypeController@edit')->name('sponsorType.edit');
 
@@ -166,7 +166,7 @@ Route::group(['prefix' => 'sponsor'], function() {
 	Route::delete('{id}/delete', 'SponsorController@delete')->name('sponsor.delete');
 });
 
-Route::group(['prefix' => 'event-type'], function() {
+Route::group(['prefix' => 'eventType'], function() {
     Route::get('create', 'EventTypeController@create')->name('eventType.create');
     Route::get('{id}/edit', 'EventTypeController@edit')->name('eventType.edit');
 
