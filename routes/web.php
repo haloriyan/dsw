@@ -61,9 +61,9 @@ Route::group(['prefix' => 'admin'], function() {
 	
 	Route::get('faq', 'AdminController@faq')->name('admin.faq')->middleware('Admin');
     Route::get('contact', 'AdminController@contact')->name('admin.contact')->middleware('Admin');
-    Route::get('sponsor-type', 'AdminController@sponsorType')->name('admin.sponsorType')->middleware('Admin');
+    Route::get('sponsorType', 'AdminController@sponsorType')->name('admin.sponsorType')->middleware('Admin');
 	Route::get('sponsor', 'AdminController@sponsor')->name('admin.sponsor')->middleware('Admin');
-	Route::get('event-type', 'AdminController@eventType')->name('admin.eventType')->middleware('Admin');
+	Route::get('eventType', 'AdminController@eventType')->name('admin.eventType')->middleware('Admin');
 	Route::get('event/{rundownID?}', 'AdminController@event')->name('admin.event')->middleware('Admin');
 	Route::get('speaker', 'AdminController@speaker')->name('admin.speaker')->middleware('Admin');
 	Route::get('judge', 'AdminController@judge')->name('admin.judge')->middleware('Admin');
@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('judge/{id}/edit', 'JudgeController@edit')->name('judge.edit')->middleware('Admin');
 	Route::get('timeline/{eventID?}', 'AdminController@timeline')->name('admin.timeline')->middleware('Admin');
 	Route::get('rundown', 'AdminController@rundown')->name('admin.rundown')->middleware('Admin');
-	Route::get('ticket-type', 'AdminController@ticketType')->name('admin.ticketType')->middleware('Admin');
+	Route::get('ticketType', 'AdminController@ticketType')->name('admin.ticketType')->middleware('Admin');
 	Route::get('ticket/{typeID?}', 'AdminController@ticket')->name('admin.ticket')->middleware('Admin');
 	Route::get('ticket/{typeID}/participant', 'TicketController@participant')->name('admin.ticket.participant')->middleware('Admin');
 	Route::get('role', 'AdminController@role')->name('admin.role')->middleware('Admin');
