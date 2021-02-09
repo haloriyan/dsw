@@ -16,3 +16,10 @@ body {
     margin-top: -5px;
 }
 .container .wrap { margin: 10%; }
+
+@media (max-width: 480px) {
+    .container {
+        left: 5%;right: 5%;
+        display: none;
+    }
+}
