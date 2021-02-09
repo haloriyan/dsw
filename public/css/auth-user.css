@@ -18,3 +18,21 @@ body {
 .container form {
     margin-top: 55px;
 }
+
+@media (max-width: 768px) {
+    .container {
+        left: 10%;right: 10%;
+    }
+    .container .logo {
+        width: 60%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        left: 5%;right: 5%;
+    }
+    .container .logo {
+        width: 70%;
+    }
+}
