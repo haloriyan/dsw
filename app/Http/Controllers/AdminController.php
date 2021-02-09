@@ -34,7 +34,7 @@ class AdminController extends Controller
 		"faq" => "fas fa-question",
 		"role" => "fas fa-cogs",
 		"event" => "fas fa-calendar",
-		"event-type" => "fas fa-calendar",
+		"eventType" => "fas fa-calendar",
 		"judge" => "fas fa-users",
 		"speaker" => "fas fa-users",
 		"team" => "fas fa-users",
@@ -45,6 +45,9 @@ class AdminController extends Controller
 		"admin" => "fas fa-home",
 	];
 
+	public static function splitCamelCase($string) {
+		return implode(preg_split('/(?<=\\w)(?=[A-Z])/', $string), " ");
+	}
 	public static function getMenus($role) {
 		$menus = RoleCtrl::get([
 			['role', '=', $role]
@@ -56,8 +59,9 @@ class AdminController extends Controller
 		$ret = [];
 		foreach ($menus as $menu) {
 			$menu->icon = self::$menuIcons[$menu->module];
-			$menu->module = ucwords($menu->module);
-			$menu->module = str_replace("-", " ", $menu->module);
+			$menu->module_display = str_replace("-", " ", $menu->module);
+			$menu->module_display = ucwords($menu->module_display);
+			$menu->module_display = self::splitCamelCase($menu->module_display);
 			$ret[] = $menu;
 		}
 
