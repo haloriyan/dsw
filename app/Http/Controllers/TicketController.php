@@ -7,6 +7,7 @@ use App\TicketType;
 use App\TicketOrder;
 use Illuminate\Http\Request;
 
+use \App\Http\Controllers\AdminController as AdminCtrl;
 use \App\Http\Controllers\EventController as EventCtrl;
 use \App\Http\Controllers\TicketTypeController as TicketTypeCtrl;
 use \App\Http\Controllers\TicketOrderController as TicketOrderCtrl;
@@ -20,10 +21,14 @@ class TicketController extends Controller
         return Ticket::where($filter);
     }
     public function create() {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         // $types = TicketTypeCtrl::get()->get();
         $events = EventCtrl::get()->get();
         
         return view('admin.ticket.create', [
+            'menus' => $menus,
+            'myData' => $myData,
             'events' => $events
         ]);
     }
@@ -40,11 +45,16 @@ class TicketController extends Controller
         ]);
     }
     public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $ticket = Ticket::find($id);
         $events = EventCtrl::get()->get();
 
         return view('admin.ticket.edit', [
             'ticket' => $ticket,
+            'menus' => $menus,
+            'myData' => $myData,
             'events' => $events
         ]);
     }

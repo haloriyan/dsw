@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Faq;
 use Illuminate\Http\Request;
 
+use \App\Http\Controllers\AdminController as AdminCtrl;
+
 class FaqController extends Controller
 {
 	public static function get($filter = NULL) {
@@ -16,7 +18,13 @@ class FaqController extends Controller
 
     public function create()
     {
-        return view('admin.faq.create');
+		$myData = AdminCtrl::me();
+		$menus = AdminCtrl::getMenus($myData->role);
+		
+        return view('admin.faq.create', [
+			'menus' => $menus,
+			'myData' => $myData
+		]);
     }
 
 	public function store(Request $req) {
@@ -39,14 +47,29 @@ class FaqController extends Controller
 
     public function view($id)
     {
-        $faq = Faq::where('id' , $id)->first();
-        return view('admin.faq.view',['faq' => $faq]);
+		$myData = AdminCtrl::me();
+		$menus = AdminCtrl::getMenus($myData->role);
+		
+		$faq = Faq::where('id' , $id)->first();
+		
+        return view('admin.faq.view', [
+			'faq' => $faq,
+			'menus' => $menus,
+			'myData' => $myData
+		]);
     }
 
 
 	public function edit($id) {
+		$myData = AdminCtrl::me();
+		$menus = AdminCtrl::getMenus($myData->role);
 		$faq = Faq::find($id);
-		return view('admin.faq.edit')->with(['faq' => $faq]);
+
+		return view('admin.faq.edit')->with([
+			'faq' => $faq,
+			'menus' => $menus,
+			'myData' => $myData
+		]);
     }
 
 	public function update(Request $req) {

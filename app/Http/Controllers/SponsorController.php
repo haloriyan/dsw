@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Sponsor;
 use App\SponsorType;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use \App\Http\Controllers\AdminController as AdminCtrl;
 
 class SponsorController extends Controller
 {
@@ -18,9 +20,14 @@ class SponsorController extends Controller
 
     public function create()
     {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $sponsorType = SponsorType::all();
+
         return view('admin.sponsor.create')->with([
-			'sponsorType' => $sponsorType
+            'sponsorType' => $sponsorType,
+            'menus' => $menus,
+            'myData' => $myData
 		]);
     }
 
@@ -46,18 +53,29 @@ class SponsorController extends Controller
 
     public function view($id)
     {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $sponsor = Sponsor::where('id', $id)->with('type')->first();
+
         return view('admin.sponsor.view')->with([
-            'sponsor' => $sponsor ,
+            'sponsor' => $sponsor,
+            'myData' => $myData,
+            'menus' => $menus,
         ]);
     }
 
 
 	public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $sponsor = Sponsor::where('id', $id)->with('type')->first();
         $sponsorType = SponsorType::all();
 		return view('admin.sponsor.edit')->with([
-            'sponsor' => $sponsor ,
+            'sponsor' => $sponsor,
+            'menus' => $menus,
+            'myData' => $myData,
             'sponsorType' => $sponsorType
         ]);
     }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\EventType;
+
 use Illuminate\Http\Request;
+use \App\Http\Controllers\AdminController as AdminCtrl;
 
 class EventTypeController extends Controller
 {
@@ -16,7 +18,13 @@ class EventTypeController extends Controller
 
     public function create()
     {
-        return view('admin.eventType.create');
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
+        return view('admin.eventType.create', [
+            'myData' => $myData,
+            'menus' => $menus,
+        ]);
     }
 
     public function store(Request $req) {
@@ -30,10 +38,14 @@ class EventTypeController extends Controller
     }
 
     public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
 		$EventType = EventType::find($id);
 
 		return view('admin.eventType.edit')->with([
-			'eventType' => $EventType
+            'eventType' => $EventType,
+            'menus' => $menus,
+            'myData' => $myData,
 		]);
     }
 

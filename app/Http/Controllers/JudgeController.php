@@ -6,6 +6,7 @@ use Storage;
 use App\Judge;
 use Illuminate\Http\Request;
 
+use \App\Http\Controllers\AdminController as AdminCtrl;
 use App\Http\Controllers\EventController as EventCtrl;
 use App\Http\Controllers\ContactController as ContactCtrl;
 
@@ -18,18 +19,26 @@ class JudgeController extends Controller
         return Judge::where('event_id', $eventID)->get();
     }
     public function create() {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $events = EventCtrl::get()->get();
 
         return view('admin.judge.create', [
-            'events' => $events
+            'events' => $events,
+            'menus' => $menus,
+            'myData' => $myData
         ]);
     }
     public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $judge = Judge::where('id', $id)->with('contacts')->first();
         $events = EventCtrl::get()->get();
 
         return view('admin.judge.edit', [
             'events' => $events,
+            'menus' => $menus,
+            'myData' => $myData,
             'judge' => $judge
         ]);
     }

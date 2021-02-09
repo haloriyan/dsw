@@ -6,6 +6,7 @@ use App\Team;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\UserController as UserCtrl;
+use App\Http\Controllers\AdminController as AdminCtrl;
 
 class TeamController extends Controller
 {
@@ -76,6 +77,9 @@ class TeamController extends Controller
         return response()->json(['status' => 200]);
     }
     public function detail($teamID) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $team = Team::where('id', $teamID)
         ->with(['chief','firstMember','secondMember'])
         ->first();
@@ -83,7 +87,9 @@ class TeamController extends Controller
         $team = json_decode(json_encode($team), FALSE);
 
         return view('admin.team.detail', [
-            'team' => $team
+            'team' => $team,
+            'menus' => $menus,
+            'myData' => $myData,
         ]);
     }
 }
