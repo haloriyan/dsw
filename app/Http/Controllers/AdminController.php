@@ -29,6 +29,7 @@ class AdminController extends Controller
 {
 	public static $menuIcons = [
 		"ticket" => "fas fa-tags",
+		"ticketType" => "fas fa-tags",
 		"sponsor" => "fas fa-ad",
 		"sponsorType" => "fas fa-ad",
 		"faq" => "fas fa-question",
