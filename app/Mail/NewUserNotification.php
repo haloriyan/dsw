@@ -32,7 +32,7 @@ class NewUserNotification extends Mailable
      */
     public function build()
     {
-        return $this->view('email.Verification')->with([
+        return $this->view('email.verification')->with([
             'name' => $this->name,
             'email' => $this->email,
         ]);
