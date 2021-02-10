@@ -106,7 +106,7 @@ class UserController extends Controller
                 'email' => $email,
             ]
         ));
-        $saveData = User::create($datas);
+        // $saveData = User::create($datas);
 
         if ($req->via != "") {
             $myData = self::me();
