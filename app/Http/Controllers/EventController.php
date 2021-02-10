@@ -6,6 +6,7 @@ use App\Event;
 use App\EventType;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\AdminController as AdminCtrl;
 use App\Http\Controllers\RundownController as RundownCtrl;
 use App\Http\Controllers\EventTypeController as EventTypeCtrl;
 
@@ -20,11 +21,15 @@ class EventController extends Controller
 
     public function create()
     {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $eventTypes = EventTypeCtrl::get()->get();
         $rundowns = RundownCtrl::get()->get();
 
         return view('admin.event.create')->with([
             'eventTypes' => $eventTypes,
+            'menus' => $menus,
+            'myData' => $myData,
             'rundowns' => $rundowns
 		]);
     }
@@ -47,21 +52,35 @@ class EventController extends Controller
 
     public function view($id)
     {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $event = Event::where('id' , $id)->with(['type','timeline','rundown'])->first();
-        return view('admin.event.view',['event' => $event]);
+        return view('admin.event.view', [
+            'event' => $event,
+            'myData' => $myData,
+            'menus' => $menus
+        ]);
     }
 
 
 	public function edit($id) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $event = Event::where('id', $id)->with('type')->first();
-        // $event = json_decode(json_encode($event), FALSE);
         $eventType = EventType::all();
         $rundowns = RundownCtrl::get()->get();
 
 		return view('admin.event.edit')->with([
+<<<<<<< HEAD
             'event' => $event ,
             'eventTypes' => $eventType,
             'rundowns' => $rundowns,
+=======
+            'event' => $event,
+            'myData' => $myData,
+            'menus' => $menus,
+            'eventTypes' => $eventType
+>>>>>>> 8a8db60ad0ec4006ee06544a896dda8e8df7b342
         ]);
     }
 
