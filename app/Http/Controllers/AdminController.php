@@ -465,6 +465,7 @@ class AdminController extends Controller
 		$menus = self::getMenus($myData->role);
 		$particpants = UserCtrl::get()
 		->orderBy('created_at', 'DESC')
+		->with('tickets')
 		->get();
 
 		$toExport = [];
