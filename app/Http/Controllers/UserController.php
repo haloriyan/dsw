@@ -98,6 +98,7 @@ class UserController extends Controller
                 'is_active' => 0
             ];
         }
+        
         Mail::to($email)
         ->send(new NewUserNotification(
             [
