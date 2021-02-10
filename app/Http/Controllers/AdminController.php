@@ -392,7 +392,7 @@ class AdminController extends Controller
 			$tickets = TicketCtrl::get([
 				['type_id', '=', $typeID]
 			])
-			->with('type')
+			->with(['type','orders'])
 			->get();
 			
 			$type = TicketTypeCtrl::get([

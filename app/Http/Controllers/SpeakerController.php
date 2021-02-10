@@ -105,12 +105,18 @@ class SpeakerController extends Controller
 
     public function view($id)
     {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
         $speaker = Speaker::where('id' , $id)
         ->with('contacts')
         ->with('event')
         ->first();
 
-        return view('admin.speaker.view',['speaker' => $speaker]);
+        return view('admin.speaker.view', [
+            'speaker' => $speaker,
+            'menus' => $menus,
+            'myData' => $myData,
+        ]);
     }
 
 
