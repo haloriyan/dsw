@@ -39,7 +39,6 @@
                         <tr>
                             <th>No</th>
                             <th>Event</th>
-                            <th>Type</th>
                             <th>Pendaftaran</th>
                             <th>Penutupan</th>
                             <th></th>
@@ -51,7 +50,6 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $timeline->event->title }}</td>
-                                <td>{{ $timeline->type }}</td>
                                 <td>{{ Carbon::parse($timeline->open_date)->format('d M Y') }}</td>
                                 <td>{{ Carbon::parse($timeline->close_date)->format('d M Y') }}</td>
                                 <td>

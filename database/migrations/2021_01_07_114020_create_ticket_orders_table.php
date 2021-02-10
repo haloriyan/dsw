@@ -16,9 +16,9 @@ class CreateTicketOrdersTable extends Migration
         Schema::create('ticket_orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('ticket_id')->unsigned()->index();
-            $table->foreign('ticket_id')->references('id')->on('tickets');
+            $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
             $table->integer('qty');
             $table->integer('total_pay');
             $table->tinyInteger('status');

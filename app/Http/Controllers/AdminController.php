@@ -135,7 +135,7 @@ class AdminController extends Controller
 
 		if ($updateData) {
 			$this->logout();
-
+			
 			return redirect()->route('admin.loginPage')->with([
 				'message' => "Profil berhasil diupdate. Silahkan login kembali"
 			]);
@@ -169,8 +169,7 @@ class AdminController extends Controller
 			'role' => $role,
 			'is_super' => 0,
 			'username' => $req->username,
-            'phone' => $req->phone,
-            'created_at' => date('Y-m-d H:i:s'),
+			'phone' => $req->phone,
 		]);
 
 		return redirect()->route('admin.admin')->with([
@@ -197,13 +196,13 @@ class AdminController extends Controller
 			'username' => $req->username,
 			'phone' => $req->phone,
 		];
-
+		
 		if ($req->password != "") {
 			$toUpdate['password'] = bcrypt($req->password);
 		}
 
 		$updateData = Admin::where('id', $id)->update($toUpdate);
-
+		
 		return redirect()->route('admin.admin')->with([
 			'message' => "Data admin berhasil diperbarui"
 		]);
@@ -361,8 +360,10 @@ class AdminController extends Controller
 	public function rundown() {
 		$myData = self::me();
 		$menus = self::getMenus($myData->role);
-		$rundowns = RundownCtrl::get()->get();
-
+		$rundowns = RundownCtrl::get()
+		->with('events')
+		->get();
+		
 		return view('admin.rundown.index', [
 			'rundowns' => $rundowns,
 			'menus' => $menus,
@@ -393,13 +394,13 @@ class AdminController extends Controller
 			])
 			->with('type')
 			->get();
-
+			
 			$type = TicketTypeCtrl::get([
 				['id', '=', $typeID]
 			])
 			->first();
 		}
-
+		
 		return view('admin.ticket.index', [
 			'tickets' => $tickets,
 			'menus' => $menus,
@@ -411,7 +412,7 @@ class AdminController extends Controller
 		$myData = self::me();
 		$menus = self::getMenus($myData->role);
 		$roles = RoleCtrl::get()->get();
-
+		
 		return view('admin.role.index', [
 			'menus' => $menus,
 			'myData' => $myData,

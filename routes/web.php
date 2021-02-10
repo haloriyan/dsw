@@ -81,6 +81,7 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::get('/', "AdminController@participant")->name('admin.participant')->middleware('Admin');
 		Route::get('export', "UserController@export")->name('participant.export')->middleware('Admin');
 		Route::get('{id}/view', "UserController@view")->name('participant.view')->middleware('Admin');
+		Route::get('{id}/delete', "UserController@delete")->name('participant.delete')->middleware('Admin');
 	});
 	
 	Route::get('team', 'AdminController@team')->name('admin.team')->middleware('Admin');
