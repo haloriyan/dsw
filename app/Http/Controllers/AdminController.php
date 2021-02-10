@@ -360,7 +360,9 @@ class AdminController extends Controller
 	public function rundown() {
 		$myData = self::me();
 		$menus = self::getMenus($myData->role);
-		$rundowns = RundownCtrl::get()->get();
+		$rundowns = RundownCtrl::get()
+		->with('events')
+		->get();
 		
 		return view('admin.rundown.index', [
 			'rundowns' => $rundowns,

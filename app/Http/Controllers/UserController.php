@@ -18,6 +18,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 use App\Http\Controllers\FaqController as FaqCtrl;
 use App\Http\Controllers\TeamController as TeamCtrl;
+use App\Http\Controllers\AdminController as AdminCtrl;
 use App\Http\Controllers\EventController as EventCtrl;
 use App\Http\Controllers\TicketController as TicketCtrl;
 use \App\Http\Controllers\RundownController as RundownCtrl;
@@ -71,17 +72,10 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
     public function register(Request $req) {
-        if ($req->via == "") {
-            $name = $req->name;
-            $email = $req->email;
+        $name = $req->name;
+        $email = $req->email;
 
-            Mail::to($req->email)
-            ->send(new NewUserNotification(
-                [
-                    'name' => $name,
-                    'email' => $email,
-                ]
-            ));
+        if ($req->via == "") {
             $datas = [
                 'name' => $name,
                 'email' => $email,
@@ -97,13 +91,20 @@ class UserController extends Controller
             ];
         }else {
             $datas = [
-                'name' => $req->name,
-                'email' => $req->email,
+                'name' => $name,
+                'email' => $email,
                 'password' => bcrypt($req->password),
                 'gender' => $req->gender,
-                'is_active' => 1
+                'is_active' => 0
             ];
         }
+        Mail::to($email)
+        ->send(new NewUserNotification(
+            [
+                'name' => $name,
+                'email' => $email,
+            ]
+        ));
         $saveData = User::create($datas);
 
         if ($req->via != "") {
@@ -368,11 +369,16 @@ class UserController extends Controller
         ]);
     }
     public function view($userID) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $participant = User::where('id', $userID)
         ->first();
 
         return view('admin.participant.view', [
-            'participant' => $participant
+            'participant' => $participant,
+            'myData' => $myData,
+            'menus' => $menus
         ]);
     }
     public function export() {
@@ -393,6 +399,13 @@ class UserController extends Controller
 
         return redirect()->route('user.loginPage')->with([
             'message' => "Akun Anda berhasil diaktifkan, silahkan login"
+        ]);
+    }
+    public function delete($userID) {
+        $deleteData = User::where('id', $userID)->delete();
+
+        return redirect()->route('admin.participant')->with([
+            'message' => "Peserta berhasil dihapus"
         ]);
     }
 }

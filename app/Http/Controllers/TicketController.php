@@ -78,6 +78,9 @@ class TicketController extends Controller
         ]);
     }
     public function participant($ticketID) {
+        $myData = AdminCtrl::me();
+        $menus = AdminCtrl::getMenus($myData->role);
+
         $ticket = self::get([
             ['id', '=', $ticketID]
         ])
@@ -108,6 +111,8 @@ class TicketController extends Controller
         return view('admin.ticket.participant', [
             'participants' => $participants,
             'ticket' => $ticket,
+            'myData' => $myData,
+            'menus' => $menus,
             'toExport' => $toExport,
         ]);
     }

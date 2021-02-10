@@ -59,12 +59,14 @@
                                         </a>
 
                                         @csrf
-                                        @method("DELETE")
-                                        <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-trash"></i>
-                                            </span>
-                                        </button>
+                                        @if ($rundown->events->count() == 0)
+                                            @method("DELETE")
+                                            <button type="submit" class="btn btn-danger btn-icon-split" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </button>
+                                        @endif
                                     </form>
                                 </td>
                             </tr>

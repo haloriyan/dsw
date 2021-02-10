@@ -40,8 +40,13 @@
                         <td>{{ $participant->name }}</td>
                         <td>
                             <a href="{{ route('participant.view',$participant->id) }}" class="btn btn-info btn-icon-split">
-                                <span class="icon text-white-50">
+                                <span class="icon">
                                     <i class="fas fa-eye"></i>
+                                </span>
+                            </a>
+                            <a href="{{ route('participant.delete', $participant->id) }}" class="btn btn-danger btn-icon-split" onclick="return confirm('Yakin ingin menghapus peserta ini?')">
+                                <span class="icon">
+                                    <i class="fas fa-trash"></i>
                                 </span>
                             </a>
                         </td>
