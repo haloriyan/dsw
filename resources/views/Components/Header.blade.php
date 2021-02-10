@@ -111,7 +111,7 @@
                                         <a href="{{ route('user.profile') }}">
                                             <li>Profile</li>
                                         </a>
-                                        <a href="#">
+                                        <a href="{{ route('user.logout') }}">
                                             <li>Logout</li>
                                         </a>
                                     </ul>

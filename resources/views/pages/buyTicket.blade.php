@@ -44,6 +44,14 @@
         font-family: Arial;
         text-align: left;
     }
+    .mobile-100 {
+        width: 50% !important;
+    }
+    @media (max-width: 480px) {
+        .mobile-100 {
+            width: 100% !important;
+        }
+    }
     </style>
         <link rel='stylesheet' id='wp-block-library-css'  href='./wp-includes/css/dist/block-library/style.min.css?ver=5.5.3' type='text/css' media='all' />
     <link rel='stylesheet' id='wc-block-vendors-style-css'  href='{{ env('APP_URL') }}/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/vendors-style.css?ver=3.1.0' type='text/css' media='all' />
@@ -222,7 +230,7 @@
                         <div class="separator"></div>
                     </div>
                     <div class="text-center">
-                        <div class="d-inline-block w-50 shadow rounded p-5">
+                        <div class="d-inline-block mobile-100 shadow rounded p-5">
                             <form action="{{ route('ticket.buy.order') }}" method="POST" class="text-left" id="formBuy">
                                 {{ csrf_field() }}
                                 <input type="hidden" id="userID" value="{{ $myData->id }}">
