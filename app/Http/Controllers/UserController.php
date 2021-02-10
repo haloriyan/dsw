@@ -122,6 +122,12 @@ class UserController extends Controller
             'message' => "Pendaftaran berhasil. Silahkan login atau verifikasi email terlebih dahulu"
         ]);
     }
+    public function logout() {
+        $loggingOut = Auth::guard('user')->logout();
+        return redirect()->route('user.loginPage')->with([
+            'message' => "Berhasil logout"
+        ]);
+    }
     public function testMail() {
         $sen = Mail::to("riyan.satria.619@gmail.com")
         ->send(new NewUserNotification([

@@ -588,9 +588,9 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 	})
 </script>
 <script>
-    let teamID = select("#teamID").value;
-    if (!teamID) {
-        teamID = 0;
+    let teamID = select("#teamID");
+    if (teamID != null) {
+        teamID = teamID.value;
     }
     const createTeam = () => {
         select("#messageArea").classList.add('d-none');
