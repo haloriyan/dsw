@@ -44,11 +44,13 @@
                                     <i class="fas fa-eye"></i>
                                 </span>
                             </a>
-                            <a href="{{ route('participant.delete', $participant->id) }}" class="btn btn-danger btn-icon-split" onclick="return confirm('Yakin ingin menghapus peserta ini?')">
-                                <span class="icon">
-                                    <i class="fas fa-trash"></i>
-                                </span>
-                            </a>
+                            @if ($participant->tickets->count() == 0)
+                                <a href="{{ route('participant.delete', $participant->id) }}" class="btn btn-danger btn-icon-split" onclick="return confirm('Yakin ingin menghapus peserta ini?')">
+                                    <span class="icon">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

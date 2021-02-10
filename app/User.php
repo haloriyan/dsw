@@ -42,4 +42,7 @@ class User extends Authenticatable
     public function myTeam() {
         return $this->hasOne('App\Team', 'user_chief');
     }
+    public function tickets() {
+        return $this->hasMany('App\TicketOrder', 'user_id');
+    }
 }
