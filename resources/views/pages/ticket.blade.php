@@ -232,10 +232,13 @@
                             <div class="icon-box">
                                 <span class="fa fa-ticket"></span>
                             </div>
+                            @php
+                                $buttonDisplay = $ticket->price == 0 ? "Get Ticket" : "Buy Ticket";
+                            @endphp
                             <div class="title">{{ $ticket->event->title }}</div>
                             <div class="price">@currency($ticket->price) <span>{{ $ticket->name }}</span> </div>
                             <div class="text">{{ $ticket->description }}</div>
-                            <a href="{{ route('ticket.buy', $ticket->id) }}" target="_blank" class="theme-btn buy-btn">buy ticket</a>
+                            <a href="{{ route('ticket.buy', $ticket->id) }}" target="_blank" class="theme-btn buy-btn">{{ $buttonDisplay }}</a>
                         </div>
                     </div>
                 @endforeach

@@ -224,7 +224,7 @@
             <section class="price-section-two mt-4" style="background-color:#fff; background-image:url('https://54.179.228.148/wp-content/uploads/2020/10/chairs-2181994_1920.jpg');">
                 <div class="auto-container mt-4">
                     <!-- Sec Title -->
-                    <div class="sec-title centered mt-4">
+                    <div class="sec-title centered mt-4 d-none">
                         <h2>Get Your Tickets</h2>
                         <div class="title mt-3">{{ $ticket->event->title }}</div>
                         <div class="separator"></div>
@@ -236,14 +236,25 @@
                                 <input type="hidden" id="userID" value="{{ $myData->id }}">
                                 <input type="hidden" name="price" id="price" value="{{ $ticket->price }}">
                                 <input type="hidden" name="ticket_id" id="ticketID" value="{{ $ticket->id }}">
-                                <div class="mt-2">Qty :</div>
-                                <select name="qty" onchange="setQty(this.value)" class="box" style="width: 100% !important;">
-                                    <option value="0">-- PILIH QTY --</option>
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <option>{{ $i }}</option>
-                                    @endfor
-                                </select>
-                                <button class="lebar-100 primer mt-4">Order</button>
+                                <div class="d-none">
+                                    <div class="mt-2">Qty :</div>
+                                    <select name="qty" onchange="setQty(this.value)" class="box" style="width: 100% !important;">
+                                        <option value="1" selected>1</option>
+                                    </select>
+                                </div>
+                                @php
+                                    $action = $ticket->price == 0 ? "getting" : "buying";
+                                    $buttonDisplay = $ticket->price == 0 ? "Get Ticket" : "Buy Ticket";
+                                @endphp
+                                <p>
+                                    You are about to {{ $action }} for this ticket
+                                </p>
+                                <div class="rata-tengah">
+                                    <h3>{{ $ticket->name }}</h3>
+                                    <p>@currency($ticket->price)</p>
+                                    <div>{{ $ticket->event->title }}</div>
+                                </div>
+                                <button class="lebar-100 primer mt-4">{{ $buttonDisplay }}</button>
                             </form>
                         </div>
                     </div>
@@ -429,15 +440,16 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 <script src="{{ asset('js/base.js') }}"></script>
 <script>
     let state = {
-        qty: 0,
+        qty: 1,
         totalPay: 0,
         ticketID: 0,
         userID: 0
     }
+    state['userID'] = select("#userID").value;
+    state['ticketID'] = select("#ticketID").value;
+
     const setQty = val => {
         let price = select("#price").value;
-        state['userID'] = select("#userID").value;
-        state['ticketID'] = select("#ticketID").value;
         
         state['qty'] = val;
         state['totalPay'] = price * val;
@@ -447,7 +459,6 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
             alert("Please select qty first");
             return false;
         }
-        console.log(state);
         let csrfToken = select("input[name='_token']").value;
         let req = post("{{ route('ticket.buy.order') }}", {
             csrfToken: csrfToken,
@@ -457,8 +468,12 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
             total_pay: state.totalPay
         })
         .then(res => {
-            let orderID = res.id;
-            window.location = `{{ route('ticket.checkout') }}?orderID=${orderID}`;
+            if (res.status == 0) {
+                let orderID = res.id;
+                window.location = `{{ route('ticket.checkout') }}?orderID=${orderID}`;
+            }else {
+                window.location = `{{ route('user.myTicket') }}`;
+            }
         });
         e.preventDefault();
     }

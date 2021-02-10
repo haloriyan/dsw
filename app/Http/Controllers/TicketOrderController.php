@@ -30,7 +30,7 @@ class TicketOrderController extends Controller
             'user_id' => $req->user_id,
             'ticket_id' => $req->ticket_id,
             'qty' => $req->qty,
-            'total_pay' => $req->total_pay,
+            'total_pay' => $ticket->price,
             'status' => $status
         ]);
 

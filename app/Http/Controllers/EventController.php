@@ -70,10 +70,11 @@ class EventController extends Controller
         $eventType = EventType::all();
         $rundowns = RundownCtrl::get()->get();
 
-	return view('admin.event.edit')->with([
+	    return view('admin.event.edit', [
             'event' => $event,
             'myData' => $myData,
             'menus' => $menus,
+            'rundowns' => $rundowns,
             'eventTypes' => $eventType
         ]);
     }

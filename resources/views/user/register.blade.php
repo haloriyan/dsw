@@ -13,7 +13,7 @@
     <input type="password" class="box" name="password" required>
     <div class="mt-2">No. Telepon :</div>
     <input type="text" class="box" name="phone" required>
-    <div class="mt-2">Instansi :</div>
+    <div class="mt-2">Instansi/Universitas :</div>
     <input type="text" class="box" name="instance" required>
     <div class="mt-2">Jenis kelamin :</div>
     <select name="gender" class="box" required>

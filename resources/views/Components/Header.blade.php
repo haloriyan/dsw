@@ -67,8 +67,6 @@
                         </div>
                         <div class="navbar-collapse collapse scroll-nav clearfix" id="navbarSupportedContent">
                             <ul id="menu-header" class="navigation clearfix"><li id="menu-item-2943" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home page_item page-item-2085 current_page_item menu-item-2943"><a href="{{ route('user.index') }}" aria-current="page">Home</a></li>
-				<li id="menu-item-2620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2620"><a href="{{ route('user.ticket') }}">Tickets</a>
-				</li>
                                 <li id="menu-item-2620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2620"><a href="#">DSW 2020</a>
                                     <ul class="sub-menu">
                                         <li id="menu-item-3082" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3082"><a href="{{ route('user.rundown') }}">Rundown</a></li>
@@ -90,6 +88,7 @@
                                         @endforeach
                                     </ul>
                                 </li>
+                                <li id="menu-item-2620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2620"><a href="{{ route('user.ticket') }}">Tickets</a></li>
                                 <li id="menu-item-2276" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2276"><a href="{{ route('user.contact') }}">Contact Us</a></li>
                                 @if (Auth::guard('user')->check())
                                     <li id="menu-item-2276" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2276"><a href="{{ route('user.myTeam') }}">My Team</a></li>
@@ -112,6 +111,9 @@
                                     <ul>
                                         <a href="{{ route('user.profile') }}">
                                             <li>Profile</li>
+                                        </a>
+                                        <a href="{{ route('user.myTicket') }}">
+                                            <li>My Tickets</li>
                                         </a>
                                         <a href="{{ route('user.logout') }}">
                                             <li>Logout</li>

@@ -155,7 +155,7 @@ class UserController extends Controller
         $this->myData = self::me();
         $tickets = TicketCtrl::get()
         ->with('event')
-        ->get();
+        ->paginate(3);
 
         $faqs = FaqCtrl::get();
         $rundowns = RundownCtrl::get()->with('events')->get();

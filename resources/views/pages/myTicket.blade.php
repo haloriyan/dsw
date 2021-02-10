@@ -224,17 +224,20 @@
                                     <tr>
                                         <th>Ticket Name</th>
                                         <th>Event</th>
-                                        <th>Qty</th>
-                                        <th>Total Pay</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($tickets as $ticket)
+                                        @php
+                                            $status = $ticket->status == 0 ? "<span class='bg-merah rounded p-2 pl-3 pr-3'>Unpaid</span>" : "<span class='bg-hijau rounded p-2 pl-3 pr-3'>Paid</span>";
+                                        @endphp
                                         <tr>
                                             <td>{{ $ticket->ticket->name }}</td>
                                             <td>{{ $ticket->ticket->event->title }}</td>
-                                            <td>{{ $ticket->qty }}</td>
                                             <td>@currency($ticket->total_pay)</td>
+                                            <td>{!! $status !!}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

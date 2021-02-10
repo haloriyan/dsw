@@ -11,7 +11,7 @@ Route::get('invoice', "UserController@invoice")->name('user.invoice');
 Route::get('my-team', "UserController@myTeam")->name('user.myTeam');
 Route::get('active', "UserController@active")->name('user.active');
 
-Route::get('verification/{email}', "UserController@emailVerification");
+Route::get('verification/{email}', "UserController@emailVerification")->name('email.verification');
 
 Route::get('admin', function() {
 	return redirect()->route('admin.loginPage');
@@ -101,13 +101,13 @@ Route::group(['prefix' => 'ticket'], function() {
 	Route::post('complete', 'TicketOrderController@completeOrder')->name('ticket.completeOrder');
 });
 
-Route::group(['prefix' => 'ticketType'], function() {
-	Route::get('create', 'TicketTypeController@create')->name('ticketType.create')->middleware('Admin');
-	Route::post('store', 'TicketTypeController@store')->name('ticketType.store')->middleware('Admin');
-	Route::get('{id}/edit', 'TicketTypeController@edit')->name('ticketType.edit')->middleware('Admin');
-	Route::post('{id}/update', 'TicketTypeController@update')->name('ticketType.update')->middleware('Admin');
-	Route::delete('{id}/delete', 'TicketTypeController@delete')->name('ticketType.delete')->middleware('Admin');
-});
+// Route::group(['prefix' => 'ticketType'], function() {
+// 	Route::get('create', 'TicketTypeController@create')->name('ticketType.create')->middleware('Admin');
+// 	Route::post('store', 'TicketTypeController@store')->name('ticketType.store')->middleware('Admin');
+// 	Route::get('{id}/edit', 'TicketTypeController@edit')->name('ticketType.edit')->middleware('Admin');
+// 	Route::post('{id}/update', 'TicketTypeController@update')->name('ticketType.update')->middleware('Admin');
+// 	Route::delete('{id}/delete', 'TicketTypeController@delete')->name('ticketType.delete')->middleware('Admin');
+// });
 
 Route::group(['prefix' => 'timeline'], function() {
 	Route::get('create/{eventID?}', 'TimelineController@create')->name('timeline.create')->middleware('Admin');
