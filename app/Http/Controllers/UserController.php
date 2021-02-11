@@ -6,9 +6,10 @@ use Auth;
 use Mail;
 use Session;
 use App\User;
+use App\Exports\UserExport;
+use App\Mail\ResetPassword;
 use Illuminate\Http\Request;
 use App\Mail\NewUserNotification;
-use App\Exports\UserExport;
 
 
 use \Midtrans\Snap as Snap;
@@ -128,6 +129,67 @@ class UserController extends Controller
         $loggingOut = Auth::guard('user')->logout();
         return redirect()->route('user.loginPage')->with([
             'message' => "Berhasil logout"
+        ]);
+    }
+    public function forgotPassword() {
+        $message = Session::get('message');
+
+        return view('user.forgotPassword', [
+            'message' => $message
+        ]);
+    }
+    public function forgotPasswordProcess(Request $req) {
+        $email = $req->email;
+        $encodedEmail = base64_encode($email);
+
+        $user = User::where('email', $email)->first();
+        if ($user == "") {
+            return redirect()->route('user.forgotPassword')->withErrors([
+                "Maaf, kami tidak mengenali alamat email Anda"
+            ]);
+        }
+
+        $send = Mail::to($email)
+        ->send(new ResetPassword([
+            'user' => $user,
+            'encodedEmail' => $encodedEmail
+        ]));
+
+        return redirect()->route('user.forgotPassword')->with([
+            'message' => "Kami telah mengirim instruksi untuk mengatur ulang password Anda"
+        ]);
+    }
+    public function resetPassword($encodedEmail) {
+        $message = Session::get('message');
+        $email = base64_decode($encodedEmail);
+        $user = User::where('email', $email)->first();
+        
+        if ($user == '') {
+            return redirect()->route('user.error', 403);
+        }
+
+        return view('user.resetPassword', [
+            'message' => $message,
+            'encodedEmail' => $encodedEmail
+        ]);
+    }
+    public function resetPasswordProcess(Request $req) {
+        $email = $req->encodedEmail;
+        $password = $req->password;
+        $passwordRetype = $req->passwordRetype;
+        
+        if ($password != $passwordRetype) {
+            return redirect()->route('user.resetPassword', $req->encodedEmail)->withErrors([
+                "Kedua password tidak sama. Silahkan ulangi kembali"
+            ]);
+        }
+
+        $updateData = User::where('email', $email)->update([
+            'password' => bcrypt($passwordRetype)
+        ]);
+
+        return redirect()->route('user.loginPage')->with([
+            'message' => "Kata sandi berhasil diatur. Silahkan login menggunakan password baru"
         ]);
     }
     public function testMail() {

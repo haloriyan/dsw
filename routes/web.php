@@ -11,6 +11,11 @@ Route::get('invoice', "UserController@invoice")->name('user.invoice');
 Route::get('my-team', "UserController@myTeam")->name('user.myTeam');
 Route::get('active', "UserController@active")->name('user.active');
 
+Route::get('forgot-password', "UserController@forgotPassword")->name('user.forgotPassword');
+Route::post('forgot-password', "UserController@forgotPasswordProcess")->name('user.forgotPassword.process');
+Route::get('reset-password/{email}', "UserController@resetPassword")->name('user.resetPassword');
+Route::post('reset-password', "UserController@resetPasswordProcess")->name('user.resetPassword.process');
+
 Route::get('verification/{email}', "UserController@emailVerification")->name('email.verification');
 
 Route::get('admin', function() {
