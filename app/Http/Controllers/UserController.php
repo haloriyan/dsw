@@ -242,7 +242,7 @@ class UserController extends Controller
         ]);
     }
     public function contactSend(Request $req) {
-        $send = Mail::to("riyan.satria.619@gmail.com")->send(new ContactForm([
+        $send = Mail::to(env("MAIL_RECIPIENT_ADDRESS"))->send(new ContactForm([
             'name' => $req->name,
             'email' => $req->email,
             'subject' => $req->subject,
