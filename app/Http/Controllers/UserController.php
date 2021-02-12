@@ -77,6 +77,10 @@ class UserController extends Controller
         $name = $req->name;
         $email = $req->email;
 
+        $this->validate($req, [
+            'email' => "unique:users"
+        ]);
+
         if ($req->via == "") {
             $datas = [
                 'name' => $name,
@@ -108,7 +112,7 @@ class UserController extends Controller
                 'email' => $email,
             ]
         ));
-        // $saveData = User::create($datas);
+        $saveData = User::create($datas);
 
         if ($req->via != "") {
             $myData = self::me();

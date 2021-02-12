@@ -5,6 +5,13 @@
 @section('content')
 <form action="{{ route('user.register') }}" method="POST">
     {{ csrf_field() }}
+    @if ($errors->count() > 0)
+        @foreach ($errors->all() as $err)
+            <div class="bg-merah-transparan rounded p-2">
+                {{ $err }}
+            </div>
+        @endforeach
+    @endif
     <div class="mt-2">Nama :</div>
     <input type="text" class="box" name="name" required>
     <div class="mt-2">Email :</div>
