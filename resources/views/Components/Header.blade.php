@@ -89,6 +89,7 @@
                                     </ul>
                                 </li>
                                 <li id="menu-item-2620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2620"><a href="{{ route('user.ticket') }}">Tickets</a></li>
+                                <li id="menu-item-2620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2620"><a href="{{ route('user.faq') }}">FAQ</a></li>
                                 <li id="menu-item-2276" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2276"><a href="{{ route('user.contact') }}">Contact Us</a></li>
                                 @if (Auth::guard('user')->check())
                                     <li id="menu-item-2276" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2276"><a href="{{ route('user.myTeam') }}">My Team</a></li>

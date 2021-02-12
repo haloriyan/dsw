@@ -467,7 +467,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                 <div class="icon-two"></div>
                 <div class="icon-three"><img src="{{ env('APP_URL') }}/wp-content/themes/miexpo/assets/images/icons/icon-24.png" alt="" /></div>
             </div>
-            <div class="outer-section clearfix">
+            <div class="outer-section clearfix d-none">
                 <!--Content Column-->
                 <div class="content-column">
                     <div class="content-box">

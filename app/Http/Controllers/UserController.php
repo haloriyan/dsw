@@ -224,7 +224,7 @@ class UserController extends Controller
         ->with('event')
         ->paginate(3);
 
-        $faqs = FaqCtrl::get();
+        $faqs = FaqCtrl::get()->get();
         $rundowns = RundownCtrl::get()->with('events')->get();
         
         return view('pages.index', [
