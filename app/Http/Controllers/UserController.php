@@ -490,4 +490,15 @@ class UserController extends Controller
             'message' => "Peserta berhasil dihapus"
         ]);
     }
+    public function faq() {
+        $faqs = FaqCtrl::get()
+        ->orderBy('type', 'ASC')
+        ->get();
+
+        return view('pages.faq', [
+            'faqs' => $faqs,
+            'eventTypes' => $this->eventTypes,
+            'myData' => $this->myData,
+        ]);
+    }
 }

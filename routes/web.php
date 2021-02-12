@@ -8,6 +8,7 @@ Route::get('contact', "UserController@contact")->name('user.contact');
 Route::post('contact', "UserController@contactSend")->name('user.contact.send');
 Route::get('ticket', "UserController@ticket")->name('user.ticket');
 Route::get('my-ticket', "UserController@myTicket")->name('user.myTicket');
+Route::get('faq', "UserController@faq")->name('user.faq');
 Route::get('invoice', "UserController@invoice")->name('user.invoice');
 Route::get('my-team', "UserController@myTeam")->name('user.myTeam');
 Route::get('active', "UserController@active")->name('user.active');

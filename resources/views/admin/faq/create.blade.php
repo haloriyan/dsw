@@ -37,11 +37,20 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <div class="form-group">
-                                            <strong>Pertanyaan: </strong>
+                                            <label for="type">Type :</label>
+                                            <select name="type" class="form-control">
+                                                <option value="">General</option>
+                                                @foreach ($types as $type)
+                                                    <option>{{ $type }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="question">Question :</label>
                                             <input type="text" name="question" class="form-control" required placeholder="Masukkan Pertanyaan">
                                         </div>
                                         <div class="form-group">
-                                            <strong>Jawaban: </strong>
+                                            <label for="answer">Answer :</label>
                                             <input type="text" name="answer" class="form-control" required placeholder="Masukkan Jawaban">
                                         </div>
                                     </div>

@@ -4,8 +4,6 @@
 
 @section('content')
 
-@section('content')
-
 <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Faq Edit</h1>
@@ -39,6 +37,18 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <input type="hidden" name="faq_id" value="{{ $faq->id }}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Type :</label>
+                                <select name="type" class="form-control">
+                                    <option value="">General</option>
+                                    @foreach ($types as $type)
+                                        @php
+                                            $isSelected = $faq->type == $type ? "selected='selected'" : "";
+                                        @endphp
+                                        <option {{ $isSelected }}>{{ $type }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <strong>Pertanyaan : </strong>

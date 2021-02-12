@@ -223,7 +223,7 @@ class AdminController extends Controller
 	}
 	public function faq() {
 		$myData = self::me();
-		$faqs = FaqCtrl::get();
+		$faqs = FaqCtrl::get()->get();
 		$menus = self::getMenus($myData->role);
 		
 		return view('admin.faq.index')->with([

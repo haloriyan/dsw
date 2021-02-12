@@ -28,6 +28,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Type</th>
                                             <th>Question</th>
                                             <th>Answer</th>
                                             <th></th>
@@ -36,8 +37,12 @@
                                     <tbody>
                                         @php $i = 1; @endphp
                                         @foreach ($faqs as $faq)
+                                            @php
+                                                $type = $faq->type == null ? "General" : $faq->type;
+                                            @endphp
                                             <tr>
                                                 <td>{{ $i++ }}</td>
+                                                <td>{{ $type }}</td>
                                                 <td>{{ $faq->question }}</td>
                                                 <td>{{ $faq->answer }}</td>
                                                 <td>

@@ -11,19 +11,21 @@ class FaqController extends Controller
 {
 	public static function get($filter = NULL) {
 		if ($filter == NULL) {
-			return Faq::all();
+			return new Faq;
 		}
-		return Faq::where($filter)->get();
+		return Faq::where($filter);
     }
 
     public function create()
     {
 		$myData = AdminCtrl::me();
 		$menus = AdminCtrl::getMenus($myData->role);
+		$types = explode(",", env("FAQ_TYPES"));
 		
         return view('admin.faq.create', [
 			'menus' => $menus,
-			'myData' => $myData
+			'myData' => $myData,
+			'types' => $types,
 		]);
     }
 
@@ -35,8 +37,10 @@ class FaqController extends Controller
 
 		$question = $req->question;
 		$answer   = $req->answer;
+		$type   = $req->type;
 
 		$saveData = Faq::create([
+			'type' => $type,
 			'question' => $question,
 			'answer' => $answer
 		]);
@@ -64,9 +68,11 @@ class FaqController extends Controller
 		$myData = AdminCtrl::me();
 		$menus = AdminCtrl::getMenus($myData->role);
 		$faq = Faq::find($id);
+		$types = explode(",", env("FAQ_TYPES"));
 
 		return view('admin.faq.edit')->with([
 			'faq' => $faq,
+			'types' => $types,
 			'menus' => $menus,
 			'myData' => $myData
 		]);
@@ -80,11 +86,12 @@ class FaqController extends Controller
 			'answer' => 'required'
 		]);
 
+		$type = $req->type;
 		$question = $req->question;
 		$answer   = $req->answer;
 
-		$saveData = Faq::where('id', $id)
-		->update([
+		$saveData = Faq::where('id', $id)->update([
+			'type' => $type,
 			'question' => $question,
 			'answer' => $answer
 		]);
