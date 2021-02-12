@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', "UserController@index")->name('user.index');
 Route::get('rundown', "UserController@rundown")->name('user.rundown');
 Route::get('contact', "UserController@contact")->name('user.contact');
+Route::post('contact', "UserController@contactSend")->name('user.contact.send');
 Route::get('ticket', "UserController@ticket")->name('user.ticket');
 Route::get('my-ticket', "UserController@myTicket")->name('user.myTicket');
 Route::get('invoice', "UserController@invoice")->name('user.invoice');

@@ -7,10 +7,11 @@ use Mail;
 use Session;
 use App\User;
 use App\Exports\UserExport;
-use App\Mail\ResetPassword;
 use Illuminate\Http\Request;
-use App\Mail\NewUserNotification;
 
+use App\Mail\ContactForm;
+use App\Mail\ResetPassword;
+use App\Mail\NewUserNotification;
 
 use \Midtrans\Snap as Snap;
 use \Midtrans\Config as Config;
@@ -232,10 +233,24 @@ class UserController extends Controller
     }
     public function contact() {
         $this->myData = self::me();
+        $message = Session::get('message');
 
         return view('pages.contact-us.index', [
             'eventTypes' => $this->eventTypes,
+            'message' => $message,
             'myData' => $this->myData
+        ]);
+    }
+    public function contactSend(Request $req) {
+        $send = Mail::to("riyan.satria.619@gmail.com")->send(new ContactForm([
+            'name' => $req->name,
+            'email' => $req->email,
+            'subject' => $req->subject,
+            'message' => $req->message,
+        ]));
+
+        return redirect()->route('user.contact')->with([
+            'message' => "We glad to hear this message from you. We will reply as soon as we can"
         ]);
     }
     public function event($id) {

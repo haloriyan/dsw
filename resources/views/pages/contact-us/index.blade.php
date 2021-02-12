@@ -208,6 +208,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                     color: var(--qlwapp-scheme-text);
                   }
                           </style>
+                <link rel="stylesheet" href="{{ asset('css/style.css') }}">
                 </head>
     <body data-rsssl=1 class="page-template page-template-elementor_header_footer page page-id-2257 wp-custom-logo theme-miexpo woocommerce-no-js elementor-default elementor-template-full-width elementor-kit-2523 elementor-page elementor-page-2257">
         <div class="page-wrapper">
@@ -247,11 +248,41 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                     <!-- Sec Title -->
                     <div class="sec-title centered">
                         <div class="title">Get In Touch With Us</div>
-                        <h2>Data Science Weekend 2020</h2>
+                        <h2>Data Science Weekend 2021</h2>
                         <div class="separator"></div>
                     </div>
-                    
+
                     <div class="row clearfix">
+                        <div class="info-block col-lg-8 col-md-12 col-sm-12">
+                            @if ($message != "")
+                                <div class="bg-hijau-transparan rounded p-2">
+                                    {{ $message }}
+                                </div>
+                            @endif
+                            <form action="{{ route('user.contact.send') }}" method="POST">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <label for="name">Name :</label>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email :</label>
+                                    <input type="email" class="form-control" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject :</label>
+                                    <input type="text" class="form-control" name="subject" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message :</label>
+                                    <textarea name="message" class="form-control" rows="8"></textarea>
+                                </div>
+                                <button class="w-100 btn btn-lg btn-primary mt-3">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="row clearfix d-none">
                                                                         <!-- Info Block -->
                             <div class="info-block col-lg-4 col-md-6 col-sm-12">
                                 <div class="inner-box">
