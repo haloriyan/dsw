@@ -46,7 +46,10 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Harga :</label>
-                    <input type="number" class="form-control" name="price">
+                    <input type="number" class="form-control" name="price" id="price">
+                    <div class="mt-3">
+                        <input type="checkbox" id="free" onchange="setFree()"> <label for="free">Free</label>
+                    </div>
                 </div>
                 <div class="text-right">
                     <button class="btn btn-success">Submit</button>
@@ -64,5 +67,21 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sb-admin/js/demo/datatables-demo.js') }}"></script>
+    <script>
+        let isFree = false;
+
+        const setFree = () => {
+            isFree = !isFree;
+            if (isFree) {
+                select("#price").value = 0;
+                select("#price").style.display = "none";
+                select("#price").setAttribute('readonly');
+            }else {
+                select("#price").style.display = "block";
+                select("#price").removeAttribute('readonly');
+            }
+            console.log(isFree);
+        }
+    </script>
 
 @endsection

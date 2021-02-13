@@ -338,9 +338,21 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                             </div>
                             @php
                                 $buttonDisplay = $ticket->price == 0 ? "Get Ticket" : "Buy Ticket";
+                                if ($ticket->price == 0) {
+                                    $buttonDisplay = "Get Ticket";
+                                }else {
+                                    $buttonDisplay = "Buy Ticket";
+                                }
                             @endphp
                             <div class="title">{{ $ticket->event->title }}</div>
-                            <div class="price">@currency($ticket->price)<span>{{ $ticket->name }}</span></div>
+                            <div class="price">
+                                @if ($ticket->price == 0)
+                                    FREE
+                                @else
+                                    @currency($ticket->price)
+                                @endif
+                                <span>{{ $ticket->name }}</span>
+                            </div>
                             <div class="text">{{ $ticket->description }}</div>
                             <a href="{{ route('ticket.buy', $ticket->id) }}" target="_blank" rel="nofollow" class="theme-btn buy-btn">{{ $buttonDisplay }}</a>
                         </div>

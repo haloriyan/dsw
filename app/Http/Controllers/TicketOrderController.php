@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Mail;
+use Carbon\Carbon;
 use App\TicketOrder;
 use App\Mail\CheckoutTicket;
 
@@ -19,10 +20,15 @@ class TicketOrderController extends Controller
         return TicketOrder::where($filter);
     }
     public function buy(Request $req) {
+        date_default_timezone_set('Asia/Jakarta');
+        
         $myData = UserCtrl::me();
         $ticket = TicketCtrl::get([
             ['id', '=', $req->ticket_id]
         ])->first();
+
+        $dateNow = date('Y-m-d H:i:s');
+        $dueDate = Carbon::parse($dateNow)->addHours(24);
 
         $status = $ticket->price > 0 ? 0 : 1;
 
@@ -31,7 +37,8 @@ class TicketOrderController extends Controller
             'ticket_id' => $req->ticket_id,
             'qty' => $req->qty,
             'total_pay' => $ticket->price,
-            'status' => $status
+            'status' => $status,
+            'due_date' => $dueDate
         ]);
 
         return response()->json($order);

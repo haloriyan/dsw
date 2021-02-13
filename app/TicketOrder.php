@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TicketOrder extends Model
 {
     protected $fillable = [
-        'ticket_id','user_id','qty','total_pay','status'
+        'ticket_id','user_id','qty','total_pay','status','due_date'
     ];
 
     public function ticket() {

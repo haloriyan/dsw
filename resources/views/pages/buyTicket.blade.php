@@ -251,7 +251,11 @@
                                 </p>
                                 <div class="rata-tengah">
                                     <h3>{{ $ticket->name }}</h3>
-                                    <p>@currency($ticket->price)</p>
+                                    @if ($ticket->price == 0)
+                                        <p>FREE</p>
+                                    @else
+                                        <p>@currency($ticket->price)</p>
+                                    @endif
                                     <div>{{ $ticket->event->title }}</div>
                                 </div>
                                 <button class="lebar-100 primer mt-4">{{ $buttonDisplay }}</button>

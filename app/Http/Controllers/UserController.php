@@ -421,7 +421,6 @@ class UserController extends Controller
         
         $tickets = TicketOrderCtrl::get([
             ['user_id', '=', $myData->id],
-            ['status', '=',  1]
         ])
         ->with('ticket.event')
         ->get();

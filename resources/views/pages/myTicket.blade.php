@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+    date_default_timezone_set('Asia/Jakarta');
+@endphp
 <!doctype html>
 <html lang="en-US">
 <head>
@@ -226,6 +230,7 @@
                                         <th>Event</th>
                                         <th>Price</th>
                                         <th>Status</th>
+                                        <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -238,6 +243,20 @@
                                             <td>{{ $ticket->ticket->event->title }}</td>
                                             <td>@currency($ticket->total_pay)</td>
                                             <td>{!! $status !!}</td>
+                                            <td>
+                                                @php
+                                                    $now = Carbon::now();
+                                                    $dueDate = Carbon::parse($ticket->due_date);
+                                                    $minutes = $dueDate->diffInMinutes($now);
+                                                @endphp
+                                                @if ($ticket->status == 0 && $minutes > 0)
+                                                    <a href="{{ route('ticket.checkout', ['orderID' => $ticket->id]) }}" class="bg-primer rounded p-2 pl-3 pr-3">
+                                                        Pay Now!
+                                                    </a>
+                                                @else
+                                                    Expired
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

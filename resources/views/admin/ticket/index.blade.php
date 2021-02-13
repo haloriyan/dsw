@@ -45,7 +45,13 @@ use \Carbon\Carbon;
                         <td>{{ $ticket->event->title }}</td>
                         <td>{{ $ticket->name }}</td>
                         <td>{{ $ticket->description }}</td>
-                        <td>{{ $ticket->price }}</td>
+                        <td>
+                            @if ($ticket->price == 0)
+                                FREE
+                            @else
+                                @currency($ticket->price)
+                            @endif
+                        </td>
                         <td>
                             <form action="{{ route('ticket.delete', [$ticket->id]) }}" method="POST">
                                 <a href="{{ route('admin.ticket.participant', $ticket->id) }}"
