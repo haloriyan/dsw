@@ -1,18 +1,13 @@
 @extends('layouts.admin')
 <style>
-    .iconDate {
-        margin: -28px 0 0 95%;
-    }
-
-    .iconDate2 {
-        margin: -28px 0 0 97.5%;
-    }
+    .iconDate { margin: -28px 0 0 95%; }
+    .iconDate2 { margin: -28px 0 0 97.5%; }
 </style>
 
 @section('title', 'Timeline')
 
 @php
-$types = ["Straight","Waves"];
+    $types = ["Straight","Waves"];
 @endphp
 
 @section('content')
@@ -59,53 +54,31 @@ $types = ["Straight","Waves"];
                     @endforeach
                 </select>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="openDate">Tanggal Pendaftaran :</label>
-                        <input type="text" name="open_date" id="openDate" class="form-control date"
-                            value="{{ $timeline->open_date }}">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
+            <div id="dateArea">
+                @foreach ($timeline->fields as $field)
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label>Item name :</label>
+                            <input type="text" class="form-control" name="name[]" value="{{ $field->name }}" required placeholder="ex: Registration, Main Event, etc">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Date Start :</label>
+                            <input type="text" class="date form-control" name="date_start[]" required value="{{ $field->date_start }}">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Date End :</label>
+                            <input type="text" class="date form-control" name="date_end[]" required value="{{ $field->date_end }}">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="closeDate">Tanggal Penutupan :</label>
-                        <input type="text" name="close_date" id="closeDate" class="form-control date"
-                            value="{{ $timeline->close_date }}">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="openDate2">Tanggal Pendaftaran Gelombang 2 (opsional) :</label>
-                        <input type="text" name="open_date_2" id="openDate2" class="form-control date" value="{{ $timeline->open_date_2 }}">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="closeDate2">Tanggal Penutupan Gelombang 2 (opsional) :</label>
-                        <input type="text" name="close_date_2" id="closeDate2" class="form-control date" value="{{ $timeline->close_date_2 }}">
-                        <i class="fas fa-fw fa-calendar iconDate"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="judgementDate">Tanggal Penjurian :</label>
-                <input type="text" name="judgement_date" id="judgementDate" class="form-control date"
-                    value="{{ $timeline->judgement_date }}">
-                <i class="fas fa-fw fa-calendar iconDate2"></i>
-            </div>
-            <div class="form-group">
-                <label for="mainDate">Tanggal Acara/Main :</label>
-                <input type="text" name="main_date" id="mainDate" class="form-control date"
-                    value="{{ $timeline->main_date }}">
-                <i class="fas fa-fw fa-calendar iconDate2"></i>
+                @endforeach
             </div>
 
+            <button class="btn btn-primary mt-3" type="button" onclick="moreDate()">
+                <i class="fas fa-plus mr-1"></i> date
+            </button>
+
             <div class="text-right">
-                <button class="btn btn-primary mt-2">Submit</button>
+                <button class="btn btn-success mt-4">Update</button>
             </div>
         </form>
     </div>
@@ -178,6 +151,32 @@ $types = ["Straight","Waves"];
 
         });
     });
+
+    $(".date").datepicker({
+        format: 'yyyy-mm-dd'
+    });
+
+    const moreDate = () => {
+        createElement({
+            el: 'div',
+            attributes: [
+                ['class', 'row mt-3']
+            ],
+            createTo: '#dateArea',
+            html: `<div class="col-md-6">
+    <label>Item name :</label>
+    <input type="text" class="form-control" name="name[]" placeholder="ex: Registration, Main Event, etc">
+</div>
+<div class="col-md-3">
+    <label>Date Start :</label>
+    <input type="text" class="date form-control" name="date_start[]">
+</div>
+<div class="col-md-3">
+    <label>Date End :</label>
+    <input type="text" class="date form-control" name="date_end[]">
+</div>`,
+        })
+    }
 </script>
 
 @endsection

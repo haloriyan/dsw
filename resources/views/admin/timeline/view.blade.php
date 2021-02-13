@@ -30,6 +30,24 @@
         <table class="table w-100">
             <thead>
                 <tr>
+                    <th>Item Name</th>
+                    <th>Date Start</th>
+                    <th>Date End</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($timeline->fields as $field)
+                    <tr>
+                        <td>{{ $field->name }}</td>
+                        <td>{{ Carbon::parse($field->date_start)->format('d M Y') }}</td>
+                        <td>{{ Carbon::parse($field->date_end)->format('d M Y') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <table class="table w-100 d-none">
+            <thead>
+                <tr>
                     <th>Pendaftaran</th>
                     <th>Penutupan</th>
                     @if ($timeline->open_date_2 != null)

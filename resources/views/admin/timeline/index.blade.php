@@ -39,8 +39,6 @@
                         <tr>
                             <th>No</th>
                             <th>Event</th>
-                            <th>Pendaftaran</th>
-                            <th>Penutupan</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -50,8 +48,6 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $timeline->event->title }}</td>
-                                <td>{{ Carbon::parse($timeline->open_date)->format('d M Y') }}</td>
-                                <td>{{ Carbon::parse($timeline->close_date)->format('d M Y') }}</td>
                                 <td>
                                     <form action="{{ route('timeline.delete', $timeline->id) }}" method="POST">
                                         <a href="{{ route('timeline.view',$timeline->id) }}" class="btn btn-primary btn-icon-split">

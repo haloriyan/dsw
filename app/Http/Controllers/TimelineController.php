@@ -48,15 +48,29 @@ class TimelineController extends Controller
         ]);
     }
     public function store(Request $req) {
+        $fields = [];
+        $names = $req->name;
+        $date_start = $req->date_start;
+        $date_end = $req->date_end;
+
+        $i = 0;
+        foreach ($names as $name) {
+            $iPP = $i++;
+            if ($name != null || $date_start[$iPP] != null || $date_end[$iPP] != null) {
+                array_push($fields, [
+                    'name' => $name,
+                    'date_start' => $date_start[$iPP],
+                    'date_end' => $date_end[$iPP],
+                ]);
+            }
+        }
+
+        $fields = json_encode($fields);
+        
         $saveData = Timeline::create([
             'event_id' => $req->event_id,
             'type' => $req->type,
-            'open_date' => $req->open_date,
-            'close_date' => $req->close_date,
-            'open_date_2' => $req->open_date_2,
-            'close_date_2' => $req->close_date_2,
-            'judgement_date' => $req->judgement_date,
-            'main_date' => $req->main_date,
+            'fields' => $fields
         ]);
 
         return redirect()->route('admin.timeline')->with([
@@ -69,6 +83,7 @@ class TimelineController extends Controller
 
         $timeline = Timeline::where('id', $id)->with('event')->first();
         $events = EventCtrl::get()->get();
+        $timeline->fields = json_decode($timeline->fields, FALSE);
 
         $eventsHasNoTimeline = [];
         foreach ($events as $evt) {
@@ -85,15 +100,29 @@ class TimelineController extends Controller
         ]);
     }
     public function update($id, Request $req) {
+        $fields = [];
+        $names = $req->name;
+        $date_start = $req->date_start;
+        $date_end = $req->date_end;
+
+        $i = 0;
+        foreach ($names as $name) {
+            $iPP = $i++;
+            if ($name != null || $date_start[$iPP] != null || $date_end[$iPP] != null) {
+                array_push($fields, [
+                    'name' => $name,
+                    'date_start' => $date_start[$iPP],
+                    'date_end' => $date_end[$iPP],
+                ]);
+            }
+        }
+
+        $fields = json_encode($fields);
+
         $updateData = Timeline::where('id', $id)->update([
             'event_id' => $req->event_id,
             'type' => $req->type,
-            'open_date' => $req->open_date,
-            'close_date' => $req->close_date,
-            'open_date_2' => $req->open_date_2,
-            'close_date_2' => $req->close_date_2,
-            'judgement_date' => $req->judgement_date,
-            'main_date' => $req->main_date,
+            'fields' => $fields,
         ]);
 
         return redirect()->route('admin.timeline')->with([
@@ -111,6 +140,8 @@ class TimelineController extends Controller
         $myData = AdminCtrl::me();
         $menus = AdminCtrl::getMenus($myData->role);
         $timeline = Timeline::where('id', $id)->with('event')->first();
+
+        $timeline->fields = json_decode($timeline->fields, FALSE);
 
         return view('admin.timeline.view', [
             'timeline' => $timeline,
