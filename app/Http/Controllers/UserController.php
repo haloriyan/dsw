@@ -265,6 +265,8 @@ class UserController extends Controller
         ->with('timeline')
         ->first();
 
+        $event->timeline->fields = json_decode($event->timeline->fields, FALSE);
+
         return view('pages.event', [
             'event' => $event,
             'eventTypes' => $this->eventTypes,

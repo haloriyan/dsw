@@ -288,56 +288,40 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 			<div class="elementor-column-wrap elementor-element-populated">
 							<div class="elementor-widget-wrap">
 						<div class="elementor-element elementor-element-b86404e elementor-widget elementor-widget-heading" data-id="b86404e" data-element_type="widget" data-widget_type="heading.default">
-				<div class="elementor-widget-container">
-			<h2 class="elementor-heading-title elementor-size-default">Timeline Event</h2>		</div>
-				</div>
-				<div class="elementor-element elementor-element-f0caaad elementor-widget elementor-widget-timeline-widget-addon" data-id="f0caaad" data-element_type="widget" data-widget_type="timeline-widget-addon.default">
-				<div class="elementor-widget-container">
-			<div id="twae-horizontal-wrapper" class="twae-wrapper twae-horizontal swiper-container" data-slidestoshow = "5" data-autoplay="false">
-    <div class="twae-horizontal-timeline swiper-wrapper"><div class="swiper-slide no-height"><div class="twae-label-extra-label"><div>
-                    <span class="twae-label" >{{ Carbon::parse($event->timeline->open_date)->format('d M Y') }}</span> 
-                    <span class="twae-extra-label" >DSW</span>
-                </div></div>
-                <div class="twae-icon"></div><div class="twae-story-info">
-                                        
-                    <span class="twae-title">Pendaftaran</span>
-                    <div class="twae-description"></div>                        
-                </div>
-            </div><div class="swiper-slide no-height"><div class="twae-label-extra-label"><div>
-                    <span class="twae-label" >{{ Carbon::parse($event->timeline->close_date)->format('d M Y') }}</span> 
-                    <span class="twae-extra-label" >DSW</span>
-                </div></div>
-                <div class="twae-icon"></div><div class="twae-story-info">
-                                        
-                    <span class="twae-title">Penutupan</span>
-                    <div class="twae-description"></div>                        
-                </div>
-            </div><div class="swiper-slide no-height"><div class="twae-label-extra-label"><div>
-                    <span class="twae-label" >{{ Carbon::parse($event->timeline->judgement_date)->format('d M Y')  }}</span> 
-                    <span class="twae-extra-label" >DSW</span>
-                </div></div>
-                <div class="twae-icon"></div><div class="twae-story-info">
-                                        
-                    <span class="twae-title">Penjurian</span>
-                    <div class="twae-description"></div>                        
-                </div>
-            </div><div class="swiper-slide no-height"><div class="twae-label-extra-label"><div>
-                    <span class="twae-label" >{{ Carbon::parse($event->timeline->main_date)->format('d M Y') }}</span> 
-                    <span class="twae-extra-label" >DSW</span>
-                </div></div>
-                <div class="twae-icon"></div><div class="twae-story-info">
-                                        
-                    <span class="twae-title">Winner announcement</span>
-                    <div class="twae-description"></div>                        
-                </div>
-            </div> </div>
+							<div class="elementor-widget-container">
+								<h2 class="elementor-heading-title elementor-size-default">Timeline Event</h2>		
+							</div>
+						</div>
+<div class="elementor-element elementor-element-f0caaad elementor-widget elementor-widget-timeline-widget-addon" data-id="f0caaad" data-element_type="widget" data-widget_type="timeline-widget-addon.default">
+	<div class="elementor-widget-container">
+		<div id="twae-horizontal-wrapper" class="twae-wrapper twae-horizontal swiper-container" data-slidestoshow = "5" data-autoplay="false">
+			<div class="twae-horizontal-timeline swiper-wrapper">
+				@if ($event->timeline != null)
+					@foreach ($event->timeline->fields as $field)
+					<div class="swiper-slide no-height">
+						<div class="twae-label-extra-label">
+							<div>
+								<span class="twae-label">
+									{{ Carbon::parse($field->date_start)->format('d M Y') }}
+								</span> 
+								<span class="twae-extra-label d-none">DSW</span>
+							</div>
+						</div>
+						<div class="twae-icon"></div>
+						<div class="twae-story-info">                    
+							<span class="twae-title mt-3">{{ $field->name }}</span>
+							<div class="twae-description"></div>                        
+						</div>
+					</div>
+					@endforeach
+				@endif
+			</div>
     <!-- Add Pagination -->        
     <div class="twae-pagination"></div>
     <!-- Add Arrows -->
     <div class="twae-button-prev twae-icon-left-open-big"></div>
     <div class="twae-button-next twae-icon-right-open-big"></div>
     </div>		</div>
-				</div>
 				<div class="elementor-element elementor-element-e8d6b96 elementor-widget elementor-widget-spacer" data-id="e8d6b96" data-element_type="widget" data-widget_type="spacer.default">
 				<div class="elementor-widget-container">
 					<div class="elementor-spacer">
@@ -375,8 +359,29 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 							</div>
 		</div>
 				</div>
+				<section class="mt-4">
+					<p>{{ $event->description }}</p>
+				</section>
+				<div class="row mt-4">
+					<div class="col-md-6 mt-3">
+						<h3>Terms and Conditions :</h3>
+						<ul>
+							@foreach (explode(",", $event->requirements) as $requirement)
+								<li>{{ $requirement }}</li>
+							@endforeach
+						</ul>
+					</div>
+					<div class="col-md-6 mt-3">
+						<h3>Prize :</h3>
+						<ul>
+							@foreach (explode(",", $event->prize) as $prize)
+								<li>{{ $prize }}</li>
+							@endforeach
+						</ul>
+					</div>
 				</div>
-				<section class="elementor-section elementor-inner-section elementor-element elementor-element-ff36d7a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ff36d7a" data-element_type="section">
+				</div>
+				<section class="d-none elementor-section elementor-inner-section elementor-element elementor-element-ff36d7a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ff36d7a" data-element_type="section">
 						<div class="elementor-container elementor-column-gap-default">
 							<div class="elementor-row">
 								<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-5b6e0cd" data-id="5b6e0cd" data-element_type="column">
@@ -396,12 +401,12 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 										</div>
 									</div>
 								</div>
-								<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-5b6e0cd" data-id="5b6e0cd" data-element_type="column">
+								<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-5b6e0cd" data-id="5b6e0cd" data-element_type="column">
 									<div class="elementor-column-wrap elementor-element-populated">
 										<div class="elementor-widget-wrap">
 											<div class="elementor-element elementor-element-40dae9c elementor-widget elementor-widget-heading" data-id="40dae9c" data-element_type="widget" data-widget_type="heading.default">
 												<div class="elementor-widget-container">
-													<h2 class="elementor-heading-title">Persyaratan dan Ketentuan Peserta :</h2>
+													<h2 class="elementor-heading-title">Terms and Conditions :</h2>
 													<div class="elementor-element elementor-element-65d008f elementor-widget elementor-widget-text-editor" data-id="65d008f" data-element_type="widget" data-widget_type="text-editor.default">
 														<div class="elementor-widget-container">
 															<div class="elementor-text-editor elementor-clearfix">
@@ -423,7 +428,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 							<div class="elementor-widget-wrap">
 						<div class="elementor-element elementor-element-76b9360 elementor-widget elementor-widget-heading" data-id="76b9360" data-element_type="widget" data-widget_type="heading.default">
 				<div class="elementor-widget-container">
-					<h2 class="elementor-heading-title">Hadiah :</h2>
+					<h2 class="elementor-heading-title">Prize :</h2>
 							<div class="elementor-element elementor-element-65d008f elementor-widget elementor-widget-text-editor" data-id="65d008f" data-element_type="widget" data-widget_type="text-editor.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-text-editor elementor-clearfix">
@@ -713,41 +718,7 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 	})
 </script>
 <script>
-	function CountDownTimer(dt, id)
-    {
-        var end = new Date(dt);
-
-        var _second = 1000;
-        var _minute = _second * 60;
-        var _hour = _minute * 60;
-        var _day = _hour * 24;
-        var timer;
-
-        function showRemaining() {
-            var now = new Date();
-            var distance = end - now;
-            if (distance < 0) {
-				console.log("expierd");
-                clearInterval(timer);
-
-                return;
-            }
-            var days = Math.floor(distance / _day);
-            var hours = Math.floor((distance % _day) / _hour);
-            var minutes = Math.floor((distance % _hour) / _minute);
-            var seconds = Math.floor((distance % _minute) / _second);
-
-			let timerArea = selectAll(".time-countdown .counter-column .count");
-			timerArea[0].innerText = days;
-			timerArea[1].innerText = hours;
-			timerArea[2].innerText = minutes;
-			timerArea[3].innerText = seconds;
-        }
-
-        timer = setInterval(showRemaining, 1000);
-    }
-
-	CountDownTimer("{{ Carbon::parse($event->timeline->open_date)->format('m/d/Y') }} 00:01 AM", "test");
+	
 </script>
 </div></body>
 </html>
