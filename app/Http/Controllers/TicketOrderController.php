@@ -26,7 +26,8 @@ class TicketOrderController extends Controller
             ['id', '=', $req->ticket_id]
         ])->first();
 
-        $tiketOrder = TicketOrder::where('user_id', $myData->id);
+        $tiketOrder = TicketOrder::where('user_id', $myData->id)->where('ticket_id', $req->ticket_id)->first();
+        // dd($tiketOrder);
 
         $dateNow = date('Y-m-d H:i:s');
         $dueDate = Carbon::parse($dateNow)->addHours(24);
@@ -35,7 +36,7 @@ class TicketOrderController extends Controller
 
         if(empty($tiketOrder)) {
                 $order = TicketOrder::create([
-                'user_id' => $req->user_id,
+                'user_id' => $myData->id,
                 'ticket_id' => $req->ticket_id,
                 'qty' => $req->qty,
                 'total_pay' => $ticket->price,
@@ -43,10 +44,12 @@ class TicketOrderController extends Controller
                 'due_date' => $dueDate
             ]);
     
-            return response()->json($order);
+            return redirect()->route('user.myTicket')->with([
+                'message' => "Order Completed"
+            ]);
         } else {
             return redirect()->route('user.myTicket')->with([
-                'message' => "Sorry just can buy one ticket"
+                'message' => "Sorry just can buy one ticket for one event"
             ]);
         }
         

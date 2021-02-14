@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name','email','password','employment_status','reason','gender','address','phone','instance',
-        'social_linkedin','social_medium','social_instagram','social_facebook', 'social_tablue',
+        'social_linkedin','social_medium','social_tablue',
         'interested_with_dsi','has_joined_dsi','is_active'
     ];
 

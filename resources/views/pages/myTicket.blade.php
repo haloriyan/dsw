@@ -221,9 +221,9 @@
                         <h2>My Tickets</h2>
                         <div class="separator"></div>
                     </div>
-                     @if ($message != "")
+                     @if ($message ?? '' != "")
                         <div class="bg-hijau-transparan p-2 rounded">
-                            {{ $message }}
+                            {{ $message ?? '' }}
                         </div>
                     @endif
                     @if ($errors->count() > 0)
@@ -253,7 +253,9 @@
                                         <tr>
                                             <td>{{ $ticket->ticket->name }}</td>
                                             <td>{{ $ticket->ticket->event->title }}</td>
-                                            <td>@currency($ticket->total_pay)</td>
+                                            <td>
+                                                @currency($ticket->total_pay)
+                                            </td>
                                             <td>{!! $status !!}</td>
                                             <td>
                                                 @php

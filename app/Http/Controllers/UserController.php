@@ -389,8 +389,8 @@ class UserController extends Controller
             'social_linkedin' => $req->social_linkedin,
             'social_tablue'   => $req->social_tablue,
             'social_medium' => $req->social_medium,
-            'social_instagram' => $req->social_instagram,
-            'social_facebook' => $req->social_facebook,
+           // 'social_instagram' => $req->social_instagram,
+           // 'social_facebook' => $req->social_facebook,
         ]);
 
         return redirect()->route('user.profile');
