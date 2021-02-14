@@ -3,13 +3,13 @@
         <div style="margin: 5%;">   
             <h1>Data Science Weekend</h1>
             <p style="text-align: left;margin-top: 35px;line-height: 35px;">
-                Terima kasih telah membeli tiket {{ $ticket->name }} untuk event {{ $event->title }}. Berikut adalah detail order tiket Anda
+                Thank you for purchased ticket {{ $ticket->name }} for {{ $event->title }}. Here the details :
             </p>
             <br /><br />
             <p style="text-align: left;margin-top: 35px;line-height: 35px;">
                 <b>Event :</b> {{ $event->title }}<br />
-                <b>Nama Tiket :</b> {{ $ticket->name }}<br />
-                <b>Status :</b> Lunas
+                <b>Ticket Name :</b> {{ $ticket->name }}<br />
+                <b>Status :</b> Paid
             </p>
             <br /><br />
             <p style="text-align: left;margin-top: 35px;line-height: 35px;">

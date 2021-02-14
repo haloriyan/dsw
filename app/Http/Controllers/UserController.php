@@ -65,7 +65,7 @@ class UserController extends Controller
         if (!$loggingIn) {
             return redirect()->route('user.loginPage', [
                 'ref' => $req->ref
-            ])->withErrors(['Email atau Password salah']);
+            ])->withErrors(['Wrong entered email and/or password']);
         }
         if ($req->ref != "") {
             return redirect($req->ref);
@@ -127,13 +127,13 @@ class UserController extends Controller
         }
 
         return redirect()->route('user.loginPage')->with([
-            'message' => "Pendaftaran berhasil. Silahkan login atau verifikasi email terlebih dahulu"
+            'message' => "You are registered now. Please login or verify your email first"
         ]);
     }
     public function logout() {
         $loggingOut = Auth::guard('user')->logout();
         return redirect()->route('user.loginPage')->with([
-            'message' => "Berhasil logout"
+            'message' => "Successfully logged out"
         ]);
     }
     public function forgotPassword() {
@@ -150,7 +150,7 @@ class UserController extends Controller
         $user = User::where('email', $email)->first();
         if ($user == "") {
             return redirect()->route('user.forgotPassword')->withErrors([
-                "Maaf, kami tidak mengenali alamat email Anda"
+                "Sorry, we could not recognize your email address"
             ]);
         }
 
@@ -161,7 +161,7 @@ class UserController extends Controller
         ]));
 
         return redirect()->route('user.forgotPassword')->with([
-            'message' => "Kami telah mengirim instruksi untuk mengatur ulang password Anda"
+            'message' => "We has sent instruction to reset your password"
         ]);
     }
     public function resetPassword($encodedEmail) {
@@ -179,13 +179,13 @@ class UserController extends Controller
         ]);
     }
     public function resetPasswordProcess(Request $req) {
-        $email = $req->encodedEmail;
+        $email = base64_decode($req->encodedEmail);
         $password = $req->password;
         $passwordRetype = $req->passwordRetype;
         
         if ($password != $passwordRetype) {
             return redirect()->route('user.resetPassword', $req->encodedEmail)->withErrors([
-                "Kedua password tidak sama. Silahkan ulangi kembali"
+                "Both of password is not same. Please try again"
             ]);
             
         } elseif ($password == $passwordRetype) {
@@ -195,7 +195,7 @@ class UserController extends Controller
         }
 
         return redirect()->route('user.loginPage')->with([
-            'message' => "Kata sandi berhasil diatur. Silahkan login menggunakan password baru"
+            'message' => "New password has been set. Please login using your new password"
         ]);
     }
     public function testMail() {
@@ -483,7 +483,7 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('user.loginPage')->with([
-            'message' => "Akun Anda berhasil diaktifkan, silahkan login"
+            'message' => "Your account has been activated, you can login now"
         ]);
     }
     public function delete($userID) {

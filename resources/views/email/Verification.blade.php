@@ -3,11 +3,11 @@
         <div style="margin: 5%;">   
             <h1>Data Science Weekend</h1>
             <p style="text-align: left;margin-top: 35px;line-height: 35px;">
-                Terima kasih telah mendaftar sebagai peserta event Data Science Weekend 2021. Sebelum kamu bisa mengikuti acara DSW tahun ini, kamu harus mengaktifkan akun terlebih dahulu dengan mengklik tombol di bawah ini
+                Thank you for registering as member of Data Science Weekend 2021. Before you can attend this event, you have to activate your account by clicking this button
             </p>
             <br /><br />
             <a href="{{ route('email.verification', $email) }}" style="background: #f65271;color: #fff;text-decoration: none;padding: 18px 35px;border-radius: 6px;">
-                Aktifkan akun
+                Activate Account
             </a>
             <br /><br />
             <p style="text-align: left;margin-top: 35px;line-height: 35px;">
