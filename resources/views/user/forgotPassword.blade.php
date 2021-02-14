@@ -22,7 +22,7 @@
     <button class="lebar-100 primer mt-3">Reset Password</button>
 
     <div class="rata-tengah mt-3">
-        sudah ingat password? <a href="{{ route('user.loginPage') }}">login</a> sekarang
+        remember your password? <a href="{{ route('user.loginPage') }}">login</a> now
     </div>
 </form>
 @endsection

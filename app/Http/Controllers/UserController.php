@@ -187,11 +187,12 @@ class UserController extends Controller
             return redirect()->route('user.resetPassword', $req->encodedEmail)->withErrors([
                 "Kedua password tidak sama. Silahkan ulangi kembali"
             ]);
+            
+        } elseif ($password == $passwordRetype) {
+                $updateData = User::where('email', $email)->update([
+                'password' => bcrypt($password)
+            ]);
         }
-
-        $updateData = User::where('email', $email)->update([
-            'password' => bcrypt($passwordRetype)
-        ]);
 
         return redirect()->route('user.loginPage')->with([
             'message' => "Kata sandi berhasil diatur. Silahkan login menggunakan password baru"
@@ -386,6 +387,7 @@ class UserController extends Controller
             'instance' => $req->instance,
             'employment_status' => $req->employment_status,
             'social_linkedin' => $req->social_linkedin,
+            'social_tablue'   => $req->social_tablue,
             'social_medium' => $req->social_medium,
             'social_instagram' => $req->social_instagram,
             'social_facebook' => $req->social_facebook,

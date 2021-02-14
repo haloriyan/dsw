@@ -44,8 +44,42 @@
         font-family: Arial;
         text-align: left;
     }
-    .faq-item label {
+    /*.faq-item label {*/
+    /*    background-color: #f6506b;*/
+    /*    color: #fff;*/
+    /*    padding: 5px 15px;*/
+    /*    border-radius: 6px;*/
+    /*}*/
+    .label-general {
         background-color: #f6506b;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 6px;
+    }
+    
+    .label-storytelling {
+        background-color: #48426d;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 6px;
+    }
+    
+    .label-danthon {
+        background-color: #0a043c;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 6px;
+    }
+    
+    .label-workshop {
+        background-color: #a1cae2;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 6px;
+    }
+    
+    .label-concert {
+        background-color: #fce38a;
         color: #fff;
         padding: 5px 15px;
         border-radius: 6px;
@@ -236,7 +270,7 @@
                                     <div class="wrap">
                                         <div class="bg-putih faq-item rounded bayangan-5 smallPadding rata-kiri">
                                             <div class="wrap">
-                                                <label>{{ $type }}</label>
+                                                <label class="label-general">{{ $type }}</label>
                                                 <h3>{{ $faq->question }}</h3>
                                                 <p>{{ $faq->answer }}</p>
                                             </div>
@@ -248,7 +282,15 @@
                                     <div class="wrap">
                                         <div class="bg-putih faq-item rounded bayangan-5 smallPadding rata-kiri">
                                             <div class="wrap">
-                                                <label>{{ $type }}</label>
+                                                @if ($type == "Storytelling")
+                                                    <label class="label-storytelling">{{ $type }}</label>
+                                                @elseif ($type == "Danthon")
+                                                    <label class="label-danthon">{{ $type }}</label>
+                                                @elseif ($type == "Workshop")
+                                                    <label class="label-workshop">{{ $type }}</label>
+                                                @elseif ($type == "Concert/Talk")
+                                                    <label class="label-concert">{{ $type }}</label>
+                                                @endif
                                                 <h3>{{ $faq->question }}</h3>
                                                 <p>{{ $faq->answer }}</p>
                                             </div>
@@ -282,8 +324,8 @@
                         <div class="textwidget custom-html-widget">
                             <div id="footerSocmedArea">
 	                            <li><a href="https://www.facebook.com/DSWeekend/"><i class="fab fa-facebook"></i></a></li>
-	                            <li><a href="https://www.instagram.com/datascienceweekend/"><i class="fab fa-instagram"></i></a></li>
-	                            <li><a href="https://twitter.com/dsweekend"><i class="fab fa-twitter"></i></a></li>
+	                            <li><a href="https://www.instagram.com/datascienceweekends/"><i class="fab fa-instagram"></i></a></li>
+	                            <li><a href="https://twitter.com/dsweekends"><i class="fab fa-twitter"></i></a></li>
 	                            <li><a href="https://www.linkedin.com/in/data-science-indonesia/"><i class="fab fa-linkedin"></i></a></li>
                             </div>
                         </div>

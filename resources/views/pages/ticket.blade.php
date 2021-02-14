@@ -236,7 +236,11 @@
                                 $buttonDisplay = $ticket->price == 0 ? "Get Ticket" : "Buy Ticket";
                             @endphp
                             <div class="title">{{ $ticket->event->title }}</div>
-                            <div class="price">@currency($ticket->price) <span>{{ $ticket->name }}</span> </div>
+                            <div class="price">@if ($ticket->price == 0)
+                                    FREE
+                                @else
+                                    @currency($ticket->price)
+                                @endif<span>{{ $ticket->name }}</span> </div>
                             <div class="text">{{ $ticket->description }}</div>
                             <a href="{{ route('ticket.buy', $ticket->id) }}" target="_blank" class="theme-btn buy-btn">{{ $buttonDisplay }}</a>
                         </div>
@@ -302,8 +306,8 @@
 	<img src="{{ env('APP_URL') }}/wp-content/uploads/2020/10/dsw-logo-white.png" />
 </div></div></div><div id="custom_html-3" class="widget_text content footer-widget  widget_custom_html"><div class="textwidget custom-html-widget"><div id="footerSocmedArea">
 	<li><a href="https://www.facebook.com/DSWeekend/"><i class="fab fa-facebook"></i></a></li>
-	<li><a href="https://www.instagram.com/datascienceweekend/"><i class="fab fa-instagram"></i></a></li>
-	<li><a href="https://twitter.com/dsweekend"><i class="fab fa-twitter"></i></a></li>
+	<li><a href="https://www.instagram.com/datascienceweekends/"><i class="fab fa-instagram"></i></a></li>
+	<li><a href="https://twitter.com/dsweekends"><i class="fab fa-twitter"></i></a></li>
 	<li><a href="https://www.linkedin.com/in/data-science-indonesia/"><i class="fab fa-linkedin"></i></a></li>
 </div></div></div>            </div>
         </div>

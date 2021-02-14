@@ -55,7 +55,10 @@
     <button class="lebar-100 primer mt-3">Register</button>
 
     <div class="rata-tengah mt-3">
-        sudah punya akun? <a href="{{ route('user.loginPage') }}">login</a> sekarang
+        Already have account? <a href="{{ route('user.loginPage') }}">login</a> now
+    </div>
+    <div class="rata-tengah mt-2">
+        Forgot your password? <a href="{{ route('user.forgotPassword') }}">reset</a> password
     </div>
 </form>
 @endsection

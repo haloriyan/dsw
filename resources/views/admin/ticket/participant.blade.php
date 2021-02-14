@@ -36,6 +36,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
+                            <th>Email</th>
+                            <th>Phone</th>
                             <th>Quantity Ticket</th>
                             <th></th>
                             <th></th>
@@ -54,6 +56,8 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $participant->user->name }}</td>
+                                <td>{{ $participant->user->email }}</td>
+                                <td>{{ $participant->user->phone }}</td>
                                 <td>{{ $participant->qty }}</td>
                                 <td>
                                     {!! $displayStatus !!}

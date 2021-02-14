@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('social_linkedin')->nullable();
             $table->string('social_medium')->nullable();
+            $table->string('social_tablue')->billable();
             $table->string('social_instagram')->nullable();
             $table->string('social_facebook')->nullable();
             $table->tinyInteger('interested_with_dsi')->nullable();

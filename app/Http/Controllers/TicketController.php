@@ -101,6 +101,8 @@ class TicketController extends Controller
                 'Event' => $ticket->event->title,
                 'ID Peserta' => $participant->user->id,
                 'Nama Peserta' => $participant->user->name,
+                'Email Peserta' => $participant->user->email,
+                'Telephone Peserta' => $participant->user->phone,
                 "Quantity" => $participant->qty,
                 "Total Bayar" => $participant->total_pay,
                 "Status" => $status

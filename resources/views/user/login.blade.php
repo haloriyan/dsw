@@ -27,5 +27,8 @@
     <div class="rata-tengah mt-3">
         belum punya akun? <a href="{{ route('user.registerPage') }}">register</a> sekarang
     </div>
+    <div class="rata-tengah mt-2">
+        Forgot your password? <a href="{{ route('user.forgotPassword') }}">reset</a> password
+    </div>
 </form>
 @endsection

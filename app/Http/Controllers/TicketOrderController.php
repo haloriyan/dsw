@@ -21,27 +21,35 @@ class TicketOrderController extends Controller
     }
     public function buy(Request $req) {
         date_default_timezone_set('Asia/Jakarta');
-        
         $myData = UserCtrl::me();
         $ticket = TicketCtrl::get([
             ['id', '=', $req->ticket_id]
         ])->first();
+
+        $tiketOrder = TicketOrder::where('user_id', $myData->id);
 
         $dateNow = date('Y-m-d H:i:s');
         $dueDate = Carbon::parse($dateNow)->addHours(24);
 
         $status = $ticket->price > 0 ? 0 : 1;
 
-        $order = TicketOrder::create([
-            'user_id' => $req->user_id,
-            'ticket_id' => $req->ticket_id,
-            'qty' => $req->qty,
-            'total_pay' => $ticket->price,
-            'status' => $status,
-            'due_date' => $dueDate
-        ]);
-
-        return response()->json($order);
+        if(empty($tiketOrder)) {
+                $order = TicketOrder::create([
+                'user_id' => $req->user_id,
+                'ticket_id' => $req->ticket_id,
+                'qty' => $req->qty,
+                'total_pay' => $ticket->price,
+                'status' => $status,
+                'due_date' => $dueDate
+            ]);
+    
+            return response()->json($order);
+        } else {
+            return redirect()->route('user.myTicket')->with([
+                'message' => "Sorry just can buy one ticket"
+            ]);
+        }
+        
     }
     public function completeOrder(Request $req) {
         $id = $req->orderID;

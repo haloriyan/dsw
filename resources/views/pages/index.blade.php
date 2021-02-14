@@ -231,9 +231,9 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
         <section class="banner-section-two"  style="background-color:rgb(30, 32, 33);">
             <div class="outer-container clearfix">
                 <!--Image Column-->
-                <div class="image-column" style="background-image: url(https://smart.commonsupport.com/miexpo/wp-content/uploads/2019/07/image-2-1.jpg)">
+                <div class="image-column" style="background-image: url({{ env('APP_URL') }}/wp-content/themes/miexpo/assets/images/background/IMG-20210213-WA0010.jpg); background-size:cover;">
                     <div class="image">
-                        <img src="https://smart.commonsupport.com/miexpo/wp-content/uploads/2019/07/image-2-1.jpg" alt="">
+                        <img src="{{ env('APP_URL') }}/wp-content/themes/miexpo/assets/images/background/IMG-20210213-WA0010.jpg" alt="">
                     </div>
                 </div>
                 <!--Content Column-->
@@ -246,14 +246,14 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                             <div class="title">Hurry Up & Enroll Today, Before It’s Late!</div>
                             <h2>Data Science Weekend</h2>
                             <ul class="event-list">
-                                <li>Nov 28 - 30, 2020</li>
+                                <li>March 26 - 28, 2021</li>
                                 <li>Online</li>
                                 <li>Indonesia</li>
                             </ul>
                             <div class="separator"></div>
                         </div>
                         <div class="time-box">
-                            <div class="time-counter style-two"><div class="time-countdown clearfix" data-countdown="2020/11/28"></div></div>
+                            <div class="time-counter style-two"><div class="time-countdown clearfix" data-countdown="2021/03/26"></div></div>
                         </div>
                     </div>
                 </div>
@@ -291,9 +291,9 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 				</div>
 				</div>
 				<div class="elementor-element elementor-element-4c130148 elementor-aspect-ratio-169 elementor-widget elementor-widget-video" data-id="4c130148" data-element_type="widget" data-settings="{&quot;aspect_ratio&quot;:&quot;169&quot;}" data-widget_type="video.default">
-				<div class="elementor-widget-container">
+				<div class="elementor-widget-container row clearfix">
 					<div class="elementor-wrapper elementor-fit-aspect-ratio elementor-open-inline">
-					<video class="elementor-video" src="{{ env('APP_URL') }}/wp-content/uploads/2020/10/video-dsw.mp4" autoplay="" loop="" controls="" playsinline="" controlslist="nodownload" poster="{{ env('APP_URL') }}/wp-content/uploads/2020/10/Screenshot-from-2020-10-06-23-49-21.png"></video>
+					<img src="{{ env('APP_URL') }}/wp-content/uploads/2020/10/IMG-20210213-WA0011.jpg"></img>
 				</div>
 				</div>
 				</div>
@@ -359,7 +359,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                     </div>		
                 @endforeach
 			</div>
-			
+			<div class="sec-title centered"><a href="{{ route('user.ticket') }}" target="_blank" rel="nofollow" class="theme-btn btn-style-one mt-2">Show More Tickets...</a></div>
 		</div>
 	</section>
 	<!-- End Price Section Two -->
@@ -427,17 +427,17 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                                                                                 <div class="overlay-box">
                                                                                     <div class="overlay-inner">
                                                                                         <div class="content">
-                                                                                            <h3><a href="">Workshop</a></h3>
+                                                                                            <!--<h3><a href="">Workshop</a></h3>-->
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="event-time">08.00 <br> --- <br> 10.00</div>
+                                                                            <!--<div class="event-time">08.00 <br> --- <br> 10.00</div>-->
                                                                         </div>
                                                                     </div>
                                                                     <div class="info-column col-lg-7 col-sm-12 col-md-12">
                                                                         <div class="inner-column">
-                                                                            <div class="name">Data Science Weekend</div>
+                                                                            <!--<div class="name">Data Science Weekend</div>-->
                                                                             <h2><a href="">{{ $event->title }}</a></h2>
                                                                             <div class="text"><span style="font-weight: 400;">{{ $event->description 	}}...<br/> <a href="{{ route('user.event', $event->id) }}">Read More...</a>
                                                                             </div>
@@ -563,8 +563,8 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 	<img src="{{ env('APP_URL') }}/wp-content/uploads/2020/10/dsw-logo-white.png" />
 </div></div></div><div id="custom_html-3" class="widget_text content footer-widget  widget_custom_html"><div class="textwidget custom-html-widget"><div id="footerSocmedArea">
 	<li><a href="https://www.facebook.com/DSWeekend/"><i class="fab fa-facebook"></i></a></li>
-	<li><a href="https://www.instagram.com/datascienceweekend/"><i class="fab fa-instagram"></i></a></li>
-	<li><a href="https://twitter.com/dsweekend"><i class="fab fa-twitter"></i></a></li>
+	<li><a href="https://instagram.com/datascienceweekends?igshid=161y04cysnnem"><i class="fab fa-instagram"></i></a></li>
+	<li><a href="https://twitter.com/dsweekends"><i class="fab fa-twitter"></i></a></li>
 	<li><a href="https://www.linkedin.com/in/data-science-indonesia/"><i class="fab fa-linkedin"></i></a></li>
 </div></div></div>            </div>
         </div>

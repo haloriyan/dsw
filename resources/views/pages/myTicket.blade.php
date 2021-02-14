@@ -221,6 +221,18 @@
                         <h2>My Tickets</h2>
                         <div class="separator"></div>
                     </div>
+                     @if ($message != "")
+                        <div class="bg-hijau-transparan p-2 rounded">
+                            {{ $message }}
+                        </div>
+                    @endif
+                    @if ($errors->count() > 0)
+                        @foreach ($errors->all() as $err)
+                            <div class="bg-merah-transparan p-2 rounded">
+                                {{ $err }}
+                            </div>
+                        @endforeach
+                    @endif
                     <div class="text-center">
                         <div class="d-inline-block w-100 shadow text-left rounded p-5">
                             <table class="table table-bordered">
