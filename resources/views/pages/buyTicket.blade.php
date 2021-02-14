@@ -280,8 +280,8 @@
                         <div class="textwidget custom-html-widget">
                             <div id="footerSocmedArea">
 	                            <li><a href="https://www.facebook.com/DSWeekend/"><i class="fab fa-facebook"></i></a></li>
-	                            <li><a href="https://www.instagram.com/datascienceweekend/"><i class="fab fa-instagram"></i></a></li>
-	                            <li><a href="https://twitter.com/dsweekend"><i class="fab fa-twitter"></i></a></li>
+	                            <li><a href="https://www.instagram.com/datascienceweekends/"><i class="fab fa-instagram"></i></a></li>
+	                            <li><a href="https://twitter.com/dsweekends"><i class="fab fa-twitter"></i></a></li>
 	                            <li><a href="https://www.linkedin.com/in/data-science-indonesia/"><i class="fab fa-linkedin"></i></a></li>
                             </div>
                         </div>

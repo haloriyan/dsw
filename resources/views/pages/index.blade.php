@@ -564,7 +564,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 </div></div></div><div id="custom_html-3" class="widget_text content footer-widget  widget_custom_html"><div class="textwidget custom-html-widget"><div id="footerSocmedArea">
 	<li><a href="https://www.facebook.com/DSWeekend/"><i class="fab fa-facebook"></i></a></li>
 	<li><a href="https://instagram.com/datascienceweekends?igshid=161y04cysnnem"><i class="fab fa-instagram"></i></a></li>
-	<li><a href="https://twitter.com/dsweekends"><i class="fab fa-twitter"></i></a></li>
+	<li><a href="https://twitter.com/dsweekendss"><i class="fab fa-twitter"></i></a></li>
 	<li><a href="https://www.linkedin.com/in/data-science-indonesia/"><i class="fab fa-linkedin"></i></a></li>
 </div></div></div>            </div>
         </div>

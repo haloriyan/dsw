@@ -87,11 +87,11 @@
                     </div>
                     <div class="form-group">
                         <label for="name">No. Telepon :</label>
-                        <input value="{{ $speaker->phone }}" type="text" class="form-control" name="phone" required>
+                        <input value="{{ $speaker->phone }}" type="text" class="form-control" name="phone">
                     </div>
                     <div class="form-group">
                         <label for="email">Email :</label>
-                        <input value="{{ $speaker->email }}" type="email" class="form-control" name="email" required>
+                        <input value="{{ $speaker->email }}" type="email" class="form-control" name="email">
                     </div>
                     <div class="form-group">
                         <label for="name">Linkedin Profile :</label>

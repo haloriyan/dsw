@@ -225,7 +225,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
         <div class="auto-container">
             <div class="content">
                     <h1>{{ $event->title }}</h1><!-- Breadcrumb NavXT 6.2.0 -->
-<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Data Science Weekend." href="./../index.html" class="home"><span property="name">Data Science Weekend</span></a><meta property="position" content="1"></span> &gt; Danthon                </div>
+					<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Data Science Weekend." href="./../index.html" class="home"><span property="name">Data Science Weekend</span></a></div>
         </div>
     </section>
     <!--End Page Title-->
@@ -552,8 +552,8 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
 	<img src="./../wp-content/uploads/2020/10/dsw-logo-white.png" />
 </div></div></div><div id="custom_html-3" class="widget_text content footer-widget  widget_custom_html"><div class="textwidget custom-html-widget"><div id="footerSocmedArea">
 	<li><a href="https://www.facebook.com/DSWeekend/"><i class="fab fa-facebook"></i></a></li>
-	<li><a href="https://www.instagram.com/datascienceweekend/"><i class="fab fa-instagram"></i></a></li>
-	<li><a href="https://twitter.com/dsweekend"><i class="fab fa-twitter"></i></a></li>
+	<li><a href="https://www.instagram.com/datascienceweekends/"><i class="fab fa-instagram"></i></a></li>
+	<li><a href="https://twitter.com/dsweekends"><i class="fab fa-twitter"></i></a></li>
 	<li><a href="https://www.linkedin.com/in/data-science-indonesia/"><i class="fab fa-linkedin"></i></a></li>
 </div></div></div>            </div>
         </div>

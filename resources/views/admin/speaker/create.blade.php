@@ -81,11 +81,11 @@
                     </div>
                     <div class="form-group">
                         <label for="name">No. Telepon :</label>
-                        <input type="text" class="form-control" name="phone" required>
+                        <input type="text" class="form-control" name="phone">
                     </div>
                     <div class="form-group">
                         <label for="email">Email :</label>
-                        <input type="email" class="form-control" name="email" required>
+                        <input type="email" class="form-control" name="email">
                     </div>
                     <div class="form-group">
                         <label for="name">Linkedin Profile :</label>
