@@ -38,6 +38,8 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Medium</th>
+                            <th>Tablue</th>
                             <th>Quantity Ticket</th>
                             <th></th>
                             <th></th>
@@ -48,9 +50,9 @@
                         @foreach ($participants as $participant)
                             @php
                                 if ($participant->status == 0) {
-                                    $displayStatus = "<span class='rounded bg-danger text-white p-1 pl-3 pr-3'>Belum dibayar</span>";
+                                    $displayStatus = "<span class='rounded bg-danger text-white p-1 pl-3 pr-3'>Unpaid</span>";
                                 } else {
-                                    $displayStatus = "<span class='rounded bg-success text-white p-1 pl-3 pr-3'>Sudah dibayar</span>";
+                                    $displayStatus = "<span class='rounded bg-success text-white p-1 pl-3 pr-3'>Paid</span>";
                                 }
                             @endphp
                             <tr>
@@ -58,6 +60,8 @@
                                 <td>{{ $participant->user->name }}</td>
                                 <td>{{ $participant->user->email }}</td>
                                 <td>{{ $participant->user->phone }}</td>
+                                <td>{{ $participant->user->social_medium }}</td>
+                                <td>{{ $participant->user->social_tablue }}</td>
                                 <td>{{ $participant->qty }}</td>
                                 <td>
                                     {!! $displayStatus !!}

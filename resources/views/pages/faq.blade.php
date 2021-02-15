@@ -251,7 +251,7 @@
     <body data-rsssl=1 class="home page-template page-template-elementor_header_footer page page-id-2085 wp-custom-logo theme-miexpo woocommerce-no-js elementor-default elementor-template-full-width elementor-kit-2523 elementor-page elementor-page-2085">
         <div class="page-wrapper">
             <!-- Main Header-->
-            @include('Components.Header')
+            @include('Components.Header', ['myData' => $myData])
             <!-- Price Section Two -->
             <section class="price-section-two mt-4" style="background-color:#fff; background-image:url('https://54.179.228.148/wp-content/uploads/2020/10/chairs-2181994_1920.jpg');">
                 <div class="auto-container mt-4">

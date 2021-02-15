@@ -31,6 +31,8 @@
                 <thead>
                     <tr>
                         <th>Nama</th>
+                        <th>Email</th>
+                        <th>Phone</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -38,6 +40,8 @@
                     @foreach ($participants as $participant)
                     <tr>
                         <td>{{ $participant->name }}</td>
+                        <td>{{ $participant->email }}</td>
+                        <td>{{ $participant->phone }}</td>
                         <td>
                             <a href="{{ route('participant.view',$participant->id) }}" class="btn btn-info btn-icon-split">
                                 <span class="icon">

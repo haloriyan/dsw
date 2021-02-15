@@ -497,11 +497,12 @@ class UserController extends Controller
         $faqs = FaqCtrl::get()
         ->orderBy('type', 'ASC')
         ->get();
+        $myData = self::me();
 
         return view('pages.faq', [
             'faqs' => $faqs,
             'eventTypes' => $this->eventTypes,
-            'myData' => $this->myData,
+            'myData' => $myData,
         ]);
     }
 }

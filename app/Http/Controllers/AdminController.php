@@ -490,8 +490,7 @@ class AdminController extends Controller
 				'Alamat' => $user->address,
 				'LinkedIn' => $user->social_linkedin,
 				'Medium' => $user->social_medium,
-				'Facebook' => $user->social_facebook,
-				'Instagram' => $user->social_instagram,
+				'Tablue' => $user->social_tablue,
 				'Sudah bergabung dengan DSI?' => $hasJoinedDSI,
 				'Tertarik bergabung dengan DSI?' => $interestedWithDSI
 			]);

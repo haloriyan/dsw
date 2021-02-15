@@ -6,6 +6,7 @@ use Mail;
 use Carbon\Carbon;
 use App\TicketOrder;
 use App\Mail\CheckoutTicket;
+use App\Mail\OrderTicket;
 
 use Illuminate\Http\Request;
 use \App\Http\Controllers\UserController as UserCtrl;
@@ -43,6 +44,10 @@ class TicketOrderController extends Controller
                 'status' => $status,
                 'due_date' => $dueDate
             ]);
+
+	    if ($ticket->price > 0) {
+		$sendMail = Mail::to($myData->email)->send(new OrderTicket(['user' => $myData, 'ticket' =>  $ticket, 'order' => $order]));
+	    }
     
             return redirect()->route('user.myTicket')->with([
                 'message' => "Order Completed"
@@ -62,11 +67,11 @@ class TicketOrderController extends Controller
             'status' => 1
         ]);
 
-        $order = $data->with('ticket.event')->first();
+        $order = $data->with(['ticket.event','user'])->first();
         $ticket = $order->ticket;
         $event = $order->ticket->event;
 
-        Mail::to()
+        Mail::to($order->user->email)
         ->send(new CheckoutTicket([
             'event' => $event,
             'ticket' => $ticket,

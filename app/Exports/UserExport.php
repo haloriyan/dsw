@@ -13,7 +13,7 @@ class UserExport implements FromCollection, withHeadings {
     public function headings(): array {
         return [
             'ID','Name','Email','Phone','Instansi','Status','Alasan ikut DSW','Gender','Alamat',
-            'LinkedIn','Medium','Facebook','Instagram',
+            'LinkedIn','Medium','Tablue',
             'Sudah bergabung dengan DSI?','Tertarik bergabung dengan DSI?'
         ];
     }

@@ -95,7 +95,7 @@ class TicketController extends Controller
 
         $toExport = [];
         foreach ($participants as $participant) {
-            $status = $participant->status == 1 ? "Sudah dibayar" : "Belum dibayar";
+            $status = $participant->status == 1 ? "Paid" : "Unpaid";
             array_push($toExport, [
                 'Tiket' => $ticket->name,
                 'Event' => $ticket->event->title,
@@ -103,6 +103,9 @@ class TicketController extends Controller
                 'Nama Peserta' => $participant->user->name,
                 'Email Peserta' => $participant->user->email,
                 'Telephone Peserta' => $participant->user->phone,
+                'Linkendin Peserta' => $participant->user->social_linkedin,
+                'Medium Peserta' => $participant->user->social_medium,
+                'Tablue Peserta' => $participant->user->social_tablue,
                 "Quantity" => $participant->qty,
                 "Total Bayar" => $participant->total_pay,
                 "Status" => $status
