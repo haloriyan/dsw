@@ -287,7 +287,7 @@ class UserController extends Controller
     public function midtransPrepare($data) {
         $myData = self::me();
         $name = explode(" ", $myData->name);
-        $lastName = !$name[1] ? $name[0] : $name[1];
+		$lastName = $name[count($name) - 1];
 
         $merchatID = env('MIDTRANS_MERCHANT_ID');
         $mode = env('MIDTRANS_MODE');
