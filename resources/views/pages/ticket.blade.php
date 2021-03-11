@@ -241,7 +241,18 @@
                                 @else
                                     @currency($ticket->price)
                                 @endif<span>{{ $ticket->name }}</span> </div>
-                            <div class="text">{{ $ticket->description }}</div>
+                            <div class="text">
+                                <!--{{  $ticket->description }}-->
+                                <!--{{ strlen($ticket->description) }}-->
+                                @if (strlen($ticket->description) > 250)
+                                       {{  $stringCut = substr($ticket->description, 0, 240) }}
+                                       {{  $endPoint = strrpos('', ' ') }}
+                                       {{  $string = $endPoint? substr($stringCut, 240, $endPoint):substr($stringCut, 240) }}
+                                       {{  $string .= '...' }}<a href="{{ route('user.event', $ticket->event->id) }}" target="_blank">Read more</a>
+                                @else
+                                    {{  $ticket->description }}
+                                @endif
+                            </div>
                             <a href="{{ route('ticket.buy', $ticket->id) }}" target="_blank" class="theme-btn buy-btn">{{ $buttonDisplay }}</a>
                         </div>
                     </div>

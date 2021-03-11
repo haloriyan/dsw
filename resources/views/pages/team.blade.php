@@ -614,6 +614,7 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
             q: value,
         })
         .then(datas => {
+            console.log(datas);
             select(area).classList.remove('d-none');
             select(area).innerHTML = "";
             if (datas.length == 0) {

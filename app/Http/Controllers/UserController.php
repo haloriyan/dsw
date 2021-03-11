@@ -61,12 +61,23 @@ class UserController extends Controller
             'email' => $req->email,
             'password' => $req->password
         ]);
+        
+        $user = User::where('email', $req->email)->first();
+        
+        // dd($user->is_active);
 
         if (!$loggingIn) {
             return redirect()->route('user.loginPage', [
                 'ref' => $req->ref
             ])->withErrors(['Wrong entered email and/or password']);
         }
+        
+        if ($user->is_active == 0) {
+            return redirect()->route('user.loginPage', [
+                'ref' => $req->ref
+            ])->withErrors(['Please Check Your Email First For Activate Account']);
+        }
+        
         if ($req->ref != "") {
             return redirect($req->ref);
         }
@@ -281,7 +292,7 @@ class UserController extends Controller
         return view('pages.ticket', [
             'tickets' => $tickets,
             'eventTypes' => $this->eventTypes,
-            'myData' => $this->myData
+            'myData' => $this->myData,
         ]);
     }
     public function midtransPrepare($data) {
@@ -429,10 +440,13 @@ class UserController extends Controller
         ->with('ticket.event')
         ->get();
 
+        $links = explode(",", env("LINK_EVENT"));
+            
         return view('pages.myTicket', [
             'eventTypes' => $this->eventTypes,
             'myData' => $myData,
             'tickets' => $tickets,
+            'links' => $links
         ]);
     }
     public function myTeam() {

@@ -221,60 +221,86 @@
                         <h2>My Tickets</h2>
                         <div class="separator"></div>
                     </div>
-                     @if ($message ?? '' != "")
-                        <div class="bg-hijau-transparan p-2 rounded">
-                            {{ $message ?? '' }}
-                        </div>
-                    @endif
-                    @if ($errors->count() > 0)
-                        @foreach ($errors->all() as $err)
-                            <div class="bg-merah-transparan p-2 rounded">
-                                {{ $err }}
-                            </div>
-                        @endforeach
-                    @endif
                     <div class="text-center">
                         <div class="d-inline-block w-100 shadow text-left rounded p-5">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Ticket Name</th>
-                                        <th>Event</th>
-                                        <th>Price</th>
-                                        <th>Status</th>
-                                        <td></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($tickets as $ticket)
-                                        @php
-                                            $status = $ticket->status == 0 ? "<span class='bg-merah rounded p-2 pl-3 pr-3'>Unpaid</span>" : "<span class='bg-hijau rounded p-2 pl-3 pr-3'>Paid</span>";
-                                        @endphp
+                            <div class="table-responsive-xl">
+                                <table class="table table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $ticket->ticket->name }}</td>
-                                            <td>{{ $ticket->ticket->event->title }}</td>
-                                            <td>
-                                                @currency($ticket->total_pay)
-                                            </td>
-                                            <td>{!! $status !!}</td>
-                                            <td>
-                                                @php
-                                                    $now = Carbon::now();
-                                                    $dueDate = Carbon::parse($ticket->due_date);
-                                                    $minutes = $dueDate->diffInMinutes($now);
-                                                @endphp
-                                                @if ($ticket->status == 0 && $minutes > 0)
-                                                    <a href="{{ route('ticket.checkout', ['orderID' => $ticket->id]) }}" class="bg-primer rounded p-2 pl-3 pr-3">
-                                                        Pay Now!
-                                                    </a>
-                                                @else
-                                                    Expired
-                                                @endif
-                                            </td>
+                                            <th>Ticket Name</th>
+                                            <th>Event</th>
+                                            <th>Price</th>
+                                            <th>Status</th>
+                                            <td></td>
+                                            <th>Link</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($tickets as $ticket)
+                                            @php
+                                                $status = $ticket->status == 0 ? "<span class='bg-merah rounded p-2 pl-3 pr-3'>Unpaid</span>" : "<span class='bg-hijau rounded p-2 pl-3 pr-3'>Paid</span>";
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $ticket->ticket->name }}</td>
+                                                <td>{{ $ticket->ticket->event->title }}</td>
+                                                <td>
+                                                    @currency($ticket->total_pay)
+                                                </td>
+                                                <td>{!! $status !!}</td>
+                                                <td collspan="6">
+                                                    @php
+                                                        $now = Carbon::now();
+                                                        $dueDate = Carbon::parse($ticket->due_date);
+                                                        $minutes = $dueDate->diffInMinutes($now);
+                                                    @endphp
+                                                    @if ($ticket->status == 0 && $minutes > 0)
+                                                        <a href="{{ route('ticket.checkout', ['orderID' => $ticket->id]) }}" class="bg-primer rounded p-2 pl-3 pr-3">
+                                                        Pay Now!
+                                                        </a>
+                                                    @elseif ($ticket->status == 1)
+                                                        Ready
+                                                    @else
+                                                        Expired
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($ticket->ticket->event->id == 7)
+                                                         <a href="#" target="_blank">{{ $links[0] }}</a>
+                                                    @elseif($ticket->ticket->event->id == 13)
+                                                         <a href="#" target="_blank">{{ $links[1] }}</a>
+                                                    @elseif($ticket->ticket->event->id == 14)
+                                                         @if($ticket->status == 0)
+                                                            Please Paid Your Ticket For Get Link
+                                                         @else
+                                                            <a href="#" target="_blank">{{ $links[2] }}</a>
+                                                         @endif
+                                                    @elseif($ticket->ticket->event->id == 16)
+                                                         @if($ticket->status == 0)
+                                                            Please Paid Your Ticket For Get Link
+                                                         @else
+                                                            <a href="#" target="_blank">{{ $links[3] }}</a>
+                                                         @endif
+                                                    @elseif($ticket->ticket->event->id == 19)
+                                                         <a href="#" target="_blank">{{ $links[4] }}</a>
+                                                    @elseif($ticket->ticket->event->id == 21)
+                                                         <a href="#" target="_blank">{{ $links[5] }}</a>
+                                                    @elseif($ticket->ticket->event->id == 23)
+                                                         <a href="#" target="_blank">{{ $links[6] }}</a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <!--<table class="table table-bordered">-->
+                                <!--    <tbody>-->
+                                <!--        <tr>-->
+                                <!--            <td>Mau Nonton Dathon : </td>-->
+                                <!--            <td><a href="https://www.youtube.com/" target="_blank">Tonton Danthon</a></td>-->
+                                <!--        </tr>-->
+                                <!--    </tbody>-->
+                                <!--</table>-->
+                            </div>
                         </div>
                     </div>
                 </div>

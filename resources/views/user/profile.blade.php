@@ -293,7 +293,7 @@ var mep_ajax = {"mep_ajaxurl":".\/wp-admin\/admin-ajax.php"};
                                 <input type="text" class="form-control" name="social_medium" id="medium" value="{{ $myData->social_medium }}">
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="tablue">Tablue :</label>
+                                <label for="tablue">Tableau Public :</label>
                                 <input typ="text" class="form-control" name="social_tablue" id="tablue" value="{{$myData->social_tablue }}">
                             </div>
                             <!-- <div class="col-md-6 mt-3">

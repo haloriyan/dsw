@@ -6,7 +6,7 @@
                 Thank you for registering as member of Data Science Weekend 2021. Before you can attend this event, you have to activate your account by clicking this button
             </p>
             <br /><br />
-            <a href="{{ route('email.verification', $email) }}" style="background: #f65271;color: #fff;text-decoration: none;padding: 18px 35px;border-radius: 6px;">
+            <a href="{{ route('email.verification', base64_encode($email)) }}" style="background: #f65271;color: #fff;text-decoration: none;padding: 18px 35px;border-radius: 6px;">
                 Activate Account
             </a>
             <br /><br />

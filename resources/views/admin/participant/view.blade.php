@@ -98,30 +98,30 @@
                         </div>
                     </div>
                 @endif
-                @if ($participant->social_facebook)
+                @if ($participant->social_tablue != "")
                     <div class="col-md-6 mb-4">
                         <div class="container">
-                            <a href="{{ $participant->social_facebook }}" target="_blank">
+                            <a href="{{ $participant->social_tablue }}" target="_blank">
                                 <div class="shadow rounded p-4">
-                                    <i class="fab fa-facebook-square"></i>
-                                    Facebook
+                                    <i class="fab fa-database"></i>
+                                    Tableau
                                 </div>
                             </a>
                         </div>
                     </div>
                 @endif
-                @if ($participant->social_instagram != "")
-                    <div class="col-md-6 mb-4">
-                        <div class="container">
-                            <a href="{{ $participant->social_instagram }}" target="_blank">
-                                <div class="shadow rounded p-4">
-                                    <i class="fab fa-instagram"></i>
-                                    Instagram
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                @endif
+                <!--@if ($participant->social_instagram != "")-->
+                <!--    <div class="col-md-6 mb-4">-->
+                <!--        <div class="container">-->
+                <!--            <a href="{{ $participant->social_instagram }}" target="_blank">-->
+                <!--                <div class="shadow rounded p-4">-->
+                <!--                    <i class="fab fa-instagram"></i>-->
+                <!--                    Instagram-->
+                <!--                </div>-->
+                <!--            </a>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--@endif-->
             </div>
         </div>
     </div>
